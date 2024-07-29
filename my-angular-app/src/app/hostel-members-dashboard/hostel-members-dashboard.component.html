@@ -1,0 +1,53 @@
+<div class="dashboard">
+    <div class="statistics">
+      <div class="stat-item">
+        <h3>284</h3>
+        <p>Hostel Members</p>
+      </div>
+      <div class="stat-item">
+        <h3>36</h3>
+        <p>Today Fee Due's</p>
+      </div>
+      <div class="stat-item">
+        <h3>128</h3>
+        <p>Total Fee Due's</p>
+      </div>
+    </div>
+  
+    <div class="recent-members">
+      <h4>Recent Hostel Members</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><input type="checkbox"></th>
+            <th>Name</th>
+            <th>Mobile No.</th>
+            <th>Joining Date</th>
+            <th>Paid Amount</th>
+            <th>Pending Fee</th>
+            <th>Payment History</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of membersData">
+            <td><input type="checkbox"></td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.mobile }}</td>
+            <td>{{ member.joiningDate | date }}</td>
+            <td>{{ member.paidAmount | currency:'INR' }}</td>
+            <td>{{ member.pendingFee | currency:'INR' }}</td>
+            <td>
+                <button class="btn btn-info btn-sm" [routerLink]="['/payment-history']">Payment History</button>
+              </td>
+            <td>{{ member.status }}</td>
+            <td>
+              <button class="btn btn-link">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
