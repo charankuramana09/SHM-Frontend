@@ -9,13 +9,17 @@ import { HostelMembersDashboardComponent } from './hostel-members-dashboard/host
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
-    PaymentHistoryComponent
+    PaymentHistoryComponent,
+    LoginFormComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,

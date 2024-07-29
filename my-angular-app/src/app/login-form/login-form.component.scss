@@ -1,0 +1,37 @@
+.captcha-container {
+    position: relative;
+  }
+  
+  .captcha {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .captcha span {
+    margin-right: 10px;
+  }
+  
+  .captcha i {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .alert {
+    color: red;
+  }
+  
+  .form-control.ng-invalid.ng-touched {
+    border-color: red;
+  }
+  .bgcolor
+  {
+    background-color: #eee;
+    text-decoration: line-through;
+    font-family: fantasy;
+  }
+      
