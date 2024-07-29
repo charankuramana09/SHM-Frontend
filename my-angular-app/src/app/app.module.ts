@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -9,24 +12,28 @@ import { HostelMembersDashboardComponent } from './hostel-members-dashboard/host
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { SignupScreenComponent } from './signup-screen/signup-screen.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
-    PaymentHistoryComponent
+    PaymentHistoryComponent,
+    SignupScreenComponent,
+    SignupFormComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
   ],
-  providers: [
-    provideClientHydration()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
