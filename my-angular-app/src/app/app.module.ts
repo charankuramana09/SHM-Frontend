@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { SignupScreenComponent } from './signup-screen/signup-screen.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { PaymentFormComponent } from './payment-form/payment-form.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     SignupScreenComponent,
     SignupFormComponent,
     LoginPageComponent,
+    PaymentFormComponent,
   ],
   imports: [
     BrowserModule,

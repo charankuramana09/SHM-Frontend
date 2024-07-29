@@ -1,37 +1,8 @@
-// .overlay {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   color: white;
-//   text-align: center;
-//   width: 100%;
-//   max-width: 400px;
-// }
-// .appointment-form {
-//   background: rgba(0, 0, 0, 0.5);
-//   padding: 20px;
-//   border-radius: 10px;
-// }
-
-// .appointment-form input,
-// .appointment-form select,
-// .appointment-form button {
-//   margin-top: 10px;
-// }
-
-// @media (max-width: 1200px) {
-//   .appointment-form {
-//     justify-content: flex-end;
-//     padding-right: 20px;
-//   }
-// }
-
 .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 350px;
+  max-width: 500px;
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -101,6 +72,7 @@
 
 .form label {
   position: relative;
+  margin-bottom: 6px;
 }
 
 .form label .input {
@@ -125,7 +97,7 @@
 
 .form label .input:placeholder-shown + span {
   top: 12.5px;
-  font-size: 0.9em;
+  font-size: 15px;
 }
 
 .form label .input:focus + span,
@@ -144,7 +116,7 @@
   border: none;
   outline: none;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 25px;
   color: #fff;
   font-size: 16px;
   transform: 0.3s ease;
