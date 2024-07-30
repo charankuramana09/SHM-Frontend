@@ -11,10 +11,9 @@ import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/
 
 
 const routes: Routes = [
-  { path: '', component: HostelMembersDashboardComponent },
+  { path: '', component: LoginPageComponent },
+  { path: 'dashboard', component: HostelMembersDashboardComponent },
   { path: 'payment-history', component: PaymentHistoryComponent },
-
-  { path: 'login-page', component: LoginPageComponent },
   { path: 'payment-page', component: PaymentFormComponent },
 
   { path: 'company-invoice', component: CompanyInvoiceGenerationComponent}
