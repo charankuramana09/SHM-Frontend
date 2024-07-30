@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CaptchaService } from '../captcha.service';  // Adjust import path as needed
+import { CaptchaService } from '../services/captcha.service';
 
 @Component({
   selector: 'app-login-form',
