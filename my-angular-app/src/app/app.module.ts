@@ -17,6 +17,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { CaptchaComponent } from './captcha/captcha.component';
+import { CaptchaService } from './services/captcha.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     LoginPageComponent,
     PaymentFormComponent,
     UserRegistrationComponent,
+    CaptchaComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     AppRoutingModule,
     RouterModule,
   ],
-  providers: [provideClientHydration()],
+  providers: [provideClientHydration(), CaptchaService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

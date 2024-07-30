@@ -1,0 +1,17 @@
+.captcha-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
