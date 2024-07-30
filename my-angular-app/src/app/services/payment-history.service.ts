@@ -26,9 +26,9 @@ export class PaymentHistoryService {
   // Dummy data for testing
   getPaymentHistoryDummy(): Observable<PaymentHistory[]> {
     const paymentHistories: PaymentHistory[] = [
-      { date: '2023-01-01', amount: 5000, status: 'Paid' },
-      { date: '2023-02-01', amount: 5000, status: 'Paid' },
-      { date: '2023-03-01', amount: 5000, status: 'Pending' }
+      { date: '2024-06-01', amount: 5000, status: 'Paid' },
+      { date: '2024-07-01', amount: 5000, status: 'Paid' },
+      { date: '2024-08-01', amount: 5000, status: 'Pending' }
     ];
     return of(paymentHistories);
   }
