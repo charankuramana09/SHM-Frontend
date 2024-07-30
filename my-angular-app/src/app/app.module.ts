@@ -16,6 +16,7 @@ import { SignupScreenComponent } from './signup-screen/signup-screen.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
     SignupFormComponent,
     LoginPageComponent,
     PaymentFormComponent,
+    UserRegistrationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,17 @@
 <form class="form">
   <p class="title mb-0">Join Us Today!</p>
   <p class="message">SignUp now to become a member.</p>
-  <label>
-    <input class="input" type="text" placeholder="" required="" />
-    <span>Full Name (As per Aadhar)</span>
-  </label>
+  <div class="flex">
+    <label>
+      <input class="input" type="text" placeholder="" required="">
+      <span>Firstname</span>
+    </label>
+
+    <label>
+      <input class="input" type="text" placeholder="" required="">
+      <span>Lastname</span>
+    </label>
+  </div>
   <label>
     <input class="input" type="email" placeholder="" required="" />
     <span>Email</span>
@@ -22,11 +29,6 @@
   </button>
   <p class="signin fs-6">
     Already have an acount ?
-    <a
-      href="#"
-      class="text-decoration-none fw-bold fs-6"
-      [routerLink]="['/login-page']"
-      >Login</a
-    >
+    <a href="#" class="text-decoration-none fw-bold fs-6" [routerLink]="['/login-page']">Login</a>
   </p>
 </form>
