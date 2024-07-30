@@ -14,6 +14,7 @@ export class CompanyInvoiceGenerationComponent {
 
   companyName = 'Microsoft';
   employeeData: any[] = [];
+  totalDue1: number = 0;
   totalDue: number = 0;
 
   onFileChange(event: any) {
@@ -49,13 +50,20 @@ export class CompanyInvoiceGenerationComponent {
   }
 
   generateInvoice() {
-    this.totalDue = this.employeeData.reduce((sum, emp) => sum + emp.Due, 0);
+    this.totalDue1= this.employeeData.reduce((sum, emp) => sum + emp.Due, 0);
     const doc = new jsPDF();
 
   // Add Company Information
   doc.setFontSize(16);
+  doc.setFont(undefined, 'bold'); // Set font to bold
+  doc.setTextColor(22, 160, 133); // Set text color to red (RGB)
   doc.text('INVOICE', 105, 20, { align: 'center' });
   
+ // Reset font style and color
+ doc.setFont(undefined, 'normal');
+ doc.setTextColor(0, 0, 0); // Reset text color to black
+
+
   doc.setFontSize(12);
   doc.text('Hostel Name', 14, 30);
   doc.text('89 Hostel Street, City, State, Country', 14, 35);
@@ -70,10 +78,16 @@ export class CompanyInvoiceGenerationComponent {
   doc.text('your@clientcompanyemail.com', 140, 50);
 
   // Add Invoice Details
-  doc.text(`Invoice No: 000001`, 14, 60);
-  doc.text(`Account No: 00002324`, 14, 65);
-  doc.text(`Issue Date: ${new Date().toLocaleDateString()}`, 14, 70);
-  doc.text(`Due Date: 01/08/2024`, 14, 75);
+  const invoiceYStart = 65;
+  const invoiceDetails = [
+    `Invoice No: 000001`,
+    `Account No: 00002324`,
+    `Issue Date: ${new Date().toLocaleDateString()}`,
+    `Due Date: 01/08/2024`
+  ];
+  invoiceDetails.forEach((detail, index) => {
+    doc.text(detail, 140, invoiceYStart + (index * 5));
+  });
 
   // Add Table
   (doc as any).autoTable({
@@ -82,8 +96,8 @@ export class CompanyInvoiceGenerationComponent {
       employee.EmpID,
       employee.Name,
       employee.Designation,
-      employee.Due,
-      employee.Due
+        `$${employee.Due.toFixed(2)}`,
+      `$${employee.Due.toFixed(2)}`
     ]),
     startY: 85,
     theme: 'grid',
@@ -95,9 +109,12 @@ export class CompanyInvoiceGenerationComponent {
   // Calculate and Display Totals
   doc.setFontSize(12);
   let finalY = (doc as any).lastAutoTable.finalY + 10;
-  doc.text(`Sub Total: $${this.totalDue.toFixed(2)}`, 140, finalY);
-  doc.text(`Tax (10%): $${(this.totalDue * 0.1).toFixed(2)}`, 140, finalY + 5);
-  doc.text(`TOTAL: $${(this.totalDue + (this.totalDue * 0.1) - 23).toFixed(2)}`, 140, finalY + 20);
+  const subTotal = this.totalDue1;
+  const tax = subTotal * 0.1; // 10% tax
+  const total = subTotal + tax;
+  doc.text(`Sub Total: $${this.totalDue1.toFixed(2)}`, 140, finalY);
+  doc.text(`Tax (10%): $${(this.totalDue1 * 0.1).toFixed(2)}`, 140, finalY + 5);
+  doc.text(`TOTAL: $${(this.totalDue1 + (this.totalDue1 * 0.1) - 23).toFixed(2)}`, 140, finalY + 20);
 
   // Add Footer
   doc.text('THANK YOU FOR YOUR BUSINESS', 14, finalY + 30);
