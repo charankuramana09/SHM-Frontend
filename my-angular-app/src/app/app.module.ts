@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { ExpenseFormComponent } from './expense-form/expense-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     HostelMembersDashboardComponent,
     PaymentHistoryComponent,
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    ExpenseFormComponent
   ],
   imports: [
     BrowserModule,
