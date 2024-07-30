@@ -1,0 +1,53 @@
+<div class="container mt-5">
+    <div class="card shadow">
+      <div class="card-header">
+        <h2>Complaint Form</h2>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" formControlName="name" class="form-control" type="text" />
+          </div>
+          <div class="mb-3">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input id="contactNumber" formControlName="contactNumber" class="form-control" type="text" />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" formControlName="email" class="form-control" type="email" />
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date of Incident</label>
+            <input id="date" formControlName="date" class="form-control" type="date" />
+          </div>
+          <div class="mb-3">
+            <label for="time" class="form-label">Time of Incident</label>
+            <input id="time" formControlName="time" class="form-control" type="time" />
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Location of Incident</label>
+            <input id="location" formControlName="location" class="form-control" type="text" />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description of Complaint</label>
+            <textarea id="description" formControlName="description" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="actionRequested" class="form-label">Action Requested</label>
+            <textarea id="actionRequested" formControlName="actionRequested" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="supportingDocuments" class="form-label">Supporting Documents</label>
+            <input id="supportingDocuments" formControlName="supportingDocuments" class="form-control" type="file" (change)="onFileChange($event)" />
+          </div>
+          <div class="mb-3">
+            <label for="othersInvolved" class="form-label">Who else was involved in the incident</label>
+            <input id="othersInvolved" formControlName="othersInvolved" class="form-control" type="text" />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit Complaint</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

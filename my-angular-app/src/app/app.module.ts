@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/company-invoice-generation.component';
@@ -9,20 +9,23 @@ import { HostelMembersDashboardComponent } from './hostel-members-dashboard/host
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
-    PaymentHistoryComponent
+    PaymentHistoryComponent,
+    ComplaintFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()
