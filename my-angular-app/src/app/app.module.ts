@@ -19,6 +19,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { CaptchaComponent } from './captcha/captcha.component';
 import { CaptchaService } from './services/captcha.service';
+import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CaptchaService } from './services/captcha.service';
     PaymentFormComponent,
     UserRegistrationComponent,
     CaptchaComponent,
+    MathCaptchaComponent,
   ],
   imports: [
     BrowserModule,

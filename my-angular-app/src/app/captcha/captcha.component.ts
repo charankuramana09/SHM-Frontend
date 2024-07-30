@@ -4,12 +4,12 @@ import { CaptchaService } from '../services/captcha.service';
 @Component({
   selector: 'app-captcha',
   templateUrl: './captcha.component.html',
-  styleUrls: ['./captcha.component.css']
+  styleUrls: ['./captcha.component.scss']
 })
 export class CaptchaComponent implements OnInit {
   captcha: string = '';
   userCaptcha: string = '';
-  captchaVerified: boolean = false;
+  captchaStatus: 'pending' | 'success' | 'error' = 'pending'; // Track status
 
   constructor(private captchaService: CaptchaService) { }
 
@@ -19,14 +19,14 @@ export class CaptchaComponent implements OnInit {
 
   refreshCaptcha(): void {
     this.captcha = this.captchaService.generateCaptcha();
+    this.captchaStatus = 'pending'; // Reset status
   }
 
   verifyCaptcha(): void {
-    this.captchaVerified = this.captcha === this.userCaptcha;
-    if (this.captchaVerified) {
-      alert('Captcha Verified Successfully');
+    if (this.captcha === this.userCaptcha) {
+      this.captchaStatus = 'success';
     } else {
-      alert('Captcha Verification Failed');
+      this.captchaStatus = 'error';
     }
   }
 }
