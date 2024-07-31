@@ -24,7 +24,7 @@ export class AuthService {
   login(loginData: { email: string, password: string }): Observable<any> {
     return this.http.post<{ token: string, authorities: string[], firstName: string, lastName: string }>(`${this.apiUrl}/login`, loginData).pipe(
       tap(response => {
-        localStorage.setItem('jwtToken', response.token);
+        localStorage.setItem('jwtToken', response.jwtToken);
         localStorage.setItem('authorities', JSON.stringify(response.authorities));
         localStorage.setItem('firstName', response.firstName);
         localStorage.setItem('lastName', response.lastName);
