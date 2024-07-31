@@ -1,12 +1,14 @@
 .card-header {
-  background-color: #004085;
-  color: #fff;
+  background-color: #f9a826ff;
+  color:#2f2e41ff;
+  text-transform: uppercase;
 }
 
 .bg{
-  background: #EFEFBB;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//   background: #50C9C3; 
+// background: -webkit-linear-gradient(to right, #96DEDA, #50C9C3); 
+// background: linear-gradient(to right, #96DEDA, #50C9C3);
+background-color: white;
 
 }
 
@@ -46,7 +48,7 @@ background: linear-gradient(to right, #D4D3DD, #EFEFBB); /* W3C, IE 10+/ Edge, F
 
 .form label .input:focus+span,
 .form label .input:valid+span {
-  color: orange;
+  color: #007bff;
   top: 5px;
   font-size: 0.7em;
   font-weight: 600;
