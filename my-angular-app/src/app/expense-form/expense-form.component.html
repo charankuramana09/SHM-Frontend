@@ -1,166 +1,164 @@
 <div class="container mt-5">
-    <h2>Expenses Form</h2>
-    <form #expensesForm="ngForm" (ngSubmit)="onSubmit(expensesForm)">
-      
-      <!-- Category Selection Overlay -->
-      <div *ngIf="changingCategory" class="overlay">
-        <div class="overlay-content">
-          <h3>Select Category</h3>
-          <div *ngFor="let category of categories">
-            <input
-              type="radio"
-              id="overlay-{{category}}"
-              name="categoryOverlay"
-              [value]="category"
-              [(ngModel)]="selectedCategory"
-              (change)="onCategoryChange()"
-              required
-            />
-            <label for="overlay-{{category}}">{{category}}</label>
-          </div>
-          <button type="button" class="btn btn-secondary mt-3" (click)="confirmCategoryChange()">Confirm</button>
+  <h2>Expenses Form</h2>
+  <form #expensesForm="ngForm" (ngSubmit)="onSubmit(expensesForm)">
+    
+    <!-- Category Selection Overlay -->
+    <div *ngIf="changingCategory" class="overlay">
+      <div class="overlay-content">
+        <h3>Select Category</h3>
+        <div *ngFor="let category of categories">
+          <input
+            type="radio"
+            id="overlay-{{category}}"
+            name="categoryOverlay"
+            [value]="category"
+            [(ngModel)]="selectedCategory"
+            (change)="onCategoryChange()"
+            required
+          />
+          <label for="overlay-{{category}}">{{category}}</label>
         </div>
+        <button type="button" class="btn btn-secondary mt-3" (click)="confirmCategoryChange()">Confirm</button>
       </div>
-      
-      <!-- Show Purchase Date and Store Name if Category is not Employee Salaries -->
-      <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
-        <div class="form-group">
-          <label for="purchaseDate">Purchase Date:</label>
-          <input type="date" id="purchaseDate" name="purchaseDate" class="form-control" ngModel required>
-        </div>
-        
-        <div class="form-group">
-          <label for="storeName">Store Name:</label>
-          <input type="text" id="storeName" name="storeName" class="form-control" ngModel required>
-        </div>
+    </div>
+    
+    <!-- Show Purchase Date and Store Name if Category is not Employee Salaries -->
+    <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
+      <div class="form-group">
+        <label for="purchaseDate">Purchase Date:</label>
+        <input type="date" id="purchaseDate" name="purchaseDate" class="form-control" ngModel required>
       </div>
       
       <div class="form-group">
-        <label>Category Type:</label>
-        <div *ngIf="!selectedCategory">
-          <div *ngFor="let category of categories">
-            <input
-              type="radio"
-              id="{{category}}"
-              name="category"
-              [value]="category"
-              [(ngModel)]="selectedCategory"
-              (change)="onCategoryChange()"
-              required
-            />
-            <label for="{{category}}">{{category}}</label>
-          </div>
-        </div>
-        <div *ngIf="selectedCategory">
-          <label>{{selectedCategory}}</label>
-          <button type="button" class="btn btn-secondary ms-3" (click)="initiateCategoryChange()">Change Category</button>
+        <label for="storeName">Store Name:</label>
+        <input type="text" id="storeName" name="storeName" class="form-control" ngModel required>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Category Type:</label>
+      <div *ngIf="!selectedCategory">
+        <div *ngFor="let category of categories">
+          <input
+            type="radio"
+            id="{{category}}"
+            name="category"
+            [value]="category"
+            [(ngModel)]="selectedCategory"
+            (change)="onCategoryChange()"
+            required
+          />
+          <label for="{{category}}">{{category}}</label>
         </div>
       </div>
-      
-      <!-- Show Items Table for All Categories Except "Employee Salaries" -->
-      <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
-        <div class="form-group">
-          <label>Items:</label>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of items; let i = index">
-                <td>
-                  <input type="text" name="itemDescription-{{i}}" placeholder="Item Description" class="form-control" [(ngModel)]="item.description" required>
-                </td>
-                <td>
-                  <input type="number" name="quantity-{{i}}" placeholder="Quantity" class="form-control" [(ngModel)]="item.quantity" required>
-                </td>
-                <td>
-                  <input type="number" name="unitPrice-{{i}}" placeholder="Unit Price" class="form-control" [(ngModel)]="item.unitPrice" required>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger" (click)="removeItem(i)" *ngIf="items.length > 1">-</button>
-                  <button type="button" class="btn btn-primary ms-1" (click)="addItem()" *ngIf="i === items.length - 1">+</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div *ngIf="selectedCategory">
+        <label>{{selectedCategory}}</label>
+        <button type="button" class="btn btn-secondary ms-3" (click)="initiateCategoryChange()">Change Category</button>
+      </div>
+    </div>
+    
+    <!-- Show Items Table for All Categories Except "Employee Salaries" -->
+    <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
+      <div class="form-group">
+        <label>Items:</label>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Item Description</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items; let i = index">
+              <td>
+                <input type="text" name="itemDescription" placeholder="Item Description" class="form-control" [(ngModel)]="item.itemDescription" required>
+              </td>
+              <td>
+                <input type="number" name="quantity" placeholder="Quantity" class="form-control" [(ngModel)]="item.quantity" required>
+              </td>
+              <td>
+                <input type="number" name="unitPrice" placeholder="Unit Price" class="form-control" [(ngModel)]="item.unitPrice" required>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="removeItem(i)" *ngIf="items.length > 1">-</button>
+                <button type="button" class="btn btn-primary ms-1" (click)="addItem()" *ngIf="i === items.length - 1">+</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Show Employee Salaries Table if Category is "Employee Salaries" -->
+    <div *ngIf="selectedCategory === 'Employee Salaries'">
+      <div class="form-group">
+        <label>Employee Salaries:</label>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Salary</th>
+              <th>Salary Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let salary of salaries; let i = index">
+              <td>
+                <input type="text" name="empId" placeholder="Employee ID" class="form-control" [(ngModel)]="salary.empId" required>
+              </td>
+              <td>
+                <input type="text" name="empName" placeholder="Employee Name" class="form-control" [(ngModel)]="salary.empName" required>
+              </td>
+              <td>
+                <input type="number" name="salary" placeholder="Salary" class="form-control" [(ngModel)]="salary.salary" required>
+              </td>
+              <td>
+                <input type="date" name="salaryDate" placeholder="Salary Date" class="form-control" [(ngModel)]="salary.salaryDate" required>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="removeSalary(i)" *ngIf="salaries.length > 1">-</button>
+                <button type="button" class="btn btn-primary ms-1" (click)="addSalary()" *ngIf="i === salaries.length - 1">+</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Common Fields for All Categories Except "Employee Salaries" -->
+    <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
+      <div class="form-group">
+        <label for="totalAmount">Total Amount Spent (Currency):</label>
+        <input type="number" id="totalAmount" name="totalAmount" class="form-control" ngModel required>
+      </div>
+    
+      <div class="form-group">
+        <label>Receipt Attached:</label>
+        <div>
+          <input type="radio" id="receiptYes" name="receipt" value="yes" [(ngModel)]="receiptAttached" (change)="onReceiptChange('yes')" required>
+          <label for="receiptYes">Yes</label>
+        </div>
+        <div>
+          <input type="radio" id="receiptNo" name="receipt" value="no" [(ngModel)]="receiptAttached" (change)="onReceiptChange('no')" required>
+          <label for="receiptNo">No</label>
         </div>
       </div>
-      
-      <!-- Show Employee Salaries Table if Category is "Employee Salaries" -->
-      <div *ngIf="selectedCategory === 'Employee Salaries'">
-        <div class="form-group">
-          <label>Employee Salaries:</label>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Salary</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let salary of salaries; let i = index">
-                <td>
-                  <input type="text" name="empId-{{i}}" placeholder="Employee ID" class="form-control" [(ngModel)]="salary.empId" required>
-                </td>
-                <td>
-                  <input type="text" name="empName-{{i}}" placeholder="Employee Name" class="form-control" [(ngModel)]="salary.empName" required>
-                </td>
-                <td>
-                  <input type="number" name="salary-{{i}}" placeholder="Salary" class="form-control" [(ngModel)]="salary.salary" required>
-                </td>
-                <td>
-                  <input type="date" name="date-{{i}}" placeholder="Date" class="form-control" [(ngModel)]="salary.date" required>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger" (click)="removeSalary(i)" *ngIf="salaries.length > 1">-</button>
-                  <button type="button" class="btn btn-primary ms-1" (click)="addSalary()" *ngIf="i === salaries.length - 1">+</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    
+      <div *ngIf="receiptAttached === 'yes'" class="form-group">
+        <label for="receiptFile">Attach Receipt:</label>
+        <input type="file" id="receiptFile" name="receiptFile" class="form-control" (change)="onFileChange($event)" required>
       </div>
-      
-      <div *ngIf="selectedCategory && selectedCategory !== 'Employee Salaries'">
-        <div class="form-group">
-          <label for="totalAmount">Total Amount Spent (Currency):</label>
-          <input type="number" id="totalAmount" name="totalAmount" class="form-control" ngModel required>
-        </div>
-      
-        <div class="form-group">
-          <label>Receipt Attached:</label>
-          <div>
-            <input type="radio" id="receiptYes" name="receipt" value="yes" [(ngModel)]="receiptAttached" (change)="onReceiptChange('yes')" required>
-            <label for="receiptYes">Yes</label>
-          </div>
-          <div>
-            <input type="radio" id="receiptNo" name="receipt" value="no" [(ngModel)]="receiptAttached" (change)="onReceiptChange('no')" required>
-            <label for="receiptNo">No</label>
-          </div>
-        </div>
-      
-        <div *ngIf="receiptAttached === 'yes'" class="form-group">
-          <label for="receiptFile">Attach Receipt:</label>
-          <input type="file" id="receiptFile" name="receiptFile" class="form-control" (change)="onFileChange($event)" required>
-        </div>
-      
-        <div *ngIf="receiptAttached === 'no'" class="form-group">
-          <label for="receiptReason">Reason for No Receipt:</label>
-          <input type="text" id="receiptReason" name="receiptReason" class="form-control" ngModel required>
-        </div>
+    
+      <div *ngIf="receiptAttached === 'no'" class="form-group">
+        <label for="receiptReason">Reason for No Receipt:</label>
+        <input type="text" id="receiptReason" name="receiptReason" class="form-control" ngModel required>
       </div>
-      
-      <button type="submit" class="btn btn-success mt-3">Submit</button>
-    </form>
-  </div>
-  
- 
-  
+    </div>
+    
+    <button type="submit" class="btn btn-success mt-3">Submit</button>
+  </form>
+</div>
