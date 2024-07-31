@@ -6,10 +6,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup-form',
   templateUrl: './signup-form.component.html',
-  styleUrl: './signup-form.component.scss'
+  styleUrls: ['./signup-form.component.scss']
 })
 export class SignupFormComponent {
-
   signupForm: FormGroup;
 
   constructor(
@@ -38,25 +37,55 @@ export class SignupFormComponent {
   }
 
   onSubmit(): void {
-    if (this.signupForm.valid) {
-      const formValues = this.signupForm.value;
-      const user: User = {
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        email: formValues.email,
-        password: formValues.password,
-        authorities: [formValues.authorities]  // Ensure authorities is an array of strings
-      };
-
-      this.authService.registerUser(user).subscribe({
-        next: (response) => {
-          console.log('User registered successfully', response);
-          this.router.navigate(['/login-page']);
-        },
-        error: (error) => {
-          console.error('Error registering user', error);
+    if (this.signupForm.invalid) {
+      // Mark all controls as touched to trigger validation messages
+      Object.keys(this.signupForm.controls).forEach(key => {
+        const control = this.signupForm.get(key);
+        if (control) {
+          control.markAsTouched();
         }
       });
+
+      // Clear specific fields if needed
+      if (this.signupForm.get('firstName')?.invalid) {
+        this.signupForm.get('firstName')?.setValue('');
+      }
+      if (this.signupForm.get('lastName')?.invalid) {
+        this.signupForm.get('lastName')?.setValue('');
+      }
+      if (this.signupForm.get('email')?.invalid) {
+        this.signupForm.get('email')?.setValue('');
+      }
+      if (this.signupForm.get('password')?.invalid) {
+        this.signupForm.get('password')?.setValue('');
+      }
+      if (this.signupForm.get('confirmPassword')?.invalid) {
+        this.signupForm.get('confirmPassword')?.setValue('');
+      }
+      if (this.signupForm.get('authorities')?.invalid) {
+        this.signupForm.get('authorities')?.setValue('');
+      }
+
+      return;
     }
+
+    const formValues = this.signupForm.value;
+    const user: User = {
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      password: formValues.password,
+      authorities: [formValues.authorities]
+    };
+
+    this.authService.registerUser(user).subscribe({
+      next: (response) => {
+        console.log('User registered successfully', response);
+        this.router.navigate(['/login-page']);
+      },
+      error: (error) => {
+        console.error('Error registering user', error);
+      }
+    });
   }
 }
