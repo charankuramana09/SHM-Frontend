@@ -16,7 +16,7 @@
       </label>
     </div>
   </div>
-  <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message">
+  <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message text-danger">
     <div *ngIf="signupForm.get('authorities')?.errors?.['required']">Please select an authority.</div>
   </div>
 
@@ -38,7 +38,7 @@
     <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
   </div>
   <span>
-  <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid" class="error-message">
+  <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid" class="error-message text-danger">
     <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Lastname is required.</div>
     <div *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Lastname cannot exceed 25 characters.</div>
   </div></span></div>
@@ -47,7 +47,7 @@
     <input formControlName="email" class="input" type="email" placeholder="" required>
     <span>Email</span>
   </label>
-  <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="error-message">
+  <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="error-message text-danger">
     <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>
     <div *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</div>
   </div>
@@ -56,7 +56,7 @@
     <input formControlName="password" class="input" type="password" placeholder="" required>
     <span>Password</span>
   </label>
-  <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="error-message">
+  <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="error-message text-danger">
     <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</div>
     <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
     <div *ngIf="signupForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div>
@@ -66,7 +66,7 @@
     <input formControlName="confirmPassword" class="input" type="password" placeholder="" required>
     <span>Confirm password</span>
   </label>
-  <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid" class="error-message">
+  <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid" class="error-message text-danger">
     <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>
     <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mustMatch']">Passwords must match.</div>
   </div>
