@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/company-invoice-generation.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HostelMembersDashboardComponent } from './hostel-members-dashboard/hostel-members-dashboard.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,7 @@ import { CaptchaComponent } from './captcha/captcha.component';
 import { CaptchaService } from './services/captcha.service';
 import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,10 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [provideClientHydration(), CaptchaService],
+  providers: [provideClientHydration(), CaptchaService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
