@@ -3,7 +3,7 @@ import {
   BrowserModule,
   provideClientHydration,
 } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/company-invoice-generation.component';
@@ -20,6 +20,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { CaptchaComponent } from './captcha/captcha.component';
 import { CaptchaService } from './services/captcha.service';
 import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
+import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
     UserRegistrationComponent,
     CaptchaComponent,
     MathCaptchaComponent,
+    ComplaintFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,7 @@ import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
+    ReactiveFormsModule
   ],
   providers: [provideClientHydration(), CaptchaService],
   bootstrap: [AppComponent],
