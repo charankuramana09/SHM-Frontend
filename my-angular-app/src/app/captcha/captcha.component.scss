@@ -1,0 +1,40 @@
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .captcha-box span {
+    font-size: 20px;
+    text-decoration: line-through;
+  }
+  
+  .captcha-box i {
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .form-control {
+    width: 200px;
+  }
+  
+  .btn-success {
+    background-color: green;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: red;
+    color: white;
+  }
