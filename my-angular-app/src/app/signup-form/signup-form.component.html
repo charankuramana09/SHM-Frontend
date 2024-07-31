@@ -3,25 +3,13 @@
   <p class="message">SignUp now to become a member.</p>
   <div class="radio-buttons-container d-flex justify-content-around">
     <div class="radio-button">
-      <input 
-        formControlName="authorities" 
-        id="radio1" 
-        class="radio-button__input" 
-        type="radio" 
-        value="Admin"
-        [formControl]="signupForm.get('authorities')">
+      <input formControlName="authorities" id="radio1" class="radio-button__input" type="radio" value="Admin">
       <label for="radio1" class="radio-button__label">
         <span class="radio-button__custom"></span>Admin
       </label>
     </div>
     <div class="radio-button">
-      <input 
-        formControlName="authorities" 
-        id="radio3" 
-        class="radio-button__input" 
-        type="radio" 
-        value="Supervisor"
-        [formControl]="signupForm.get('authorities')">
+      <input formControlName="authorities" id="radio3" class="radio-button__input" type="radio" value="Supervisor">
       <label for="radio3" class="radio-button__label">
         <span class="radio-button__custom"></span>Supervisor
       </label>
@@ -29,50 +17,25 @@
   </div>
   <div class="flex">
     <label>
-      <input 
-        formControlName="firstName" 
-        class="input" 
-        type="text" 
-        placeholder="" 
-        required>
+      <input formControlName="firstName" class="input" type="text" placeholder="" required>
       <span>Firstname</span>
     </label>
 
     <label>
-      <input 
-        formControlName="lastName" 
-        class="input" 
-        type="text" 
-        placeholder="" 
-        required>
+      <input formControlName="lastName" class="input" type="text" placeholder="" required>
       <span>Lastname</span>
     </label>
   </div>
   <label>
-    <input 
-      formControlName="email" 
-      class="input" 
-      type="email" 
-      placeholder="" 
-      required>
+    <input formControlName="email" class="input" type="email" placeholder="" required>
     <span>Email</span>
   </label>
   <label>
-    <input 
-      formControlName="password" 
-      class="input" 
-      type="password" 
-      placeholder="" 
-      required>
+    <input formControlName="password" class="input" type="password" placeholder="" required>
     <span>Password</span>
   </label>
   <label>
-    <input 
-      formControlName="confirmPassword" 
-      class="input" 
-      type="password" 
-      placeholder="" 
-      required>
+    <input formControlName="confirmPassword" class="input" type="password" placeholder="" required>
     <span>Confirm password</span>
   </label>
   <button type="submit" class="submit my-2 fw-bold">

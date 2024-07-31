@@ -45,7 +45,7 @@ export class SignupFormComponent {
         lastName: formValues.lastName,
         email: formValues.email,
         password: formValues.password,
-        authorities: [formValues.authorities]
+        authorities: [formValues.authorities]  // Ensure authorities is an array of strings
       };
 
       this.authService.registerUser(user).subscribe({
