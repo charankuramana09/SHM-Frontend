@@ -1,9 +1,15 @@
 .container {
-    max-width: 800px;
-  }
-  
-  .table th,
-  .table td {
-    text-align: center;
-    vertical-align: middle;
-  }
+  max-width: 800px;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bg-info-subtle {
+  background-color: #d1ecf1;
+  height: 100vh;
+  padding: 20px;
+}
