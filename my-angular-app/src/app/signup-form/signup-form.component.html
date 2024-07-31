@@ -25,20 +25,23 @@
       <input formControlName="firstName" class="input" type="text" placeholder="" required>
       <span>Firstname</span>
     </label>
-    <div *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid" class="error-message">
-      <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Firstname is required.</div>
-      <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
-    </div>
     
     <label>
       <input formControlName="lastName" class="input" type="text" placeholder="" required>
       <span>Lastname</span>
     </label>
-    <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid" class="error-message">
-      <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Lastname is required.</div>
-      <div *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Lastname cannot exceed 25 characters.</div>
-    </div>
+    
   </div>
+  <div class="d-flex gap-5 mx-3">
+  <div *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid" class="error-message text-danger">
+    <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Firstname is required.</div>
+    <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
+  </div>
+  <span>
+  <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid" class="error-message">
+    <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Lastname is required.</div>
+    <div *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Lastname cannot exceed 25 characters.</div>
+  </div></span></div>
   
   <label>
     <input formControlName="email" class="input" type="email" placeholder="" required>
