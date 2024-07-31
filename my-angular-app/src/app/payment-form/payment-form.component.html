@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm">
+    <div>
+      <label for="userId">User ID</label>
+      <input type="text" id="userId" name="userId" ngModel required>
+    </div>
+    <div>
+      <label for="userName">User Name</label>
+      <input type="text" id="userName" name="userName" ngModel required>
+    </div>
+    <div>
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" ngModel required>
+    </div>
+    <div>
+      <label for="amount">Amount</label>
+      <input type="number" id="amount" name="amount" ngModel required>
+    </div>
+    <button type="submit">Create Payment Link</button>
+  </form>
+  
+  <div *ngIf="paymentLink">
+    <p>Payment Link: <a [href]="paymentLink" target="_blank">{{ paymentLink }}</a></p>
+  </div>
+  
+  <!-- New section for fetching payment status -->
+  <form (ngSubmit)="getPaymentStatus(paymentId.value, userIdForStatus.value)">
+    <div>
+      <label for="paymentId">Payment ID</label>
+      <input type="text" id="paymentId" #paymentId required>
+    </div>
+    <div>
+      <label for="userIdForStatus">User ID</label>
+      <input type="text" id="userIdForStatus" #userIdForStatus required>
+    </div>
+    <button type="submit">Get Payment Status</button>
+  </form>
+  
+  <div *ngIf="paymentStatus">
+    <p>Payment Status: {{ paymentStatus.status }}</p>
+    <p>Payment Message: {{ paymentStatus.message }}</p>
+  </div>
+  

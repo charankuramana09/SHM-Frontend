@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
+import { PaymentFormComponent } from './payment-form/payment-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     PaymentHistoryComponent,
     LoginFormComponent,
     SignupFormComponent,
-    ExpenseFormComponent
+    ExpenseFormComponent,
+    PaymentFormComponent
   ],
   imports: [
     BrowserModule,
