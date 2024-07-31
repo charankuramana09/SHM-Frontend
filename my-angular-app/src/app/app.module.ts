@@ -21,6 +21,8 @@ import { CaptchaComponent } from './captcha/captcha.component';
 import { CaptchaService } from './services/captcha.service';
 import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
     UserRegistrationComponent,
     CaptchaComponent,
     MathCaptchaComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
