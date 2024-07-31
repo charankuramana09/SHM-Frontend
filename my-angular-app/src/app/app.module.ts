@@ -10,6 +10,8 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
+import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
     PaymentHistoryComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    QuarysComplaintsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ComplaintService {
-  private apiUrl = 'http://your-backend-url/api/complaints';
+  private apiUrl = 'http://localhost:8080/raiseTicket';
 
   constructor(private http: HttpClient) {}
 

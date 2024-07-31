@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h2>Querys Complaints</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let complaint of complaints">
+          <td>{{ complaint.id }}</td>
+          <td>{{ complaint.name }}</td>
+          <td>{{ complaint.email }}</td>
+          <td>{{ complaint.description }}</td>
+          <td>{{ complaint.status }}</td>
+          <td>
+            <button class="btn btn-success" (click)="acceptComplaint(complaint.id)">Accept</button>
+            <button class="btn btn-danger" (click)="rejectComplaint(complaint.id)">Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
