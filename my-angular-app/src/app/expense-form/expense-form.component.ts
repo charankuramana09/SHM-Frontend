@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
-import { ExpenseService } from '../expense.service';
+import { ExpenseService } from '../services/expense.service';
 
 @Component({
   selector: 'app-expense-form',
