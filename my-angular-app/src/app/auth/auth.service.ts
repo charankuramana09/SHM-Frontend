@@ -24,18 +24,14 @@ export class AuthService {
   login(loginData: { email: string, password: string }): Observable<any> {
     return this.http.post<{ token: string, authorities: string[], firstName: string, lastName: string }>('${this.apiUrl}/login', loginData).pipe(
       tap(response => {
-        localStorage.setItem('jwtToken', response.jwtToken);
+        localStorage.setItem('jwtToken', response.token);
         localStorage.setItem('authorities', JSON.stringify(response.authorities));
-        // localStorage.setItem('firstName', response.firstName);
-        // localStorage.setItem('lastName', response.lastName);
-        // console.log('Login successful', localStorage.getItem('jwtToken'));
-        // console.log(localStorage.getItem('authorities'));
-        // console.log(localStorage.getItem('firstName'));
-        // console.log(localStorage.getItem('lastName'));
+        localStorage.setItem('firstName', response.firstName);
+        localStorage.setItem('lastName', response.lastName);
         this.isAuthenticatedSubject.next(true);
-      })
-    );
-  }
+      })
+    );
+  }
   registerUser(user: User): Observable<User> {
     return this.http.post<User>('${this.apiUrl}/register', user);
   }
