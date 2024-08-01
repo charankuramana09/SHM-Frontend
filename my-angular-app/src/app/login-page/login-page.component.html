@@ -4,20 +4,20 @@
     <p class="login-tag text-decoration-none text-dark">Glad to see you again. Login to your account below.</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="inputBox mb-4">
+      <div class="inputBox">
         <input type="text" formControlName="email" required="required">
         <span class="fw-bold">Email</span>
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message text-danger">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
           <p *ngIf="loginForm.get('email')?.errors?.['required']">This field is required.</p>
           <p *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email address.</p>
           <p *ngIf="emailError">{{ emailError }}</p>
         </div>
       </div>
 
-      <div class="inputBox mb-4">
+      <div class="inputBox">
         <input type="password" formControlName="password" required="required">
         <span class="fw-bold">Password</span>
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message text-danger">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
           <p *ngIf="loginForm.get('password')?.errors?.['required']">This field is required.</p>
           <p *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</p>
           <p *ngIf="passwordError">{{ passwordError }}</p>
@@ -25,21 +25,17 @@
       </div>
 
       <div class="d-flex flex-column gap-3">
-        <app-captcha (validation)="onCaptchaValidation($event, 'captcha')"></app-captcha>
-        <app-math-captcha (validation)="onCaptchaValidation($event, 'math captcha')"></app-math-captcha>
+        <app-captcha (captchaValidity)="onCaptchaValidityChange($event)"></app-captcha>
+        <app-math-captcha (mathCaptchaValidity)="onMathCaptchaValidityChange($event)"></app-math-captcha>
         <div *ngIf="captchaError" class="error-message">
           <p>{{ captchaError }}</p>
         </div>
-        <div *ngIf="loginForm.get('captcha')?.invalid && loginForm.get('captcha')?.touched" class="error-message">
-          <p *ngIf="loginForm.get('captcha')?.errors?.['required']">Captcha is required.</p>
-        </div>
-        <div *ngIf="loginForm.get('mathCaptcha')?.invalid && loginForm.get('mathCaptcha')?.touched" class="error-message">
-          <p *ngIf="loginForm.get('mathCaptcha')?.errors?.['required']">Math captcha is required.</p>
+        <div *ngIf="mathCaptchaError" class="error-message">
+          <p>{{ mathCaptchaError }}</p>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
+
       <button type="submit" class="enter fw-bold fs-6 rounded-pill">LOGIN</button>
-      </div>
     </form>
 
     <p class="signin fs-6">
@@ -48,61 +44,3 @@
     </p>
   </div>
 </div>
-
-
-<!-- <div class="login-container d-flex align-items-center justify-content-center">
-  <div class="card p-4">
-    <p class="login text-decoration-none mb-3 fs-3 text-center">Welcome Back!</p>
-    <p class="login-tag text-decoration-none text-dark text-center mb-5">Glad to see you again. Login to your account below.</p>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="inputBox mb-4">
-        <input type="text" formControlName="email" required="required">
-        <span class="fw-bold">Email</span>
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message text-danger">
-          <p *ngIf="loginForm.get('email')?.errors?.['required']">This field is required.</p>
-          <p *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email address.</p>
-          <p *ngIf="emailError">{{ emailError }}</p>
-        </div>
-      </div>
-
-      <div class="inputBox mb-4">
-        <input type="password" formControlName="password" required="required">
-        <span class="fw-bold">Password</span>
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message text-danger">
-          <p *ngIf="loginForm.get('password')?.errors?.['required']">This field is required.</p>
-          <p *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</p>
-          <p *ngIf="passwordError">{{ passwordError }}</p>
-        </div>
-      </div>
-
-      <div class="d-flex flex-column gap-3 mb-4">
-        <div class="d-flex justify-content-center">
-          <app-captcha (validation)="onCaptchaValidation($event, 'captcha')"></app-captcha>
-          <div *ngIf="loginForm.get('captcha')?.invalid && loginForm.get('captcha')?.touched" class="error-message text-danger">
-            <p *ngIf="loginForm.get('captcha')?.errors?.['required']">Captcha is required.</p>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center">
-          <app-math-captcha (validation)="onCaptchaValidation($event, 'math captcha')"></app-math-captcha>
-          <div *ngIf="captchaError" class="error-message">
-            <p>{{ captchaError }}</p>
-          </div>
-          <div *ngIf="loginForm.get('mathCaptcha')?.invalid && loginForm.get('mathCaptcha')?.touched" class="error-message text-danger">
-            <p *ngIf="loginForm.get('mathCaptcha')?.errors?.['required']">Math captcha is required.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="enter fw-bold fs-6 rounded-pill">LOGIN</button>
-      </div>
-    </form>
-
-    <p class="signin fs-6 text-center">
-      Don't have an account?
-      <a href="#" class="text-decoration-none fw-bold fs-6" [routerLink]="['/signup']">SignUp</a>
-    </p>
-  </div>
-</div> -->
-
