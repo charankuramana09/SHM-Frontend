@@ -2,6 +2,18 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, User } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+
+
+function passwordStrengthValidator(control: FormControl): { [key: string]: boolean } | null {
+  const value = control.value;
+ 
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+  if (value && !hasSpecialChar) {
+    return { specialChar: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-signup-form',
@@ -21,10 +33,11 @@ export class SignupFormComponent {
       firstName: ['', [Validators.required, Validators.maxLength(25)]],
       lastName: ['', [Validators.required, Validators.maxLength(25)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), passwordStrengthValidator]],
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
   }
+
 
   passwordMatchValidator(formGroup: FormGroup): void {
     const password = formGroup.get('password')?.value;
@@ -38,7 +51,7 @@ export class SignupFormComponent {
 
   onSubmit(): void {
     if (this.signupForm.invalid) {
-      // Mark all controls as touched to trigger validation messages
+    
       Object.keys(this.signupForm.controls).forEach(key => {
         const control = this.signupForm.get(key);
         if (control) {
@@ -46,7 +59,6 @@ export class SignupFormComponent {
         }
       });
 
-      // Clear specific fields if needed
       if (this.signupForm.get('firstName')?.invalid) {
         this.signupForm.get('firstName')?.setValue('');
       }

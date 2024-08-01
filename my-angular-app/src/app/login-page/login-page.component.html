@@ -25,16 +25,13 @@
       </div>
 
       <div class="d-flex flex-column gap-3">
-        <app-captcha (validation)="onCaptchaValidation($event, 'captcha')"></app-captcha>
-        <app-math-captcha (validation)="onCaptchaValidation($event, 'math captcha')"></app-math-captcha>
+        <app-captcha (captchaValidity)="onCaptchaValidityChange($event)"></app-captcha>
+        <app-math-captcha (mathCaptchaValidity)="onMathCaptchaValidityChange($event)"></app-math-captcha>
         <div *ngIf="captchaError" class="error-message">
           <p>{{ captchaError }}</p>
         </div>
-        <div *ngIf="loginForm.get('captcha')?.invalid && loginForm.get('captcha')?.touched" class="error-message">
-          <p *ngIf="loginForm.get('captcha')?.errors?.['required']">Captcha is required.</p>
-        </div>
-        <div *ngIf="loginForm.get('mathCaptcha')?.invalid && loginForm.get('mathCaptcha')?.touched" class="error-message">
-          <p *ngIf="loginForm.get('mathCaptcha')?.errors?.['required']">Math captcha is required.</p>
+        <div *ngIf="mathCaptchaError" class="error-message">
+          <p>{{ mathCaptchaError }}</p>
         </div>
       </div>
 

@@ -16,10 +16,6 @@
       </label>
     </div>
   </div>
-  <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message">
-    <div *ngIf="signupForm.get('authorities')?.errors?.['required']">Please select an authority.</div>
-  </div>
-
   <div class="flex">
     <label>
       <input formControlName="firstName" class="input" type="text" placeholder="" required>
@@ -57,7 +53,9 @@
     <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</div>
     <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
     <div *ngIf="signupForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div>
+    <div *ngIf="signupForm.get('password')?.errors?.['specialChar']">Password must contain at least one special character.</div>
   </div>
+  
   
   <label>
     <input formControlName="confirmPassword" class="input" type="password" placeholder="" required>
@@ -74,6 +72,6 @@
   
   <p class="signin fs-6">
     Already have an account?
-    <a [routerLink]="['/login-page']" class="text-decoration-none fw-bold fs-6">Login</a>
+    <a [routerLink]="['']" class="text-decoration-none fw-bold fs-6">Login</a>
   </p>
 </form>

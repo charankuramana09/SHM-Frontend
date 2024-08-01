@@ -14,6 +14,8 @@ export class LoginPageComponent {
   passwordError: string | null = null;
   captchaError: string | null = null;
   mathCaptchaError: string | null = null;
+  captchaValid: boolean = false;
+  mathCaptchaValid: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,14 +25,34 @@ export class LoginPageComponent {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      captcha: ['', Validators.required],  // Bind captcha value
-      mathCaptcha: ['', Validators.required] // Bind math captcha value
+      captcha: [''], // CAPTCHA field
+      mathCaptcha: [''] // Mathematical CAPTCHA field
     });
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid || this.captchaError || this.mathCaptchaError) {
-      this.loginForm.markAllAsTouched();  // Trigger validation messages
+    // Reset previous error messages
+    this.emailError = null;
+    this.passwordError = null;
+    this.captchaError = null;
+    this.mathCaptchaError = null;
+
+    // Validate form and CAPTCHA fields
+    if (this.loginForm.invalid || !this.captchaValid || !this.mathCaptchaValid) {
+      this.loginForm.markAllAsTouched(); // Show validation messages
+
+      if (!this.captchaValid) {
+        this.captchaError = 'Invalid CAPTCHA.';
+      }
+      if (!this.mathCaptchaValid) {
+        this.mathCaptchaError = 'Invalid mathematical CAPTCHA.';
+      }
+      if (this.loginForm.get('captcha')?.value === '') {
+        this.captchaError = 'CAPTCHA is required.';
+      }
+      if (this.loginForm.get('mathCaptcha')?.value === '') {
+        this.mathCaptchaError = 'Mathematical CAPTCHA is required.';
+      }
       return;
     }
 
@@ -53,19 +75,13 @@ export class LoginPageComponent {
     });
   }
 
-  onCaptchaValidation(isValid: boolean, captchaType: string): void {
-    if (!isValid) {
-      if (captchaType === 'captcha') {
-        this.captchaError = 'Invalid captcha.';
-      } else if (captchaType === 'math captcha') {
-        this.mathCaptchaError = 'Invalid math captcha.';
-      }
-    } else {
-      if (captchaType === 'captcha') {
-        this.captchaError = null;
-      } else if (captchaType === 'math captcha') {
-        this.mathCaptchaError = null;
-      }
-    }
+  // Event handler for CAPTCHA validity change
+  onCaptchaValidityChange(isValid: boolean): void {
+    this.captchaValid = isValid;
+  }
+
+  // Event handler for mathematical CAPTCHA validity change
+  onMathCaptchaValidityChange(isValid: boolean): void {
+    this.mathCaptchaValid = isValid;
   }
 }
