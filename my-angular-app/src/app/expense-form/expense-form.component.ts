@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExpenseService } from '../expense.service';
-import { ActivatedRoute } from '@angular/router';
 import { ExpenseService } from '../services/expense.service';
 
 @Component({
@@ -14,7 +12,6 @@ export class ExpenseFormComponent implements OnInit {
   categories = ['Monthly Rent Expenses', 'Grocery', 'Gas', 'Power Bill', 'Petrol Charges', 'Employee Salaries'];
   selectedCategory = '';
   changingCategory = false;
-  changingCategory = false;
   items = [{ itemDescription: '', quantity: 1, unitPrice: 0 }];
   salaries = [{ empId: '', empName: '', salary: 0, salaryDate: '' }];
   rents = [{ hostelName: '', ownerName: '', rentDate: '', amount: 0 }];
@@ -26,8 +23,8 @@ export class ExpenseFormComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.user) {
         try {
-          this.salaries = JSON.parse(params.user);
-          console.log(this.salaries);
+          this.usersArray = JSON.parse(params.user);
+          console.log(this.usersArray);
         } catch (error) {
           console.error('Error parsing user data:', error);
         }
@@ -37,7 +34,7 @@ export class ExpenseFormComponent implements OnInit {
 
   onCategoryChange() {
     console.log('Selected Category:', this.selectedCategory);
-
+    
     if (this.selectedCategory === 'Employee Salaries') {
       this.items = [];
       this.rents = [];
@@ -105,7 +102,7 @@ export class ExpenseFormComponent implements OnInit {
 
   onSubmit(form: any) {
     console.log('Form Submitted:', form.value);
-
+    
     if (this.selectedCategory === 'Employee Salaries') {
       const employeeSalaries = this.salaries.map(salary => ({
         empId: salary.empId,
@@ -114,17 +111,6 @@ export class ExpenseFormComponent implements OnInit {
         salaryDate: salary.salaryDate
       }));
 
-      console.log('Employee Salaries Data:', employeeSalaries);
-      console.log('Request Payload:', JSON.stringify(employeeSalaries));
-
-      this.expenseService.createEmployeeSalaries(employeeSalaries).subscribe(
-        response => {
-          console.log('Employee Salaries Saved:', response);
-        },
-        error => {
-          console.error('Error saving employee salaries:', error);
-        }
-      );
       this.expenseService.createEmployeeSalaries(employeeSalaries).subscribe(response => {
         console.log('Employee Salaries Saved:', response);
       }, error => {
@@ -152,15 +138,12 @@ export class ExpenseFormComponent implements OnInit {
         receiptFilePath: this.receiptAttached === 'yes' ? 'path/to/receipt' : '',
         receiptReason: this.receiptAttached === 'no' ? form.value.receiptReason : ''
       };
-
-      this.expenseService.createExpense(expense).subscribe(
-        response => {
-          console.log('Expense Saved:', response);
-        },
-        error => {
-          console.error('Error saving expense:', error);
-        }
-      );
+      
+      this.expenseService.createExpense(expense).subscribe(response => {
+        console.log('Expense Saved:', response);
+      }, error => {
+        console.error('Error saving expense:', error);
+      });
     }
   }
 }
