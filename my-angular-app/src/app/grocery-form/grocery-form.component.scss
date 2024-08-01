@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
   
     div {
@@ -37,7 +37,6 @@
     }
   
     button {
-      margin-top: 1em;
       padding: 0.5em 1em;
       border: none;
       background-color: #007bff;
@@ -55,4 +54,5 @@
       margin-bottom: 0.5em;
     }
   }
+  
   

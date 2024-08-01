@@ -1,19 +1,17 @@
 <div class="form">
+    <p class="title my-3 d-flex">Grocery Purchase Form</p>
     
-    
-    <!-- Purchase Date -->
-    <div>
-      <label>Purchase Date</label>
-      <input formControlName="purchaseDate" type="date" required>
-    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+          <label>Purchase Date</label>
+          <input formControlName="purchaseDate" type="date" class="form-control" required>
+      </div>
+      <div class="col-md-6 mb-3">
+          <label>Store Name</label>
+          <input formControlName="storeName" type="text" class="form-control" required>
+      </div>
+  </div>
   
-    <!-- Store Name -->
-    <div>
-      <label>Store Name</label>
-      <input formControlName="storeName" type="text" required>
-    </div>
-    
-    <!-- Items Table -->
     <table>
       <thead>
         <tr>
@@ -22,6 +20,8 @@
           <th>Unit Price</th>
           <th>Receipt</th>
           <th>Actions</th>
+          <th class="border border-0 bg-transparent"><button type="button" (click)="addItem()"
+            class="bg-transparent"><img src="../../assets/img/icons8-plus-30.png" /></button></th>
         </tr>
       </thead>
       <tbody>
@@ -38,15 +38,15 @@
           <td>
             <input formControlName="receipt" type="file">
           </td>
-          <td>
-            <button type="button" (click)="deleteItem(i)">Delete</button>
-          </td>
+          <td><button type="button" (click)="deleteItem(i)" class="bg-transparent"><img
+            src="../../assets/img/icons8-delete-30.png" /></button></td>
+            <span>
+              <td class="border border-0"><button type="button" (click)="addItem()" class="bg-transparent"><img
+                    src="../../assets/img/icons8-plus-30.png" /></button></td>
+            </span>
         </tr>
       </tbody>
     </table>
-  
-    <!-- Add Item Button -->
-    <button type="button" (click)="addItem()">Add Item</button>
     
     <!-- Total Amount -->
     <div>
