@@ -22,7 +22,7 @@ function passwordStrengthValidator(control: FormControl): { [key: string]: boole
 })
 export class SignupFormComponent {
   signupForm: FormGroup;
-
+  errorMessage :string | null = null;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -96,7 +96,10 @@ export class SignupFormComponent {
         this.router.navigate(['/login-page']);
       },
       error: (error) => {
-        console.error('Error registering user', error);
+        if(error.status === 208)
+        {
+              this.errorMessage = "Email already exists"
+        }
       }
     });
   }

@@ -48,6 +48,8 @@
     <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>
     <div *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</div>
   </div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   
   <label>
     <input formControlName="password" class="input" type="password" placeholder="" required>
