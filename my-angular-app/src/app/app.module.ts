@@ -33,7 +33,19 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
     PaymentHistoryComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    SignupFormComponent,
+    SignupScreenComponent,
+    LoginPageComponent,
+    PaymentFormComponent,
+    UserRegistrationComponent,
+    CaptchaComponent,
+    MathCaptchaComponent,
+    FooterComponent,
+    HeaderComponent,
+    AdminDashboardComponent,
+    QuarysComplaintsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
