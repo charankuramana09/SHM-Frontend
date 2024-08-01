@@ -53,8 +53,8 @@
             </div>
             <div class="col-md-4">
               <label>
-                <input id="roomNumber" formControlName="roomNumber" class="form-control input" type="number" required>
-                <span>Room No.</span>
+                <input id="location" formControlName="location" class="form-control input" type="text" required>
+                <span>Location of Incident (Room No )</span>
               </label>
             </div>
           </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-6">
               <label>
-                <textarea id="actionRequested" formControlName="actionRequested" class="form-control input"
+                <textarea id="action" formControlName="action" class="form-control input"
                   required></textarea>
                 <span>Action Requested</span>
               </label>
@@ -79,10 +79,10 @@
                 required>
               <span>Type of Complaint</span>
             </label>
-          </div>
+          </div>  
           <div class="mb-3">
-            <label for="supportingDocuments" class="form-label">Supporting Documents</label>
-            <input id="supportingDocuments" formControlName="supportingDocuments" class="form-control" type="file"
+            <label for="supportingDocument" class="form-label">Supporting Documents</label>
+            <input id="supportingDocument" formControlName="supportingDocument" class="form-control" type="file"
               (change)="onFileChange($event)">
           </div>
           <div class="mb-3">

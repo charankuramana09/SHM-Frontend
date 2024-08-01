@@ -24,12 +24,11 @@ export class ComplaintFormComponent {
       email: ['', [Validators.required, Validators.email]],
       date: ['', Validators.required],
       time: ['', Validators.required],
-      roomNumber: ['', Validators.required],
+      location: ['', Validators.required],
       description: ['', Validators.required],
       action: ['', Validators.required],
-      
       typeComplaint: ['', Validators.required],
-      whoInvolvedInTheIncident: ['', Validators.required],
+      othersInvolved: ['', Validators.required],
     });
   }
 
