@@ -15,9 +15,9 @@ import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
-  { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard] },
-  { path: 'payment-history', component: PaymentHistoryComponent,canActivate:[AuthGuard] },
-  { path: 'payment-page', component: PaymentFormComponent,canActivate:[AuthGuard] },
+  // { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard] },
+  // { path: 'payment-history', component: PaymentHistoryComponent,canActivate:[AuthGuard] },
+  // { path: 'payment-page', component: PaymentFormComponent,canActivate:[AuthGuard] },
 
   { path: 'company-invoice', component: CompanyInvoiceGenerationComponent}
 

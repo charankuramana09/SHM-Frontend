@@ -1,0 +1,46 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+  
+    .category-label {
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+  
+    .category-options {
+      display: flex;
+      flex-direction: column;
+  
+      label {
+        margin-bottom: 0.5em;
+        display: flex;
+        align-items: center;
+  
+        input {
+          margin-right: 0.5em;
+        }
+      }
+    }
+  
+    button {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+  }
+  

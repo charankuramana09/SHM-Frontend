@@ -1,12 +1,11 @@
-<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form">
+<div class="form">
     <p class="title mb-0">Grocery Purchase Form</p>
     
     <!-- Purchase Date -->
-    <label>
-    <span>Purchase Date</span>
-      <input formControlName="purchaseDate" type="date" required>
-      
-    </label>
+    <div>
+      <label>Purchase Date</label>
+      <input [formControl]="groceryForm.get('purchaseDate')" type="date" required>
+    </div>
     
     <!-- Items Table -->
     <table>
@@ -21,49 +20,35 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of items.controls; let i = index" [formGroup]="item">
-          <td>
-            <input formControlName="itemName" type="text" required>
-          </td>
-          <td>
-            <input formControlName="quantity" type="number" min="1" required>
-          </td>
-          <td>
-            <input formControlName="unitPrice" type="number" min="0" step="0.01" required>
-          </td>
-          <td>
-            <input formControlName="receipt" type="file">
-          </td>
-          <td>
-            <button type="button" (click)="deleteItem(i)">Delete</button>
-            
-          </td>
+          <td><input formControlName="itemName" type="text" required></td>
+          <td><input formControlName="quantity" type="number" min="1" required></td>
+          <td><input formControlName="unitPrice" type="number" min="0" step="0.01" required></td>
+          <td><input formControlName="receipt" type="file"></td>
+          <td><button type="button" (click)="deleteItem(i)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   
     <!-- Add Item Button -->
     <button type="button" (click)="addItem()">Add Item</button>
-  
+    
     <!-- Total Amount -->
-    <label>
-        <span>Total Amount</span>
-      <input formControlName="totalAmount" type="text" disabled>
-      
-    </label>
+    <div>
+      <label>Total Amount</label>
+      <input [formControl]="groceryForm.get('totalAmount')" type="text" disabled>
+    </div>
   
     <!-- Receipt Attached Radio Buttons -->
     <div>
+      <label>Receipt Attached</label>
       <label>
         <input formControlName="receiptAttached" type="radio" value="Yes" required>
-        <span>Receipt Attached</span>
+        Yes
       </label>
       <label>
         <input formControlName="receiptAttached" type="radio" value="No" required>
-        <span>No Receipt</span>
+        No
       </label>
     </div>
-  
-    <!-- Submit Button -->
-    <button type="submit">Submit</button>
-  </form>
+  </div>
   

@@ -10,7 +10,7 @@
       margin-bottom: 1em;
     }
   
-    input {
+    input, select {
       padding: 0.5em;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -30,7 +30,7 @@
         background-color: #f4f4f4;
       }
   
-      td input {
+      td input, td select {
         width: 100%;
         box-sizing: border-box;
       }

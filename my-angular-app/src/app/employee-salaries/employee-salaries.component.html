@@ -1,0 +1,35 @@
+<div class="form">
+    <p class="title mb-0">Employee Salaries Form</p>
+    
+    <!-- Salaries Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Designation</th>
+          <th>Salary</th>
+          <th>Payment Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let salary of salaries.controls; let i = index" [formGroup]="salary">
+          <td><input formControlName="employeeName" type="text" required></td>
+          <td><input formControlName="designation" type="text" required></td>
+          <td><input formControlName="salary" type="number" min="0" step="0.01" required></td>
+          <td><input formControlName="paymentDate" type="date" required></td>
+          <td><button type="button" (click)="deleteSalary(i)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Salary Button -->
+    <button type="button" (click)="addSalary()">Add Salary</button>
+    
+    <!-- Total Salary -->
+    <div>
+      <label>Total Salary</label>
+      <input [formControl]="salariesForm.get('totalSalary')" type="text" disabled>
+    </div>
+  </div>
+  

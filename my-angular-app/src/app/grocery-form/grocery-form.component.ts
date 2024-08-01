@@ -14,10 +14,12 @@ export class GroceryFormComponent {
       purchaseDate: ['', Validators.required],
       items: this.fb.array([this.createItem()]),
       receiptAttached: ['', Validators.required],
-      totalAmount: [{ value: 0, disabled: true }]  // Total amount input field
+      totalAmount: [{ value: 0, disabled: true }]
     });
 
-    this.updateTotalAmount();
+    this.items.valueChanges.subscribe(() => {
+      this.updateTotalAmount();
+    });
   }
 
   get items() {
@@ -28,14 +30,13 @@ export class GroceryFormComponent {
     return this.fb.group({
       itemName: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      unitPrice: ['', [Validators.required, Validators.min(0)]],
+      unitPrice: [0, [Validators.required, Validators.min(0)]],
       receipt: ['']
     });
   }
 
   addItem() {
     this.items.push(this.createItem());
-    this.updateTotalAmount();
   }
 
   deleteItem(index: number) {
@@ -50,14 +51,5 @@ export class GroceryFormComponent {
       return total + (quantity * unitPrice);
     }, 0);
     this.groceryForm.get('totalAmount')?.setValue(totalAmount);
-  }
-
-  onSubmit() {
-    if (this.groceryForm.invalid) {
-      this.groceryForm.markAllAsTouched();
-      return;
-    }
-
-    console.log(this.groceryForm.value);
   }
 }

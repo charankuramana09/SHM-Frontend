@@ -1,0 +1,25 @@
+<form [formGroup]="expenseForm" class="form">
+    <p class="title mb-0">Expense Form</p>
+  
+    <!-- Category Selection -->
+    <div>
+      <label class="category-label">Select Category</label>
+      <div class="category-options">
+        <label *ngFor="let category of categories">
+          <input type="radio" formControlName="category" [value]="category.value" required>
+          {{ category.label }}
+        </label>
+      </div>
+    </div>
+  
+    <!-- Conditionally Display Forms -->
+    <app-grocery-form *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'"></app-grocery-form>
+    <app-monthly-rent-form *ngIf="selectedCategory === 'monthly-rent'"></app-monthly-rent-form>
+    <app-power-bill-form *ngIf="selectedCategory === 'power-bill'"></app-power-bill-form>
+    <app-employee-salaries *ngIf="selectedCategory === 'employee-salaries'"></app-employee-salaries>
+  
+    <!-- Submit Button -->
+    <button type="button" (click)="onSubmit()">Submit</button>
+    <button type="reset" (click)="onCancel()">Cancel</button>
+  </form>
+  

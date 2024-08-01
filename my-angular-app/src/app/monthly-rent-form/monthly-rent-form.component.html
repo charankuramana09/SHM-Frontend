@@ -1,0 +1,37 @@
+<div class="form">
+    <p class="title mb-0">Monthly Rent Form</p>
+    
+    <!-- Records Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Hostel Name</th>
+          <th>Owner Name</th>
+          <th>Paid Date</th>
+          <th>Paid Amount</th>
+          <th>Receipt Attached</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of records.controls; let i = index" [formGroup]="record">
+          <td><input formControlName="hostelName" type="text" required></td>
+          <td><input formControlName="ownerName" type="text" required></td>
+          <td><input formControlName="paidDate" type="date" required></td>
+          <td><input formControlName="paidAmount" type="number" min="0" step="0.01" required></td>
+          <td><input formControlName="receipt" type="file"></td>
+          <td><button type="button" (click)="deleteRecord(i)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Record Button -->
+    <button type="button" (click)="addRecord()">Add Record</button>
+    
+    <!-- Total Amount -->
+    <div>
+      <label>Total Amount</label>
+      <input [formControl]="rentForm.get('totalAmount')" type="text" disabled>
+    </div>
+  </div>
+  
