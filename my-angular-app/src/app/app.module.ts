@@ -23,6 +23,7 @@ import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HeaderComponent } from './header/header.component';
     MathCaptchaComponent,
     ComplaintFormComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
