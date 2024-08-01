@@ -22,6 +22,7 @@ import { CaptchaService } from './services/captcha.service';
 import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { GroceryFormComponent } from './grocery-form/grocery-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UserRegistrationComponent,
     CaptchaComponent,
     MathCaptchaComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    GroceryFormComponent
   ],
   imports: [
     BrowserModule,

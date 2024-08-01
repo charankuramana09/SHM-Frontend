@@ -1,0 +1,68 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+  
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1em;
+    }
+  
+    input {
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1em;
+  
+      th, td {
+        border: 1px solid #ddd;
+        padding: 0.5em;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+      }
+  
+      td input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  
+    button {
+      margin-top: 1em;
+      padding: 0.5em 1em;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+  
+    .message {
+      margin-bottom: 1em;
+      color: #666;
+    }
+  
+    .error-message {
+      color: red;
+      margin-top: 0.5em;
+    }
+  }
+  
