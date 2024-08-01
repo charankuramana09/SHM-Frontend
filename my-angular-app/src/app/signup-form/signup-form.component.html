@@ -16,6 +16,10 @@
       </label>
     </div>
   </div>
+  <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message">
+    <div *ngIf="signupForm.get('authorities')?.errors?.['required']">Please select an authority.</div>
+  </div>
+
   <div class="flex">
     <label>
       <input formControlName="firstName" class="input" type="text" placeholder="" required>
