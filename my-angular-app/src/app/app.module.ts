@@ -20,7 +20,6 @@ import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
@@ -32,7 +31,17 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     PaymentHistoryComponent,
     ComplaintFormComponent,
     QuarysComplaintsComponent,
+    SignupFormComponent,
+    SignupScreenComponent,
+    LoginPageComponent,
+    PaymentFormComponent,
+    UserRegistrationComponent,
+    CaptchaComponent,
+    MathCaptchaComponent,
+    FooterComponent,
+    HeaderComponent,
     UserProfileComponent
+    
   ],
   imports: [
     BrowserModule,
