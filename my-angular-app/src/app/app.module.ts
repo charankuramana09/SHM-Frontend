@@ -32,6 +32,8 @@ import { MonthlyRentFormComponent } from './monthly-rent-form/monthly-rent-form.
 import { EmployeeSalariesComponent } from './employee-salaries/employee-salaries.component';
 import { PowerBillFormComponent } from './power-bill-form/power-bill-form.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
+import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
+
 
 
 @NgModule({
@@ -59,6 +61,8 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
     EmployeeSalariesComponent,
     PowerBillFormComponent,
     ExpenseFormComponent,
+    HostelFeeComponent,
+   
   
   ],
   imports: [

@@ -1,0 +1,13 @@
+<div class="hostel-fee-container">
+    <h2>Hostel Room Fee Calculator</h2>
+    <label for="sharing">Number of Sharing Members:</label>
+    <select id="sharing" [(ngModel)]="selectedSharing" (change)="updateFee()">
+      <option *ngFor="let option of sharingOptions" [value]="option">
+        {{ option }} {{ option === 1 ? 'Member' : 'Members' }}
+      </option>
+    </select>
+    <div class="fee-display">
+      <h3>Fee per Member: <span>{{ fee | currency }}</span></h3>
+    </div>
+  </div>
+  
