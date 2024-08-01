@@ -29,6 +29,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,14 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserRegistrationComponent,
     CaptchaComponent,
     MathCaptchaComponent,
-    ComplaintFormComponent
+    ComplaintFormComponent,
+    GroceryFormComponent,
+    FooterComponent,
+    HeaderComponent,
+    AdminDashboardComponent,
+    UserProfileComponent,
+    QuarysComplaintsComponent,
+  
   ],
   imports: [
     BrowserModule,
