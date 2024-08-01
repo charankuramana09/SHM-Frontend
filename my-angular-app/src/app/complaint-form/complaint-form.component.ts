@@ -23,12 +23,13 @@ export class ComplaintFormComponent {
       contactNumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
       email: ['', [Validators.required, Validators.email]],
       date: ['', Validators.required],
-      time: ['', Validators.required],
+      time: ['', ],
       location: ['', Validators.required],
       description: ['', Validators.required],
       action: ['', Validators.required],
       typeComplaint: ['', Validators.required],
-      othersInvolved: ['', Validators.required],
+      othersInvolved: ['',],
+      supportingDocument:[null]
     });
   }
 
