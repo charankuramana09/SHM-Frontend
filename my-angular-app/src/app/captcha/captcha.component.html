@@ -2,10 +2,16 @@
   <div class="d-flex align-content-center justify-content-around gap-3">
     <div class="captcha-box">
       <span>{{ captcha }}</span>
+    <div class="captcha-box">
+      <span>{{ captcha }}</span>
       <i class="fas fa-sync-alt" (click)="refreshCaptcha()"></i>
     </div>
     <input type="text" class="form-control" [(ngModel)]="userCaptcha" placeholder="Enter Captcha">
-    <button type="button" class="btn" (click)="verifyCaptcha()" [ngClass]="{
+    <button 
+      type="button" 
+      class="btn" 
+      (click)="verifyCaptcha()"
+      [ngClass]="{
         'btn-success': captchaStatus === 'success',
         'btn-danger': captchaStatus === 'error',
         'btn-primary': captchaStatus === 'pending'
@@ -15,4 +21,7 @@
       <span *ngIf="captchaStatus === 'pending'">Verify</span>
     </button>
   </div>
+  <!-- Error message display -->
 </div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+<div *ngIf="invalidMessage" class="error-message">Invalid Captcha</div>

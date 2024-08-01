@@ -1,49 +1,46 @@
 <div class="login-container align-items-center justify-content-center">
   <div class="card">
     <p class="login text-decoration-none mb-0 fs-3">Welcome Back!</p>
-    <p class="login-tag text-decoration-none text-dark">Glad to see you again Login to your account below.</p>
-    <!--<div class="radio-buttons-container">
-     <div class="radio-button">
-        <input name="radio-group" id="radio2" class="radio-button__input" type="radio">
-        <label for="radio2" class="radio-button__label">
-          <span class="radio-button__custom"></span>Super Admin
-        </label>
+    <p class="login-tag text-decoration-none text-dark">Glad to see you again. Login to your account below.</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="inputBox">
+        <input type="text" formControlName="email" required="required">
+        <span class="fw-bold">Email</span>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+          <p *ngIf="loginForm.get('email')?.errors?.['required']">This field is required.</p>
+          <p *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email address.</p>
+          <p *ngIf="emailError">{{ emailError }}</p>
+        </div>
       </div>
-       <div class="radio-button">
-        <input name="radio-group" id="radio1" class="radio-button__input" type="radio">
-        <label for="radio1" class="radio-button__label">
-          <span class="radio-button__custom"></span>Admin
-        </label>
+
+      <div class="inputBox">
+        <input type="password" formControlName="password" required="required">
+        <span class="fw-bold">Password</span>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+          <p *ngIf="loginForm.get('password')?.errors?.['required']">This field is required.</p>
+          <p *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</p>
+          <p *ngIf="passwordError">{{ passwordError }}</p>
+        </div>
       </div>
-      <div class="radio-button">
-        <input name="radio-group" id="radio3" class="radio-button__input" type="radio">
-        <label for="radio3" class="radio-button__label">
-          <span class="radio-button__custom"></span>Supervisor
-        </label>
+
+      <div class="d-flex flex-column gap-3">
+        <app-captcha (captchaValidity)="onCaptchaValidityChange($event)"></app-captcha>
+        <app-math-captcha (mathCaptchaValidity)="onMathCaptchaValidityChange($event)"></app-math-captcha>
+        <div *ngIf="captchaError" class="error-message">
+          <p>{{ captchaError }}</p>
+        </div>
+        <div *ngIf="mathCaptchaError" class="error-message">
+          <p>{{ mathCaptchaError }}</p>
+        </div>
       </div>
-      <div class="radio-button">
-        <input name="radio-group" id="radio3" class="radio-button__input" type="radio">
-        <label for="radio3" class="radio-button__label">
-          <span class="radio-button__custom"></span>User
-        </label>
-      </div>
-    </div> -->
-    <div class="inputBox">
-      <input type="text" required="required">
-      <span class="fw-bold">Email</span>
-    </div>
-    <div class="inputBox">
-      <input type="password" required="required">
-      <span class="fw-bold">Password</span>
-    </div>
-    <div class="d-flex flex-column gap-3">
-      <app-captcha></app-captcha>
-      <app-math-captcha></app-math-captcha>
-    </div>
-    <button class="enter fw-bold fs-6 rounded-pill">LOGIN</button>
+
+      <button type="submit" class="enter fw-bold fs-6 rounded-pill">LOGIN</button>
+    </form>
+
     <p class="signin fs-6">
-      Don't have an acount ?
-      <a href="#" class="text-decoration-none fw-bold fs-6" [routerLink]="['/payment-page']">SignUp</a>
+      Don't have an account?
+      <a href="#" class="text-decoration-none fw-bold fs-6" [routerLink]="['/signup']">SignUp</a>
     </p>
   </div>
 </div>

@@ -8,13 +8,16 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PaymentFormComponent } from './payment-form/payment-form.component';
 
 import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/company-invoice-generation.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
-  { path: 'dashboard', component: HostelMembersDashboardComponent },
-  { path: 'payment-history', component: PaymentHistoryComponent },
-  { path: 'payment-page', component: PaymentFormComponent },
+  { path: 'signup', component: SignupFormComponent },
+  { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard] },
+  { path: 'payment-history', component: PaymentHistoryComponent,canActivate:[AuthGuard] },
+  { path: 'payment-page', component: PaymentFormComponent,canActivate:[AuthGuard] },
 
   { path: 'company-invoice', component: CompanyInvoiceGenerationComponent}
 
