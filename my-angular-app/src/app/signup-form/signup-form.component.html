@@ -1,0 +1,60 @@
+<form class="form">
+  <p class="title mb-0">Join Us Today!</p>
+  <p class="message">SignUp now to become a member.</p>
+  <div class="radio-buttons-container d-flex justify-content-around">
+    <!-- <div class="radio-button">
+      <input name="radio-group" id="radio2" class="radio-button__input" type="radio">
+      <label for="radio2" class="radio-button__label">
+        <span class="radio-button__custom"></span>Super Admin
+      </label>
+    </div> -->
+    <div class="radio-button">
+      <input name="radio-group" id="radio1" class="radio-button__input" type="radio">
+      <label for="radio1" class="radio-button__label">
+        <span class="radio-button__custom"></span>Admin
+      </label>
+    </div>
+    <div class="radio-button">
+      <input name="radio-group" id="radio3" class="radio-button__input" type="radio">
+      <label for="radio3" class="radio-button__label">
+        <span class="radio-button__custom"></span>Supervisor
+      </label>
+    </div>
+    <!-- <div class="radio-button">
+      <input name="radio-group" id="radio3" class="radio-button__input" type="radio">
+      <label for="radio3" class="radio-button__label">
+        <span class="radio-button__custom"></span>User
+      </label>
+    </div> -->
+  </div>
+  <div class="flex">
+    <label>
+      <input class="input" type="text" placeholder="" required="">
+      <span>Firstname</span>
+    </label>
+
+    <label>
+      <input class="input" type="text" placeholder="" required="">
+      <span>Lastname</span>
+    </label>
+  </div>
+  <label>
+    <input class="input" type="email" placeholder="" required="" />
+    <span>Email</span>
+  </label>
+  <label>
+    <input class="input" type="password" placeholder="" required="" />
+    <span>Password</span>
+  </label>
+  <label>
+    <input class="input" type="password" placeholder="" required="" />
+    <span>Confirm password</span>
+  </label>
+  <button class="submit my-2 fw-bold" [routerLink]="['/login-page']">
+    SIGN UP
+  </button>
+  <p class="signin fs-6">
+    Already have an acount ?
+    <a href="#" class="text-decoration-none fw-bold fs-6" [routerLink]="['/login-page']">Login</a>
+  </p>
+</form>

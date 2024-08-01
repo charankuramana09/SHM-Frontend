@@ -1,59 +1,69 @@
 .dashboard {
-    .statistics {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-  
-      .stat-item {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        padding: 20px;
-        text-align: center;
-        flex: 1;
-        margin: 10px;
-        min-width: 200px;
-  
-        h3 {
-          margin: 0;
-          font-size: 24px;
-        }
-  
-        p {
-          margin: 0;
-          font-size: 14px;
-          color: #6c757d;
-        }
+  padding: 50px;
+
+  .statistics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 50px;
+    padding-bottom: 0px;
+    flex-wrap: wrap;
+
+    .stat-item {
+      background-color: bisque;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      flex: 1;
+      margin: 10px;
+      min-width: 200px;
+
+      h3 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #6c757d;
       }
     }
-  
-    .recent-members {
-      h4 {
-        margin-bottom: 20px;
-      }
-  
-      table {
-        width: 100%;
-        overflow-x: auto;
-      }
-  
-      @media (max-width: 768px) {
-        .statistics {
-          flex-direction: column;
-          align-items: stretch;
-  
-          .stat-item {
-            margin: 10px 0;
-          }
+  }
+
+  .recent-members {
+    h4 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+      .statistics {
+        flex-direction: column;
+        align-items: stretch;
+
+        .stat-item {
+          margin: 10px 0;
         }
-  
-        table {
-          th, td {
-            font-size: 12px;
-            padding: 8px;
-          }
+      }
+
+      table {
+
+        th,
+        td {
+          font-size: 12px;
+          padding: 8px;
         }
       }
     }
   }
-  
+}
+
+.options{
+  align-items: flex-end;
+}
