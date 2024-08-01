@@ -24,6 +24,8 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +33,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
     PaymentHistoryComponent,
-    SignupScreenComponent,
-    SignupFormComponent,
-    LoginPageComponent,
-    PaymentFormComponent,
-    UserRegistrationComponent,
-    CaptchaComponent,
-    MathCaptchaComponent,
-    ComplaintFormComponent,
-    FooterComponent,
-    HeaderComponent,
-    AdminDashboardComponent
+    ComplaintFormComponent
   ],
   imports: [
     BrowserModule,
