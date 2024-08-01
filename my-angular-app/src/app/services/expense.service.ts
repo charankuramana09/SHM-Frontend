@@ -17,4 +17,8 @@ export class ExpenseService {
   createEmployeeSalaries(salaries: any[]): Observable<any> {
     return this.http.post(`${this.baseUrl}/employee`, salaries);
   }
+
+  createRentExpenses(rentExpenses: any[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}/rent-expenses`, rentExpenses);
+  }
 }

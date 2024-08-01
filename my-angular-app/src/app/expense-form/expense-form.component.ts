@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { ActivatedRoute } from '@angular/router';
 import { ExpenseService } from '../services/expense.service';
 
 @Component({
@@ -11,9 +11,10 @@ export class ExpenseFormComponent implements OnInit {
   usersArray: any[] = [];
   categories = ['Monthly Rent Expenses', 'Grocery', 'Gas', 'Power Bill', 'Petrol Charges', 'Employee Salaries'];
   selectedCategory = '';
-  changingCategory = false; // New state to control the category change overlay
+  changingCategory = false;
   items = [{ itemDescription: '', quantity: 1, unitPrice: 0 }];
   salaries = [{ empId: '', empName: '', salary: 0, salaryDate: '' }];
+  rents = [{ hostelName: '', ownerName: '', rentDate: '', amount: 0 }];
   receiptAttached = '';
 
   constructor(private expenseService: ExpenseService, private route: ActivatedRoute) {}
@@ -36,11 +37,19 @@ export class ExpenseFormComponent implements OnInit {
     
     if (this.selectedCategory === 'Employee Salaries') {
       this.items = [];
+      this.rents = [];
       if (this.salaries.length === 0) {
         this.salaries.push({ empId: '', empName: '', salary: 0, salaryDate: '' });
       }
+    } else if (this.selectedCategory === 'Monthly Rent Expenses') {
+      this.items = [];
+      this.salaries = [];
+      if (this.rents.length === 0) {
+        this.rents.push({ hostelName: '', ownerName: '', rentDate: '', amount: 0 });
+      }
     } else {
       this.salaries = [];
+      this.rents = [];
       if (this.items.length === 0) {
         this.items.push({ itemDescription: '', quantity: 1, unitPrice: 0 });
       }
@@ -61,6 +70,14 @@ export class ExpenseFormComponent implements OnInit {
 
   removeSalary(index: number) {
     this.salaries.splice(index, 1);
+  }
+
+  addRent() {
+    this.rents.push({ hostelName: '', ownerName: '', rentDate: '', amount: 0 });
+  }
+
+  removeRent(index: number) {
+    this.rents.splice(index, 1);
   }
 
   onReceiptChange(value: string) {
@@ -98,6 +115,19 @@ export class ExpenseFormComponent implements OnInit {
         console.log('Employee Salaries Saved:', response);
       }, error => {
         console.error('Error saving employee salaries:', error);
+      });
+    } else if (this.selectedCategory === 'Monthly Rent Expenses') {
+      const rentExpenses = this.rents.map(rent => ({
+        hostelName: rent.hostelName,
+        ownerName: rent.ownerName,
+        rentDate: rent.rentDate,
+        amount: rent.amount
+      }));
+
+      this.expenseService.createRentExpenses(rentExpenses).subscribe(response => {
+        console.log('Rent Expenses Saved:', response);
+      }, error => {
+        console.error('Error saving rent expenses:', error);
       });
     } else {
       const expense = {
