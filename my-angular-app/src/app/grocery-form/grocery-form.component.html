@@ -4,7 +4,13 @@
     <!-- Purchase Date -->
     <div>
       <label>Purchase Date</label>
-      <input [formControl]="groceryForm.get('purchaseDate')" type="date" required>
+      <input formControlName="purchaseDate" type="date" required>
+    </div>
+  
+    <!-- Store Name -->
+    <div>
+      <label>Store Name</label>
+      <input formControlName="storeName" type="text" required>
     </div>
     
     <!-- Items Table -->
@@ -20,11 +26,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of items.controls; let i = index" [formGroup]="item">
-          <td><input formControlName="itemName" type="text" required></td>
-          <td><input formControlName="quantity" type="number" min="1" required></td>
-          <td><input formControlName="unitPrice" type="number" min="0" step="0.01" required></td>
-          <td><input formControlName="receipt" type="file"></td>
-          <td><button type="button" (click)="deleteItem(i)">Delete</button></td>
+          <td>
+            <input formControlName="itemName" type="text" required>
+          </td>
+          <td>
+            <input formControlName="quantity" type="number" min="1" required>
+          </td>
+          <td>
+            <input formControlName="unitPrice" type="number" min="0" step="0.01" required>
+          </td>
+          <td>
+            <input formControlName="receipt" type="file">
+          </td>
+          <td>
+            <button type="button" (click)="deleteItem(i)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -37,7 +53,7 @@
       <label>Total Amount</label>
       <input [formControl]="groceryForm.get('totalAmount')" type="text" disabled>
     </div>
-  
+    
     <!-- Receipt Attached Radio Buttons -->
     <div>
       <label>Receipt Attached</label>
