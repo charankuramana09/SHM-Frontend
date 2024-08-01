@@ -1,25 +1,39 @@
+<div class="text-center fs-3 text-uppercase fw-bold my-4">Expense Form</div>
 <form [formGroup]="expenseForm" class="form">
-    <p class="title mb-0">Expense Form</p>
-  
-    <!-- Category Selection -->
-    <div>
-      <label class="category-label">Select Category</label>
-      <div class="category-options">
-        <label *ngFor="let category of categories">
-          <input type="radio" formControlName="category" [value]="category.value" required>
-          {{ category.label }}
+ 
+  <!-- Category Selection -->
+  <div>
+    <label class="category-label">Select Category</label>
+    <!-- <div class="radio-buttons-container d-flex justify-content-around">
+      <div class="radio-button">
+        <input formControlName="authorities" id="radio1" class="radio-button__input" type="radio" value="Admin">
+        <label for="radio1" class="radio-button__label">
+          <span class="radio-button__custom"></span>Admin
         </label>
       </div>
+      <div class="radio-button">
+        <input formControlName="authorities" id="radio3" class="radio-button__input" type="radio" value="Supervisor">
+        <label for="radio3" class="radio-button__label">
+          <span class="radio-button__custom"></span>Supervisor
+        </label>
+      </div>
+    </div> -->
+    <div class="category-options">
+      <label *ngFor="let category of categories">
+        <input type="radio" formControlName="category" [value]="category.value" required>
+        {{ category.label }}
+      </label>
     </div>
-  
-    <!-- Conditionally Display Forms -->
-    <app-grocery-form *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'"></app-grocery-form>
-    <app-monthly-rent-form *ngIf="selectedCategory === 'monthly-rent'"></app-monthly-rent-form>
-    <app-power-bill-form *ngIf="selectedCategory === 'power-bill'"></app-power-bill-form>
-    <app-employee-salaries *ngIf="selectedCategory === 'employee-salaries'"></app-employee-salaries>
-  
-    <!-- Submit Button -->
-    <button type="button" (click)="onSubmit()">Submit</button>
-    <button type="reset" (click)="onCancel()">Cancel</button>
-  </form>
-  
+  </div>
+
+  <!-- Conditionally Display Forms -->
+  <app-grocery-form
+    *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'"></app-grocery-form>
+  <app-monthly-rent-form *ngIf="selectedCategory === 'monthly-rent'"></app-monthly-rent-form>
+  <app-power-bill-form *ngIf="selectedCategory === 'power-bill'"></app-power-bill-form>
+  <app-employee-salaries *ngIf="selectedCategory === 'employee-salaries'"></app-employee-salaries>
+
+  <!-- Submit Button -->
+  <button type="button" (click)="onSubmit()">Submit</button>
+  <button type="reset" (click)="onCancel()">Cancel</button>
+</form>

@@ -18,10 +18,10 @@ export class PaymentHistoryService {
 
   constructor(private http: HttpClient) {}
 
-  getPaymentHistory(memberId: number): Observable<PaymentHistory[]> {
-    // Replace with actual API call
-    return this.http.get<PaymentHistory[]>(`${this.apiUrl}/members/${memberId}/payment-history`);
-  }
+  // getPaymentHistory(memberId: number): Observable<PaymentHistory[]> {
+  //   // Replace with actual API call
+  //   return this.http.get<PaymentHistory[]>(`${this.apiUrl}/members/${memberId}/payment-history`);
+  // }
 
   // Dummy data for testing
   getPaymentHistoryDummy(): Observable<PaymentHistory[]> {

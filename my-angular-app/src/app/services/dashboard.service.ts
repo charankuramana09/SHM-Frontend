@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  private baseUrl = 'http://localhost:8083/admin';
+  constructor(){}
+  // private baseUrl = 'http://localhost:8083/admin';
 
-  constructor(private http: HttpClient) { }
+  // constructor(private http: HttpClient) { }
 
-  getFilteredData(frequencyType: string, hostelName: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/filter?frequencyType=${frequencyType}&hostelName=${hostelName}`);
-  }
+  // getFilteredData(frequencyType: string, hostelName: string): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/filter?frequencyType=${frequencyType}&hostelName=${hostelName}`);
+  // }
 }
