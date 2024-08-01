@@ -29,7 +29,8 @@ export class EmployeeSalariesComponent {
       employeeName: ['', Validators.required],
       designation: ['', Validators.required],
       salary: [0, [Validators.required, Validators.min(0)]],
-      paymentDate: ['', Validators.required]
+      paymentDate: ['', Validators.required],
+      receipt: ['']
     });
   }
 

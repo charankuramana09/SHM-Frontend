@@ -40,7 +40,6 @@ export class ExpenseFormComponent {
     }
 
     console.log(this.expenseForm.value);
-    // You can add form submission logic here
   }
 
   onCancel() {

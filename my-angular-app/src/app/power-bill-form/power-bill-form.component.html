@@ -1,15 +1,17 @@
 <div class="form">
-    <p class="title mb-0">Power Bill Form</p>
+    <p class="title my-3">Power Bill Form</p>
     
     <!-- Records Table -->
     <table>
       <thead>
         <tr>
           <th>Hostel Name</th>
-          <th>Paid Date</th>
           <th>Paid Amount</th>
+          <th>Paid Date</th>
           <th>Receipt Attached</th>
           <th>Actions</th>
+          <th class="border border-0 bg-transparent"><button type="button" (click)="addRecord()"
+            class="bg-transparent"><img src="../../assets/img/icons8-plus-30.png" /></button></th>
         </tr>
       </thead>
       <tbody>
@@ -18,23 +20,23 @@
             <input formControlName="hostelName" type="text" required>
           </td>
           <td>
-            <input formControlName="paidDate" type="date" required>
+            <input formControlName="paidAmount" type="number" min="0" step="0.01" required>
           </td>
           <td>
-            <input formControlName="paidAmount" type="number" min="0" step="0.01" required>
+            <input formControlName="paidDate" type="date" required>
           </td>
           <td>
             <input formControlName="receiptAttached" type="file">
           </td>
-          <td>
-            <button type="button" (click)="deleteRecord(i)">Delete</button>
-          </td>
+          <td><button type="button" (click)="deleteRecord(i)" class="bg-transparent"><img
+            src="../../assets/img/icons8-delete-30.png" /></button></td>
+            <span>
+              <td class="border border-0"><button type="button" (click)="addRecord()" class="bg-transparent"><img
+                    src="../../assets/img/icons8-plus-30.png" /></button></td>
+            </span>
         </tr>
       </tbody>
     </table>
-    
-    <!-- Add Record Button -->
-    <button type="button" (click)="addRecord()">Add Record</button>
     
     <!-- Total Amount Spent -->
     <div>
