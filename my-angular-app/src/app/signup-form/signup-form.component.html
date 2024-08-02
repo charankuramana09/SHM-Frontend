@@ -1,8 +1,8 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
   <p class="title mb-0">Join Us Today!</p>
-  <p class="message">SignUp now to become a member.</p>
+  <p class="message">Sign up now to become a member.</p>
 
-  <div class="radio-buttons-container d-flex justify-content-around">
+  <div *ngIf="isSuperAdmin" class="radio-buttons-container d-flex justify-content-around">
     <div class="radio-button">
       <input formControlName="authorities" id="radio1" class="radio-button__input" type="radio" value="Admin">
       <label for="radio1" class="radio-button__label">
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message">
-    <div *ngIf="signupForm.get('authorities')?.errors?.['required']" class="alerts">*Please select an authority</div>
+    <div *ngIf="signupForm.get('authorities')?.errors?.['required']">Please select an authority.</div>
   </div>
 
   <div class="flex">
@@ -25,6 +25,11 @@
       <input formControlName="firstName" class="input" type="text" placeholder="" required>
       <span>Firstname</span>
     </label>
+    <div *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid" class="error-message">
+      <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Firstname is required.</div>
+      <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
+    </div>
+    
     <label>
       <input formControlName="lastName" class="input" type="text" placeholder="" required>
       <span>Lastname</span>
@@ -66,8 +71,8 @@
     <div *ngIf="signupForm.get('password')?.errors?.['specialChar']" class="alerts">*Password must contain at least one special
       character.</div>
   </div>
-
-
+  
+  
   <label>
     <input formControlName="confirmPassword" class="input" type="password" placeholder="" required>
     <span>Confirm password</span>

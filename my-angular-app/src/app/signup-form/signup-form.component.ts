@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, User } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { SharedServiceService } from '../services/shared-service.service';
 
 
 function passwordStrengthValidator(control: FormControl): { [key: string]: boolean } | null {
@@ -23,10 +24,13 @@ function passwordStrengthValidator(control: FormControl): { [key: string]: boole
 export class SignupFormComponent {
   signupForm: FormGroup;
   errorMessage :string | null = null;
+  isSuperAdmin: boolean = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedServiceService
+    
   ) {
     this.signupForm = this.fb.group({
       authorities: ['', Validators.required],
@@ -38,7 +42,11 @@ export class SignupFormComponent {
     }, { validator: this.passwordMatchValidator });
   }
 
-
+  ngOnInit(): void {
+    this.sharedService.superAdminStatus$.subscribe(status => {
+      this.isSuperAdmin = status;
+    });
+  }
   passwordMatchValidator(formGroup: FormGroup): void {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
@@ -90,6 +98,8 @@ export class SignupFormComponent {
       authorities: [formValues.authorities]
     };
 
+
+
     this.authService.registerUser(user).subscribe({
       next: (response) => {
         console.log('User registered successfully', response);
@@ -102,5 +112,9 @@ export class SignupFormComponent {
         }
       }
     });
+  }
+  setSuperAdminStatus(status: boolean): void {
+    this.isSuperAdmin = status;
+    console.log(this.isSuperAdmin,"is inside in signuppage");
   }
 }

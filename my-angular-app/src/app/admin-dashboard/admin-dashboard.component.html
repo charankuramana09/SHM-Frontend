@@ -1,53 +1,50 @@
 <div class="dashboard">
+    <h1 class="text-success">Admin Dashboard</h1>
     <div class="statistics">
-      <div class="stat-item"(click)="setFilterCriteria('Hostel A')" >
-        <h3>   </h3>
+      <div class="stat-item" (click)="setFilterCriteria('Hostel A')">
+        <h3>{{ selectedHostel === 'Hostel A' ? totalCount : '' }}</h3>
         <p>Hostel Nio</p>
       </div>
       <div class="stat-item" (click)="setFilterCriteria('Hostel B')">
-        <h3></h3>
+        <h3>{{ selectedHostel === 'Hostel B' ? totalCount : '' }}</h3>
         <p>Hostel Saturn</p>
       </div>
-      <div class="stat-item" (click)="setFilterCriteria('Hostel C')" >
-        <h3></h3>
+      <div class="stat-item" (click)="setFilterCriteria('Hostel C')">
+        <h3>{{ selectedHostel === 'Hostel C' ? totalCount : '' }}</h3>
         <p>Hostel Nuance</p>
       </div>
-      <div class="stat-item" (click)="setFilterCriteria('Hostel D')" >
-        <h3></h3>
+      <div class="stat-item" (click)="setFilterCriteria('Hostel D')">
+        <h3>{{ selectedHostel === 'Hostel D' ? totalCount : '' }}</h3>
         <p>Hostel Chirag</p>
       </div>
     </div>
   
-    <div class="recent-members">
+    <div class="statistics">
       <div class="d-flex justify-content-between align-items-center">
-       
-        <div class="statistics">
-            <div class="stat-item"(click)="setFilterCriteria('Hostel A')" >
-              <h3>   </h3>
-              <p>Monthly</p>
-            </div>
-            <div class="stat-item" (click)="setFilterCriteria('Hostel B')">
-              <h3></h3>
-              <p><div class="stat-item" (click)="setFilterCriteria('Hostel C')">
-              <h3></h3>
-              <p>Weekly</p>
-            </div>
-            </div>
-            <div class="stat-item" >
-              <h3></h3>
-              <p>Custom</p>
-            </div>
-            <div class="stat-item" >
-              <h3></h3>
-              <p>Corporate</p>
-            </div>
-            <div class="stat-item" >
-                <h3></h3>
-                <p>Total</p>
-              </div>
+        <div>
+          <h2>Hostel Data Counts</h2>
+          <div class="stat-item" (click)="navigateToDashboard('Monthly')">
+            <h3>Monthly</h3>
+            <p>{{ monthlyData.length }}</p> 
           </div>
+          <div class="stat-item" (click)="navigateToDashboard('Weekly')">
+            <h3>Weekly</h3>
+            <p>{{ weeklyData.length }}</p> <!-- Display count instead of data -->
+          </div>
+          <div class="stat-item" (click)="navigateToDashboard('custom')">
+            <h3>Custom</h3>
+            <p>{{ customData.length }}</p> <!-- Display count instead of data -->
+          </div>
+          <div class="stat-item" (click)="navigateToDashboard('corporate')">
+            <h3>Corporate</h3>
+            <p>{{ corporateData.length }}</p> <!-- Display count instead of data -->
+          </div>
+          <div class="stat-item">
+            <h3>Total</h3>
+            <p>{{ totalCount }}</p>
+          </div>
+        </div>
       </div>
-     
     </div>
   </div>
   

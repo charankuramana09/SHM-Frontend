@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { SharedServiceService } from '../services/shared-service.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +21,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedServiceService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -68,12 +70,6 @@ export class LoginPageComponent implements OnInit {
       if (this.loginForm.get('mathCaptcha')?.value === '') {
         this.mathCaptchaError = 'Mathematical CAPTCHA is required.';
       }
-      if (this.loginForm.get('captcha')?.value !== '') {
-        this.captchaError = null;
-      }
-      if (this.loginForm.get('mathCaptcha')?.value !== '') {
-        this.mathCaptchaError = null;
-      }
       return;
     }
 
@@ -81,6 +77,8 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(loginData).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
+        const isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
+        this.sharedService.setSuperAdminStatus(isSuperAdmin);
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
