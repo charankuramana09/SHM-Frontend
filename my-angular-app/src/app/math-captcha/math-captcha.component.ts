@@ -60,7 +60,9 @@ export class MathCaptchaComponent implements OnInit {
     if (this.answer === this.userAnswer) {
       this.captchaStatus = 'success';
       this.errorMessage = null; 
+      
       this.mathCaptchaValidity.emit(true);
+      this.invalidMessage = null; 
     } else {
       this.captchaStatus = 'error';
       this.invalidMessage = 'Invalid value.'; 
