@@ -1,77 +1,133 @@
 <div class="container mt-5">
-    <form>
-      <div class="row">
-        <!-- User Info -->
-        <div class="col-md-6">
-          <h5>1. User Info</h5>
-          <div class="coolinput">
-            <label for="input" class="text">Name:</label>
-            <input type="text" placeholder="" name="input" class="input">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- User Info -->
+      <div class="col-md-6">
+        <h5>1. User Info</h5>
+        <div class="coolinput" >
+          <label for="firstName"  class="text">FirstName:</label>
+          <input type="text" name="firstName" id="firstName" formControlName="firstName" class="input">
+          <label for="lastName" class="text" >LastName:</label>
+          <input type="text" name="lastName" id="lastName" formControlName="lastName" class="input">
         </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="gender" type="radio" formControlName="gender" id="male" value="male">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="gender" type="radio" formControlName="gender" id="female" value="female">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Type -->
+        <div class="form-group">
+          <label>User Type</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="userType" type="radio" formControlName="userType" id="corporate" value="corporate" (change)="onUserTypeChange($event)">
+              <label class="form-check-label" for="corporate">Corporate</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="userType" type="radio" formControlName="userType" id="regular" value="regular" (change)="onUserTypeChange($event)">
+              <label class="form-check-label" for="regular">Regular</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fee Paid by Company (conditional) -->
+        <div *ngIf="isCorporate">
           <div class="form-group">
-            <label>Gender</label>
+            <label>Is fee paid by the company?</label>
             <div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
-                <label class="form-check-label" for="male">Male</label>
+                <input class="form-check-input" type="radio" formControlName="feePaidByCompany" id="feeYes" value="yes">
+                <label class="form-check-label" for="feeYes">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                <label class="form-check-label" for="female">Female</label>
+                <input class="form-check-input" type="radio" formControlName="feePaidByCompany" id="feeNo" value="no">
+                <label class="form-check-label" for="feeNo">No</label>
               </div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="joiningDate">Joining Date</label>
-            <input type="date" class="form-control" id="joiningDate">
-          </div>
-          <div class="form-group">
-            <label for="purpose">Purpose</label>
-            <select class="form-control" id="purpose">
-              <option>Select purpose</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="roomSharing">Room Sharing</label>
-            <select class="form-control" id="roomSharing">
-              <option>Select sharing</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="frequency">Frequency <small>(day/monthly/custom)</small></label>
-            <select class="form-control" id="frequency">
-              <option>Select frequency</option>
-            </select>
-          </div>
         </div>
-        <!-- Contact Info -->
-        <div class="col-md-6">
-          <h5>2. Contact Info</h5>
-          <div class="form-group">
-            <label for="contactNo">Contact No.</label>
-            <input type="text" class="form-control" id="contactNo" placeholder="Enter contact no.">
-          </div>
-          <div class="form-group">
-            <label for="altContactNo">Alternative Contact No.</label>
-            <input type="text" class="form-control" id="altContactNo" placeholder="Enter alternative contact no.">
-          </div>
-          <div class="form-group">
-            <label for="email">Email ID</label>
-            <input type="email" class="form-control" id="email" placeholder="Yourname@gmail.com">
-          </div>
-          <h5>3. ID Proff Info</h5>
-          <div class="form-group">
-            <label for="idProff">Select ID Proff</label>
-            <select class="form-control" id="idProff">
-              <option>Aadhar Card</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="fileUpload">Upload ID Proff</label>
-            <input type="file" class="form-control-file" id="fileUpload">
-          </div>
+
+        <div class="form-group">
+          <label for="joiningDate">Joining Date</label>
+          <input type="date" name="joiningDate" class="form-control" id="joiningDate" formControlName="joiningDate">
+        </div>
+        <div class="form-group">
+          <label for="purpose">Purpose</label>
+          <select class="form-control" name="purpose" id="purpose" formControlName="purpose">
+            <option>Select</option>
+            <option>Education</option>
+            <option>Working</option>
+            <option>Visiting</option>
+            <option>Coaching</option>
+            <option>Job Searching</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="roomSharing">Room Sharing</label>
+          <select class="form-control" name="roomSharing" id="roomSharing" formControlName="roomSharing">
+            <option>Select</option>
+            <option>Individual</option>
+            <option>1 Sharing</option>
+            <option>2 Sharing</option>
+            <option>3 Sharing</option>
+            <option>4 Sharing</option>
+            <option>5 Sharing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="frequency">Frequency <small>(day/monthly/custom)</small></label>
+          <select class="form-control" name="frequency" id="frequency" formControlName="frequency">
+            <option>Select frequency</option>
+            <option>Daily</option>
+            <option>Monthly</option>
+            <option>Custom</option>
+          </select>
         </div>
       </div>
-    </form>
-  </div>
-  
+      <!-- Contact Info -->
+      <div class="col-md-6">
+        <h5>2. Contact Info</h5>
+        <div class="form-group">
+          <label for="mobileNumber">Contact No.</label>
+          <input type="text" name="mobileNumber" class="form-control" id="mobileNumber" formControlName="mobileNumber" placeholder="Enter contact no.">
+        </div>
+        <div class="form-group">
+          <label for="alternateMobileNumber">Alternative Contact No.</label>
+          <input type="text" class="form-control" name="alternateMobileNumber" id="alternateMobileNumber" formControlName="alternateMobileNumber" placeholder="Enter alternative contact no.">
+        </div>
+        <div class="form-group">
+          <label for="email">Email ID</label>
+          <input type="email" name="email" class="form-control" id="email" formControlName="email" placeholder="Yourname@gmail.com">
+        </div>
+        <h5>3. ID Proof Info</h5>
+        <div class="form-group">
+          <label for="idProofType" >Select ID Proof</label>
+          <select class="form-control" name="idProofType"  id="idProofType" formControlName="idProofType">
+            <option>Select</option>
+            <option>Aadhar Card</option>
+            <option>PAN Card</option>
+            <option>Driving License</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="idProof">Upload ID Proof</label>
+          <input type="file" name="idProof" class="form-control-file" id="idProof" formControlName="idProof">
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-check mt-3">
+      <input type="checkbox" class="form-check-input" id="dataConfirmed" formControlName="dataConfirmed">
+      <label class="form-check-label" for="dataConfirmed">I confirm that the data filled is correct</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!userForm.valid">Submit</button>
+  </form>
+</div>

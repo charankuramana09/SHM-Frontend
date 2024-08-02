@@ -1,15 +1,13 @@
-.card-header {
-  background-color: #f9a826ff;
-  color:#2f2e41ff;
-  text-transform: uppercase;
+.container{
+  padding: 100px;
 }
 
-.bg{
-//   background: #50C9C3; 
-// background: -webkit-linear-gradient(to right, #96DEDA, #50C9C3); 
-// background: linear-gradient(to right, #96DEDA, #50C9C3);
-background-color: white;
+.card{
+  background-color: #fffbf0ff;
+}
 
+.card-header {
+  border-radius: 10px;
 }
 
 .btn-primary {
@@ -54,35 +52,15 @@ background-color: white;
   font-weight: 600;
 }
 
-.animated-image {
-  animation: moveUpDown 2s infinite alternate;
+h3{
+  font-size: 1.5rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@keyframes moveUpDown {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(-20px);
-  }
+span, label, button{ 
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
 }
 
-@media (max-width: 991.98px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .col-lg-4,
-  .col-lg-8 {
-    max-width: 100%;
-  }
-
-  .form .row .col-md-6 {
-    max-width: 100%;
-  }
-
-  .form label .input {
-    width: 100%;
-  }
-}

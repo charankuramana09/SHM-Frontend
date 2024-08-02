@@ -35,7 +35,6 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,9 +68,10 @@ import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
+ 
     AppRoutingModule,
     RouterModule,
+   
     ReactiveFormsModule
   ],
   providers: [provideClientHydration(), provideHttpClient(withFetch()),CaptchaService,
