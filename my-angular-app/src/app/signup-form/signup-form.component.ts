@@ -44,15 +44,12 @@ export class SignupFormComponent {
       confirmPassword: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
 
-    console.log('SignupForm initialized:', this.signupForm);
   }
 
   ngOnInit(): void {
-    console.log('SignupFormComponent ngOnInit');
 
     this.sharedService.superAdminStatus$.subscribe(status => {
       this.isSuperAdmin = status;
-      console.log('SuperAdmin status updated:', this.isSuperAdmin);
 
       // Update form controls based on superAdmin status
       const authoritiesControl = this.signupForm.get('authorities');
@@ -70,28 +67,22 @@ export class SignupFormComponent {
   passwordMatchValidator(formGroup: FormGroup): void {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-    console.log('Password Match Validator:', { password, confirmPassword });
 
     if (password !== confirmPassword) {
       formGroup.get('confirmPassword')?.setErrors({ mustMatch: true });
-      console.log('Passwords do not match');
     } else {
       formGroup.get('confirmPassword')?.setErrors(null);
-      console.log('Passwords match');
     }
   }
 
   onSubmit(): void {
-    console.log('SignupForm submitted');
 
     if (this.signupForm.invalid) {
-      console.log('Form is invalid');
 
       Object.keys(this.signupForm.controls).forEach(key => {
         const control = this.signupForm.get(key);
         if (control) {
           control.markAsTouched();
-          console.log(`Control ${key} marked as touched`);
         }
       });
 
@@ -99,7 +90,6 @@ export class SignupFormComponent {
     }
 
     const formValues = this.signupForm.value;
-    console.log('Form Values:', formValues);
 
     // Create User object
     const user: User = {
@@ -110,21 +100,17 @@ export class SignupFormComponent {
       authorities: this.isSuperAdmin ? [formValues.authorities] : []
     };
 
-    console.log('User object:', user);
 
     this.authService.registerUser(user).subscribe({
       next: (response) => {
-        console.log('User registered successfully:', response);
         this.router.navigate(['/login-page']);
       },
       error: (error) => {
         console.error('Registration error:', error);
         if (error.status === 208) {
           this.errorMessage = "Email already exists";
-          console.log('Error: Email already exists');
         } else {
           this.errorMessage = "An error occurred. Please try again.";
-          console.log('Error: An error occurred');
         }
       }
     });
@@ -132,6 +118,5 @@ export class SignupFormComponent {
 
   setSuperAdminStatus(status: boolean): void {
     this.isSuperAdmin = status;
-    console.log('Set SuperAdmin Status:', this.isSuperAdmin);
   }
 }
