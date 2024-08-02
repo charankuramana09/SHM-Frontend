@@ -1,14 +1,14 @@
 <div class="container mt-5">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="userDetails" (ngSubmit)="onSubmit()">
     <div class="row">
       <!-- User Info -->
       <div class="col-md-6">
         <h5>1. User Info</h5>
-        <div class="coolinput" >
-          <label for="firstName"  class="text">FirstName:</label>
-          <input type="text" name="firstName" id="firstName" formControlName="firstName" class="input">
-          <label for="lastName" class="text" >LastName:</label>
-          <input type="text" name="lastName" id="lastName" formControlName="lastName" class="input">
+        <div class="form-group">
+          <label for="firstName" class="text">First Name:</label>
+          <input type="text" name="firstName" id="firstName" formControlName="firstName" class="form-control">
+          <label for="lastName" class="text">Last Name:</label>
+          <input type="text" name="lastName" id="lastName" formControlName="lastName" class="form-control">
         </div>
         <div class="form-group">
           <label>Gender</label>
@@ -45,11 +45,11 @@
             <label>Is fee paid by the company?</label>
             <div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="feePaidByCompany" id="feeYes" value="yes">
+                <input class="form-check-input" type="radio" id="feeYes" value="yes">
                 <label class="form-check-label" for="feeYes">Yes</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="feePaidByCompany" id="feeNo" value="no">
+                <input class="form-check-input" type="radio"  id="feeNo" value="no">
                 <label class="form-check-label" for="feeNo">No</label>
               </div>
             </div>
@@ -63,33 +63,33 @@
         <div class="form-group">
           <label for="purpose">Purpose</label>
           <select class="form-control" name="purpose" id="purpose" formControlName="purpose">
-            <option>Select</option>
-            <option>Education</option>
-            <option>Working</option>
-            <option>Visiting</option>
-            <option>Coaching</option>
-            <option>Job Searching</option>
+            <option value="">Select</option>
+            <option value="Education">Education</option>
+            <option value="Working">Working</option>
+            <option value="Visiting">Visiting</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Job Searching">Job Searching</option>
           </select>
         </div>
         <div class="form-group">
           <label for="roomSharing">Room Sharing</label>
           <select class="form-control" name="roomSharing" id="roomSharing" formControlName="roomSharing">
-            <option>Select</option>
-            <option>Individual</option>
-            <option>1 Sharing</option>
-            <option>2 Sharing</option>
-            <option>3 Sharing</option>
-            <option>4 Sharing</option>
-            <option>5 Sharing</option>
+            <option value="">Select</option>
+            <option value="Individual">Individual</option>
+            <option value="1 Sharing">1 Sharing</option>
+            <option value="2 Sharing">2 Sharing</option>
+            <option value="3 Sharing">3 Sharing</option>
+            <option value="4 Sharing">4 Sharing</option>
+            <option value="5 Sharing">5 Sharing</option>
           </select>
         </div>
         <div class="form-group">
           <label for="frequency">Frequency <small>(day/monthly/custom)</small></label>
           <select class="form-control" name="frequency" id="frequency" formControlName="frequency">
-            <option>Select frequency</option>
-            <option>Daily</option>
-            <option>Monthly</option>
-            <option>Custom</option>
+            <option value="">Select frequency</option>
+            <option value="Daily">Daily</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Custom">Custom</option>
           </select>
         </div>
       </div>
@@ -110,24 +110,24 @@
         </div>
         <h5>3. ID Proof Info</h5>
         <div class="form-group">
-          <label for="idProofType" >Select ID Proof</label>
-          <select class="form-control" name="idProofType"  id="idProofType" formControlName="idProofType">
-            <option>Select</option>
-            <option>Aadhar Card</option>
-            <option>PAN Card</option>
-            <option>Driving License</option>
+          <label for="idProofType">Select ID Proof</label>
+          <select class="form-control" id="idProofType">
+            <option value="">Select</option>
+            <option value="Aadhar Card">Aadhar Card</option>
+            <option value="PAN Card">PAN Card</option>
+            <option value="Driving License">Driving License</option>
           </select>
         </div>
         <div class="form-group">
           <label for="idProof">Upload ID Proof</label>
-          <input type="file" name="idProof" class="form-control-file" id="idProof" formControlName="idProof">
+          <input type="file" name="idProof" class="form-control-file" id="idProof" (change)="onFileChange($event)">
         </div>
       </div>
     </div>
     <div class="form-group form-check mt-3">
-      <input type="checkbox" class="form-check-input" id="dataConfirmed" formControlName="dataConfirmed">
+      <input type="checkbox" class="form-check-input" id="dataConfirmed">
       <label class="form-check-label" for="dataConfirmed">I confirm that the data filled is correct</label>
     </div>
-    <button type="submit" class="btn btn-primary mt-3" [disabled]="!userForm.valid">Submit</button>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!userDetails.valid">Submit</button>
   </form>
 </div>
