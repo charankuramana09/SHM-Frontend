@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
   styleUrls: ['./grocery-form.component.scss']
 })
 export class GroceryFormComponent {
+  @Input() selectedCategory: string;
   groceryForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -52,6 +53,17 @@ export class GroceryFormComponent {
       return total + (quantity * unitPrice);
     }, 0);
     this.groceryForm.get('totalAmount')?.setValue(totalAmount);
+  }
+
+  get storeNameLabel() {
+    switch (this.selectedCategory) {
+      case 'petrol':
+        return 'Bunk Name';
+      case 'gas':
+        return 'Gas Agency Name';
+      default:
+        return 'Store Name';
+    }
   }
 
   onSubmit() {
