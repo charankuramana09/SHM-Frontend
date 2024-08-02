@@ -16,15 +16,15 @@
 
   <div class="recent-members">
     <div class="d-flex justify-content-between align-items-center">
-    <h4>Recent Hostel Members</h4>
-    <div class="filter options">
-      <label for="status-filter">Status:&nbsp;</label>
-      <select id="status-filter" [(ngModel)]="filterStatus" (change)="applyFilters()">
-        <option value="active">Active</option> 
-        <option value="inactive">Inactive</option>
-      </select>
+      <h4>Recent Hostel Members</h4>
+      <div class="filter options">
+        <label for="status-filter">Status:&nbsp;</label>
+        <select id="status-filter" [(ngModel)]="filterStatus" (change)="applyFilters()">
+          <option value="active">Active</option> 
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
     </div>
-  </div>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -42,8 +42,8 @@
       <tbody>
         <tr *ngFor="let member of filteredMembers">
           <td><input type="checkbox"></td>
-          <td>{{ member.name }}</td>
-          <td>{{ member.mobile }}</td>
+          <td>{{ member.firstName + member.lastName }}</td>
+          <td>{{ member.mobileNumber }}</td>
           <td>{{ member.joiningDate | date }}</td>
           <td>{{ member.paidAmount | currency:'INR' }}</td>
           <td>{{ member.pendingFee | currency:'INR' }}</td>
@@ -52,7 +52,7 @@
             <button class="btn btn-info btn-sm" [routerLink]="['/payment-history']">Payment History</button>
           </td>
           <td>
-            <button class="btn btn-link">View Details</button>
+            <button class="btn btn-link">Edit</button>
           </td>
         </tr>
       </tbody>

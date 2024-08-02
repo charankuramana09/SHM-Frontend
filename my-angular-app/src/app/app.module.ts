@@ -62,6 +62,7 @@ import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
     PowerBillFormComponent,
     ExpenseFormComponent,
     HostelFeeComponent,
+    PaymentHistoryComponent
    
   
   ],
