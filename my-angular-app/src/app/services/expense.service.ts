@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ExpenseService {
 
   private baseUrl = 'http://localhost:8083';
+  private baseUrl = 'http://localhost:8083/expenses/';
 
   constructor(private http: HttpClient) { }
 

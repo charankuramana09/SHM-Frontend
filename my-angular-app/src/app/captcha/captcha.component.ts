@@ -37,6 +37,7 @@ export class CaptchaComponent implements OnInit {
       this.captchaStatus = 'success';
       this.captchaValidity.emit(true);
       this.errorMessage = null; 
+      this.invalidMessage=null;
     } else {
       this.captchaStatus = 'error';
       this.captchaValidity.emit(false);

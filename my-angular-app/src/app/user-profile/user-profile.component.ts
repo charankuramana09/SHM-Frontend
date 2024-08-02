@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '../models/user-profile.model';
 import { UserProfileService } from '../services/user-profile.service';
+import { HostelMember } from '../models/HostelMember';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,12 +9,12 @@ import { UserProfileService } from '../services/user-profile.service';
 })
 export class UserProfileComponent implements OnInit{
 
-  userProfile: UserProfile | null = null;
+  userProfile: HostelMember[] | null = null;
 
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    this.userProfileService.getUserProfile().subscribe((data) => {
+    this.userProfileService.getUserProfiles().subscribe((data) => {
       this.userProfile = data;
     });
   }

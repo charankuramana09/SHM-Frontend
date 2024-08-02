@@ -26,10 +26,11 @@
 
       <div class="d-flex flex-column gap-3">
         <app-captcha (captchaValidity)="onCaptchaValidityChange($event)"></app-captcha>
-        <app-math-captcha (mathCaptchaValidity)="onMathCaptchaValidityChange($event)"></app-math-captcha>
-        <div *ngIf="captchaError" class="error-message">
+         <div *ngIf="captchaError" class="error-message">
           <p>{{ captchaError }}</p>
         </div>
+        <app-math-captcha (mathCaptchaValidity)="onMathCaptchaValidityChange($event)"></app-math-captcha>
+       
         <div *ngIf="mathCaptchaError" class="error-message">
           <p>{{ mathCaptchaError }}</p>
         </div>

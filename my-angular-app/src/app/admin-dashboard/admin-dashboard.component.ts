@@ -1,49 +1,59 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+// admin-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DashboardService } from '../services/dashboard.service';
+import { HostelDataService } from '../services/hostel-data.service';
+
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent {
-//   hostels = [
-//     { name: 'Hostel A', },
-//     { name: 'Hostel B', },
-//     { name: 'Hostel C', },
-//     { name: 'Hostel D' }
-//   ];
-// frquencyType:string='Monthyly';
-//   selectedHostel = this.hostels[0];
-//   filteredData: any = {
-//     monthlyMembers: 0,
-//     weeklyMembers: 0,
-//     customPeriodMembers: 0,
-//     totalMembers: 0
-//   };
+export class AdminDashboardComponent implements OnInit {
 
-//   constructor(private dataService: DashboardService) { }
+  selectedHostel: string = '';
+  monthlyData: any[] = [];
+  weeklyData: any[] = [];
+  customData: any[] = [];
+  corporateData: any[] = [];
+  totalCount: number = 0;
 
-//   ngOnInit(): void {
-//     this.fetchDataForSelectedHostel();
-//     console.log('this frequency'+this.frquencyType+"hostelname= "+this.selectedHostel)
-//   }
 
-//   selectHostel(hostel: any): void {
-//     this.selectedHostel = hostel;
-//     this.fetchDataForSelectedHostel();
-//   }
+  constructor(private hostelDataService: HostelDataService,private router: Router) { }
 
-//   fetchDataForSelectedHostel(): void {
-//     this.dataService.getFilteredData(this.selectedHostel.name, this.frquencyType).subscribe(
-//       data => {
-//         this.filteredData = data;
-//       },
-//       error => {
-//         console.error('Error fetching data', error);
-//       }
-//     );
-  // }
+  ngOnInit(): void {
+    this.selectedHostel = this.hostelDataService.getHostelName();
+    this.fetchAllData();
+  }
+  setFilterCriteria(hostelName: string): void {
+    this.selectedHostel = hostelName;
+    console.log(hostelName);
+    this.hostelDataService.setHostelName(hostelName);
+    this.fetchAllData();
+  }
+  fetchAllData(): void {
+    this.fetchDataByFrequencyType('monthly', 'monthlyData');
+    this.fetchDataByFrequencyType('weekly', 'weeklyData');
+    this.fetchDataByFrequencyType('custom', 'customData');
+    this.fetchDataByFrequencyType('corporate', 'corporateData');
+  }
+
+  fetchDataByFrequencyType(frequencyType: string, dataProperty: string): void {
+    this.hostelDataService.getUserDetailsByFrequencyType(frequencyType, this.selectedHostel).subscribe(
+      (response) => {
+        this[dataProperty] = response;
+        this.updateTotalCount();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  updateTotalCount(): void {
+    this.totalCount = this.monthlyData.length + this.weeklyData.length + this.customData.length + this.corporateData.length;
+  }
+  navigateToDashboard(frequencyType: string): void {
+    this.router.navigate(['dashboard'], { queryParams: { frequencyType: frequencyType, hostelName: this.selectedHostel } });
+  }
 }

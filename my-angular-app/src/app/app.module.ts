@@ -33,7 +33,8 @@ import { EmployeeSalariesComponent } from './employee-salaries/employee-salaries
 import { PowerBillFormComponent } from './power-bill-form/power-bill-form.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 @NgModule({
@@ -62,15 +63,19 @@ import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
     PowerBillFormComponent,
     ExpenseFormComponent,
     HostelFeeComponent,
+    PaymentHistoryComponent,
+    NavbarComponent,
+    LayoutComponent
    
   
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
+ 
     AppRoutingModule,
     RouterModule,
+   
     ReactiveFormsModule
   ],
   providers: [provideClientHydration(), provideHttpClient(withFetch()),CaptchaService,

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HostelMember, HostelService } from '../services/hostel.service';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { HostelMember } from '../models/HostelMember';
+import { HostelService } from '../services/hostel.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-hostel-members-dashboard',
   templateUrl: './hostel-members-dashboard.component.html',
-  styleUrl: './hostel-members-dashboard.component.scss'
+  styleUrls: ['./hostel-members-dashboard.component.scss']
 })
 export class HostelMembersDashboardComponent implements OnInit {
   membersData: HostelMember[] = [];
@@ -14,25 +16,43 @@ export class HostelMembersDashboardComponent implements OnInit {
   totalFeeDueCount: number = 0;
   filterStatus: 'active' | 'inactive' = 'active';
   filterCriteria: string = 'all';
+  isBrowser: boolean;
 
-
-  constructor(private hostelService: HostelService) {}
+  constructor(private hostelService: HostelService, @Inject(PLATFORM_ID) private platformId: Object) {this.isBrowser = isPlatformBrowser(this.platformId);}
 
   ngOnInit(): void {
-    this.getAllMembers();
+    if (this.isBrowser) {
+      this.loadMembersFromLocalStorage();
+    }
+    if (this.membersData.length === 0) {
+      this.getAllMembers();
+    }
+  }
+
+  getAllMembers(): void {
     this.hostelService.getHostelMembers().subscribe(
-      data => this.membersData = data,
+      (data: HostelMember[]) => {
+        this.membersData = data;
+        if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+          this.saveMembersToLocalStorage();
+        }
+       
+        this.applyFilters();
+      },
       error => console.error('Error fetching members data', error)
     );
   }
-  getAllMembers(): void {
-    this.hostelService.getHostelMembers().subscribe((data: HostelMember[]) => {
-      this.membersData = data;
-      // this.calculateCounts();
-      this.applyFilters();
-    });
+
+  loadMembersFromLocalStorage(): void {
+    const storedMembers = localStorage.getItem('hostelMembers');
+    if (storedMembers) {
+      this.membersData = JSON.parse(storedMembers);
+    }
   }
 
+  saveMembersToLocalStorage(): void {
+    localStorage.setItem('hostelMembers', JSON.stringify(this.membersData));
+  }
 
   setFilterCriteria(criteria: string): void {
     this.filterCriteria = criteria;
@@ -46,7 +66,7 @@ export class HostelMembersDashboardComponent implements OnInit {
 
   matchFilters(member: HostelMember): boolean {
     const today = new Date();
-    const isStatusMatch = member.status === this.filterStatus;
+    const isStatusMatch = (this.filterStatus === 'active' && member.status) || (this.filterStatus === 'inactive' && !member.status);
     let isCriteriaMatch = false;
 
     switch(this.filterCriteria) {
@@ -54,13 +74,11 @@ export class HostelMembersDashboardComponent implements OnInit {
         isCriteriaMatch = true;
         break;
       case 'todayDue':
-        const joiningDate = new Date(member.joiningDate);
-        const dueDate = new Date(joiningDate);
-        dueDate.setMonth(joiningDate.getMonth() + 1);
+        const dueDate = new Date(member.paymentETA);
         isCriteriaMatch = today.getDate() === dueDate.getDate() && today.getMonth() === dueDate.getMonth();
         break;
       case 'totalDue':
-        isCriteriaMatch = member.pendingFee > 0;
+        isCriteriaMatch = member.pendingAmount > 0;
         break;
       default:
         isCriteriaMatch = true;
@@ -71,16 +89,12 @@ export class HostelMembersDashboardComponent implements OnInit {
   }
 
   calculateCounts(): void {
-    this.totalMembersCount = this.membersData.filter(member => member.status === this.filterStatus).length;
+    this.totalMembersCount = this.membersData.filter(member => (this.filterStatus === 'active' && member.status) || (this.filterStatus === 'inactive' && !member.status)).length;
     this.todayFeeDueCount = this.membersData.filter(member => {
       const today = new Date();
-      const joiningDate = new Date(member.joiningDate);
-      const dueDate = new Date(joiningDate);
-      dueDate.setMonth(joiningDate.getMonth() + 1);
-      return today.getDate() === dueDate.getDate() && today.getMonth() === dueDate.getMonth()
-        && member.status === this.filterStatus;
+      const dueDate = new Date(member.paymentETA);
+      return today.getDate() === dueDate.getDate() && today.getMonth() === dueDate.getMonth() && member.status === (this.filterStatus === 'active');
     }).length;
-    this.totalFeeDueCount = this.membersData.filter(member => member.pendingFee > 0 && member.status === this.filterStatus).length;
+    this.totalFeeDueCount = this.membersData.filter(member => member.pendingAmount > 0 && member.status === (this.filterStatus === 'active')).length;
   }
-
 }

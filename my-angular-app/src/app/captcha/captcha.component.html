@@ -1,6 +1,5 @@
 <div class="captcha-container">
   <div class="d-flex align-content-center justify-content-around gap-3">
-    
     <div class="captcha-box">
       <span>{{ captcha }}</span>
       <i class="fas fa-sync-alt" (click)="refreshCaptcha()"></i>
@@ -20,7 +19,7 @@
       <span *ngIf="captchaStatus === 'pending'">Verify</span>
     </button>
   </div>
-  <!-- Error message display -->
 </div>
+<!-- Error message display -->
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-<div *ngIf="invalidMessage" class="error-message">Invalid Captcha</div>
+<div *ngIf="invalidMessage" class="error-message">{{ invalidMessage }}</div>

@@ -1,62 +1,18 @@
-// .form {
-//     display: flex;
-//     flex-direction: column;
-//     max-width: 600px;
-//     margin: 0 auto;
-  
-//     .category-label {
-//       font-size: 1.5em;
-//       margin-bottom: 0.5em;
-//     }
-  
-//     .category-options {
-//       display: flex;
-//       flex-direction: column;
-  
-//       label {
-//         margin-bottom: 0.5em;
-//         display: flex;
-//         align-items: center;
-  
-//         input {
-//           margin-right: 0.5em;
-//         }
-//       }
-//     }
-  
-//     button {
-//       margin-top: 1em;
-//       padding: 0.5em 1em;
-//       border: none;
-//       background-color: #007bff;
-//       color: #fff;
-//       border-radius: 4px;
-//       cursor: pointer;
-  
-//       &:hover {
-//         background-color: #0056b3;
-//       }
-//     }
-  
-//     .title {
-//       font-size: 1.5em;
-//       margin-bottom: 0.5em;
-//     }
-//   }
-  
 .container {
-  width: 100%;
-  background-color: #fffbf0ff; /* Set the background color */
-  padding: 2em; /* Add some padding around the form */
+  max-width: 100vw;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #fffbf0ff;
+  padding: 80px;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1em; /* Add some padding to make it look nicer */
-  border-radius: 8px; /* Optional: Add rounded corners */
+  // display: flex;
+  // flex-direction: column;
+  // // max-width: 100vw;
+  // // margin: 0 auto;
+  // // padding: 1em;
+  // border-radius: 8px;
 
   .category-label {
     font-size: 1.5em;
@@ -68,7 +24,7 @@
     flex-wrap: wrap;
 
     label {
-      width: 33.33%; /* Make sure three labels fit per row */
+      width: 33.33%;
       margin-bottom: 0.5em;
       display: flex;
       align-items: center;
@@ -84,4 +40,3 @@
     margin-bottom: 0.5em;
   }
 }
-

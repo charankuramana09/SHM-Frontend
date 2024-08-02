@@ -29,6 +29,17 @@ export class ExpenseFormComponent {
     return this.expenseForm.get('category')?.value;
   }
 
+  get storeNameLabel() {
+    switch (this.selectedCategory) {
+      case 'petrol':
+        return 'Bunk Name';
+      case 'gas':
+        return 'Gas Agency Name';
+      default:
+        return 'Store Name';
+    }
+  }
+
   onSubmit() {
     if (this.expenseForm.invalid) {
       this.expenseForm.markAllAsTouched();
@@ -74,6 +85,8 @@ export class ExpenseFormComponent {
   getFormComponent(category: string): FormGroup | null {
     switch (category) {
       case 'grocery':
+      case 'petrol':
+      case 'gas':
         return (document.querySelector('app-grocery-form') as any)?.groceryForm;
       case 'monthly-rent':
         return (document.querySelector('app-monthly-rent-form') as any)?.rentForm;
