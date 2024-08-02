@@ -11,7 +11,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { LayoutComponent } from './layout/layout.component';
-
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
@@ -19,10 +20,12 @@ const routes: Routes = [
     path: '', component: LayoutComponent, children: [
       { path: 'dashboard', component: HostelMembersDashboardComponent },
       { path: 'expenses', component: ExpenseFormComponent },
+      { path: 'admin-dashboard', component: AdminDashboardComponent },
       { path: 'payment-page', component: PaymentFormComponent},
       { path: 'payment-history', component: PaymentHistoryComponent },
       { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
       { path: 'complaint', component: UserRegistrationComponent },
+      { path: 'queries', component: QuarysComplaintsComponent },
       // Other routes requiring the navbar
     ]
   },
