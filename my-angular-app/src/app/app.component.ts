@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './auth/auth.service'; 
 
 @Component({
@@ -7,11 +8,24 @@ import { AuthService } from './auth/auth.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  isLoggedIn: boolean = false;
+  showNavbar: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const isAuthPage = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/signup';
+        this.authService.isAuthenticated$.subscribe(isLoggedIn => {
+          if (isLoggedIn) {
+            this.authService.isSuperAdmin$.subscribe(isSuperAdmin => {
+              this.showNavbar = !isAuthPage;
+            });
+          } else {
+            this.showNavbar = false;
+          }
+        });
+      }
+    });
   }
 }

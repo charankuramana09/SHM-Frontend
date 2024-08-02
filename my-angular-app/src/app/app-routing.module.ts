@@ -10,19 +10,23 @@ import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { AuthGuard } from './auth/auth.guard';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
-
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-   { path: '', component: LoginPageComponent },
-   { path: 'registration', component: UserRegistrationComponent  },
-   { path: 'signup', component: SignupFormComponent },  
-     { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard] },
-  { path: 'payment-history', component: PaymentHistoryComponent },
-  { path: 'payment-page', component: PaymentFormComponent,canActivate:[AuthGuard] },
-  { path: 'expenses', component: ExpenseFormComponent },
-
-  { path: 'company-invoice', component: CompanyInvoiceGenerationComponent}
-
+  { path: '', component: LoginPageComponent },
+  { path: 'signup', component: SignupFormComponent },
+  {
+    path: '', component: LayoutComponent, children: [
+      { path: 'dashboard', component: HostelMembersDashboardComponent },
+      { path: 'expenses', component: ExpenseFormComponent },
+      { path: 'payment-page', component: PaymentFormComponent},
+      { path: 'payment-history', component: PaymentHistoryComponent },
+      { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
+      { path: 'complaint', component: UserRegistrationComponent },
+      // Other routes requiring the navbar
+    ]
+  },
+  // Other routes
 ];
 
 @NgModule({
