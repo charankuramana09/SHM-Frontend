@@ -1,9 +1,9 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 export interface User {
   email: string;
   firstName: string;
@@ -11,6 +11,9 @@ export interface User {
   password: string;
   authorities: string[];
 }
+// globals.ts
+export let isSuperAdmin: boolean = false;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,15 +25,26 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(loginData: { email: string, password: string }): Observable<any> {
-    return this.http.post<{ token: string, authorities: string[], firstName: string, lastName: string }>(`${this.apiUrl}/login`, loginData).pipe(
+    return this.http.post<{ jwtToken: string, authorities: string[], firstName: string, lastName: string }>(`${this.apiUrl}/login`, loginData).pipe(
       tap(response => {
         localStorage.setItem('jwtToken', response.jwtToken);
         localStorage.setItem('authorities', JSON.stringify(response.authorities));
         localStorage.setItem('firstName', response.firstName);
         localStorage.setItem('lastName', response.lastName);
+        
+        isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
+        console.log(isSuperAdmin,'inside authservice');
+        localStorage.setItem('isSuperAdmin', JSON.stringify(isSuperAdmin));
+        this.checkUserRole(isSuperAdmin);
         this.isAuthenticatedSubject.next(true);
-      })
+      })  
     );
+  }
+
+  private checkUserRole(isSuperAdmin: boolean): void {
+    console.log(isSuperAdmin,'inside checkUserRole');
+     isSuperAdmin=true;
+     console.log(isSuperAdmin,'inside checkUserRole');
   }
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/register`, user);
@@ -48,12 +62,16 @@ export class AuthService {
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
-  
+
   private hasToken(): boolean {
     return this.isBrowser() && !!localStorage.getItem('jwtToken');
   }
 
   getToken(): string | null {
     return this.isBrowser() ? localStorage.getItem('jwtToken') : null;
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('jwtToken');
   }
 }
