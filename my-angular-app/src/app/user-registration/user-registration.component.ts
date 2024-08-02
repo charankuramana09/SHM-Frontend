@@ -27,7 +27,6 @@ export class UserRegistrationComponent {
       alternateMobilenumber: [''],
       email: ['', [Validators.required, Validators.email]],
       idProof: ['', Validators.required],
-      idProofType: [''],
       dataConfirmed: [false, Validators.requiredTrue]
     });
   }

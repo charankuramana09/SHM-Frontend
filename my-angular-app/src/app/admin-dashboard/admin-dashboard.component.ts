@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DashboardService } from '../services/dashboard.service';
+import { HostelMember } from '../models/HostelMember';
+import { HostelDataService } from '../services/hostel-data.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,41 +11,37 @@ import { DashboardService } from '../services/dashboard.service';
   styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent {
-//   hostels = [
-//     { name: 'Hostel A', },
-//     { name: 'Hostel B', },
-//     { name: 'Hostel C', },
-//     { name: 'Hostel D' }
-//   ];
-// frquencyType:string='Monthyly';
-//   selectedHostel = this.hostels[0];
-//   filteredData: any = {
-//     monthlyMembers: 0,
-//     weeklyMembers: 0,
-//     customPeriodMembers: 0,
-//     totalMembers: 0
-//   };
+  membersData: HostelMember[] = [];
+  filteredMembers: HostelMember[] = [];
+  totalMembersCount: number = 0;
+  todayFeeDueCount: number = 0;
+  totalFeeDueCount: number = 0;
+  filterStatus: 'active' | 'inactive' = 'active';
+  filterCriteria: string = 'all';
+  isBrowser: boolean;
 
-//   constructor(private dataService: DashboardService) { }
+  constructor(private hostelDataService: HostelDataService) {}
+  
 
-//   ngOnInit(): void {
-//     this.fetchDataForSelectedHostel();
-//     console.log('this frequency'+this.frquencyType+"hostelname= "+this.selectedHostel)
-//   }
+  ngOnInit(): void {
+   
+    if (this.membersData.length === 0) {
+     
+    }
+  }
+  setFilterCriteria(criteria: string): void {
+    this.hostelDataService.setHostelName(criteria);
+    console.log(criteria);
+    this.filterCriteria = criteria;
+    this.applyFilters();
+  }
 
-//   selectHostel(hostel: any): void {
-//     this.selectedHostel = hostel;
-//     this.fetchDataForSelectedHostel();
-//   }
+  applyFilters(): void {
+    this.calculateCounts();
+  }
 
-//   fetchDataForSelectedHostel(): void {
-//     this.dataService.getFilteredData(this.selectedHostel.name, this.frquencyType).subscribe(
-//       data => {
-//         this.filteredData = data;
-//       },
-//       error => {
-//         console.error('Error fetching data', error);
-//       }
-//     );
-  // }
+
+  calculateCounts(): void {
+    this.totalMembersCount = this.membersData.filter(member => (this.filterStatus === 'active' && member.status) || (this.filterStatus === 'inactive' && !member.status)).length;
+    }
 }

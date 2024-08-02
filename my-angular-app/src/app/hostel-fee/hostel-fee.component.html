@@ -1,13 +1,15 @@
-<div class="hostel-fee-container">
-    <h2>Hostel Room Fee Calculator</h2>
-    <label for="sharing">Number of Sharing Members:</label>
-    <select id="sharing" [(ngModel)]="selectedSharing" (change)="updateFee()">
-      <option *ngFor="let option of sharingOptions" [value]="option">
-        {{ option }} {{ option === 1 ? 'Member' : 'Members' }}
-      </option>
-    </select>
-    <div class="fee-display">
-      <h3>Fee per Member: <span>{{ fee | currency }}</span></h3>
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <h2 class="mb-5">Hostel Room Fee Calculator</h2>
+    <div class="mb-3 w-25">
+      <label for="sharing" class="form-label">Number of Sharing Members:</label>
+      <select id="sharing" class="form-select" [(ngModel)]="selectedSharing" (change)="updateFee()">
+        <option *ngFor="let option of sharingOptions" [value]="option">
+          {{ option }} {{ option === 1 ? 'Member' : 'Members' }}
+        </option>
+      </select>
+    </div>
+    <div class="fee-display text-center mt-5">
+      <h3>Fee per Member: <span>{{ fee | currency:'INR' }}</span></h3>
     </div>
   </div>
   
