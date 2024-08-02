@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
   emailError: string | null = null;
   passwordError: string | null = null;
@@ -30,6 +30,21 @@ export class LoginPageComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Subscribe to form value changes to clear error messages dynamically
+    this.loginForm.get('captcha')?.valueChanges.subscribe(() => {
+      if (this.captchaError && this.captchaValid) {
+        this.captchaError = null;
+      }
+    });
+
+    this.loginForm.get('mathCaptcha')?.valueChanges.subscribe(() => {
+      if (this.mathCaptchaError && this.mathCaptchaValid) {
+        this.mathCaptchaError = null;
+      }
+    });
+  }
+
   onSubmit(): void {
     // Reset previous error messages
     this.emailError = null;
@@ -39,7 +54,7 @@ export class LoginPageComponent {
 
     // Validate form and CAPTCHA fields
     if (this.loginForm.invalid || !this.captchaValid || !this.mathCaptchaValid) {
-      this.loginForm.markAllAsTouched(); // Show validation messages
+      this.loginForm.markAllAsTouched(); 
 
       if (!this.captchaValid) {
         this.captchaError = 'Invalid CAPTCHA.';
@@ -53,6 +68,12 @@ export class LoginPageComponent {
       if (this.loginForm.get('mathCaptcha')?.value === '') {
         this.mathCaptchaError = 'Mathematical CAPTCHA is required.';
       }
+      if (this.loginForm.get('captcha')?.value !== '') {
+        this.captchaError = null;
+      }
+      if (this.loginForm.get('mathCaptcha')?.value !== '') {
+        this.mathCaptchaError = null;
+      }
       return;
     }
 
@@ -63,10 +84,10 @@ export class LoginPageComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
-        if (error.error.message === 'Email does not exist') {
+        if (error.status === 404) {
           this.emailError = 'Email does not exist';
           this.loginForm.get('email')?.setValue('');
-        } else if (error.error.message === 'Invalid password') {
+        } else if (error.status === 401) {
           this.passwordError = 'Invalid password';
           this.loginForm.get('password')?.setValue('');
         }
@@ -78,10 +99,16 @@ export class LoginPageComponent {
   // Event handler for CAPTCHA validity change
   onCaptchaValidityChange(isValid: boolean): void {
     this.captchaValid = isValid;
+    if (isValid && this.captchaError) {
+      this.captchaError = null;
+    }
   }
 
   // Event handler for mathematical CAPTCHA validity change
   onMathCaptchaValidityChange(isValid: boolean): void {
     this.mathCaptchaValid = isValid;
+    if (isValid && this.mathCaptchaError) {
+      this.mathCaptchaError = null;
+    }
   }
 }

@@ -24,7 +24,6 @@ export class HostelMembersDashboardComponent implements OnInit {
     if (this.isBrowser) {
       this.loadMembersFromLocalStorage();
     }
-    this.loadMembersFromLocalStorage();
     if (this.membersData.length === 0) {
       this.getAllMembers();
     }
@@ -34,7 +33,10 @@ export class HostelMembersDashboardComponent implements OnInit {
     this.hostelService.getHostelMembers().subscribe(
       (data: HostelMember[]) => {
         this.membersData = data;
-        this.saveMembersToLocalStorage();
+        if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+          this.saveMembersToLocalStorage();
+        }
+       
         this.applyFilters();
       },
       error => console.error('Error fetching members data', error)

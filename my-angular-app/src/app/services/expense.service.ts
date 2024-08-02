@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ExpenseService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8083/expenses/';
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +32,6 @@ export class ExpenseService {
     formData.append('totalAmount', monthlyRent.totalAmount.toString());
     formData.append('receiptFile', receiptFile);
 
-    return this.http.post<any>(`${this.baseUrl}/api/monthly/create`, formData);
+    return this.http.post<any>(`${this.baseUrl}/save`, formData);
   }
 }
