@@ -9,13 +9,13 @@ import { HostelMember } from '../models/HostelMember';
 })
 export class UserProfileComponent implements OnInit{
 
-  hostelMember: HostelMember[] | null = null;
+  userProfile: HostelMember[] | null = null;
 
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
     this.userProfileService.getUserProfiles().subscribe((data) => {
-      this.hostelMember = data;
+      this.userProfile = data;
     });
   }
 

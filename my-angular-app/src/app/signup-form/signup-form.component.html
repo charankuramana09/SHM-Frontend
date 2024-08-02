@@ -1,8 +1,8 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
   <p class="title mb-0">Join Us Today!</p>
-  <p class="message">SignUp now to become a member.</p>
-  
-  <div class="radio-buttons-container d-flex justify-content-around">
+  <p class="message">Sign up now to become a member.</p>
+
+  <div *ngIf="isSuperAdmin" class="radio-buttons-container d-flex justify-content-around">
     <div class="radio-button">
       <input formControlName="authorities" id="radio1" class="radio-button__input" type="radio" value="Admin">
       <label for="radio1" class="radio-button__label">
@@ -16,9 +16,6 @@
       </label>
     </div>
   </div>
-  <div *ngIf="signupForm.get('authorities')?.touched && signupForm.get('authorities')?.invalid" class="error-message">
-    <div *ngIf="signupForm.get('authorities')?.errors?.['required']">Please select an authority.</div>
-  </div>
 
   <div class="flex">
     <label>
@@ -29,7 +26,7 @@
       <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Firstname is required.</div>
       <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
     </div>
-    
+
     <label>
       <input formControlName="lastName" class="input" type="text" placeholder="" required>
       <span>Lastname</span>
@@ -39,7 +36,7 @@
       <div *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Lastname cannot exceed 25 characters.</div>
     </div>
   </div>
-  
+
   <label>
     <input formControlName="email" class="input" type="email" placeholder="" required>
     <span>Email</span>
@@ -50,7 +47,6 @@
   </div>
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  
   <label>
     <input formControlName="password" class="input" type="password" placeholder="" required>
     <span>Password</span>
@@ -61,8 +57,7 @@
     <div *ngIf="signupForm.get('password')?.errors?.['maxlength']">Password cannot exceed 20 characters.</div>
     <div *ngIf="signupForm.get('password')?.errors?.['specialChar']">Password must contain at least one special character.</div>
   </div>
-  
-  
+
   <label>
     <input formControlName="confirmPassword" class="input" type="password" placeholder="" required>
     <span>Confirm password</span>
@@ -71,11 +66,11 @@
     <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirm password is required.</div>
     <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mustMatch']">Passwords must match.</div>
   </div>
-  
+
   <button type="submit" class="submit my-2 fw-bold">
     SIGN UP
   </button>
-  
+
   <p class="signin fs-6">
     Already have an account?
     <a [routerLink]="['']" class="text-decoration-none fw-bold fs-6">Login</a>

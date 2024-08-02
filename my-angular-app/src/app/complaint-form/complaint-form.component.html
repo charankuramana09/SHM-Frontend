@@ -1,97 +1,89 @@
-<div class="bg">
-  <div class="container p-4 d-flex align-items-center justify-content-md-between flex-wrap">
-    <div class="col-lg-4">
-      <img src="../../assets/img/cf6.png" class="animated-image" style="width: 100%; height: 100%;" />
-    </div>
-    <div class="card shadow col-lg-7">
-      <div class="card-header">
-        <h3 class="fw-bold">Complaint Form</h3>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()" class="form">
-          <div class="row mb-3">
-            <div class="col-md-6 mb-3 mb-md-0">
-              <label>
-                <input id="firstName" formControlName="firstName" class="form-control input" type="text" required>
-                <span>First Name</span>
-              </label>
-            </div>
-            <div class="col-md-6">
-              <label>
-                <input id="lastName" formControlName="lastName" class="form-control input" type="text" required>
-                <span>Last Name</span>
-              </label>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6 mb-3 mb-md-0">
-              <label>
-                <input id="contactNumber" formControlName="contactNumber" class="form-control input" type="text"
-                  required>
-                <span>Contact No</span>
-              </label>
-            </div>
-            <div class="col-md-6">
-              <label>
-                <input id="email" formControlName="email" class="form-control input" type="email" required>
-                <span>Email</span>
-              </label>
-            </div>
-          </div>
-          <div class="row mb-3 align-items-center">
-            <div class="col-md-4 mb-3 mb-md-0">
-              <label>
-                <label for="date" class="form-label">Date of Incident</label>
-                <input id="date" formControlName="date" class="form-control" type="date" required>
-              </label>
-            </div>
-            <div class="col-md-4">
-              <label>
-                <label for="time" class="form-label">Time of Incident</label>
-                <input id="time" formControlName="time" class="form-control" type="time" step="1" required>
-              </label>
-            </div>
-            <div class="col-md-4">
-              <label>
-                <input id="location" formControlName="location" class="form-control input" type="text" required>
-                <span>Location of Incident (Room No )</span>
-              </label>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6 mb-3 mb-md-0">
-              <label>
-                <textarea id="description" formControlName="description" class="form-control input" required></textarea>
-                <span>Description of Complaint</span>
-              </label>
-            </div>
-            <div class="col-md-6">
-              <label>
-                <textarea id="action" formControlName="action" class="form-control input"
-                  required></textarea>
-                <span>Action Requested</span>
-              </label>
-            </div>
-          </div>
-          <div class="mb-3">
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+  <div class="card shadow w-100">
+    <div class="card-body">
+        <h3 class="fw-bold mb-3 text-uppercase card-header bg-primary-subtle">Complaint Form</h3>
+      <!-- </div> -->
+      <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()" class="form">
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3 mb-md-0">
             <label>
-              <input id="typeComplaint" formControlName="typeComplaint" class="form-control input" type="text"
-                required>
-              <span>Type of Complaint</span>
+              <input id="firstName" formControlName="firstName" class="form-control input" type="text" required>
+              <span>First Name</span>
             </label>
-          </div>  
-          <div class="mb-3">
-            <label for="supportingDocument" class="form-label">Supporting Documents</label>
-            <input id="supportingDocument" formControlName="supportingDocument" class="form-control" type="file"
-              (change)="onFileChange($event)">
           </div>
-          <div class="mb-3">
-            <label for="othersInvolved" class="form-label">Who else was involved in the incident</label>
-            <input id="othersInvolved" formControlName="othersInvolved" class="form-control" type="text">
+          <div class="col-md-6">
+            <label>
+              <input id="lastName" formControlName="lastName" class="form-control input" type="text" required>
+              <span>Last Name</span>
+            </label>
           </div>
-          <button type="submit" class="btn btn-primary w-100">SUBMIT</button>
-        </form>
-      </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <label>
+              <input id="contactNumber" formControlName="contactNumber" class="form-control input" type="text" required>
+              <span>Contact No</span>
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>
+              <input id="email" formControlName="email" class="form-control input" type="email" required>
+              <span>Email</span>
+            </label>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <label>
+              <label for="date" class="form-label">Date of Incident</label>
+              <input id="date" formControlName="date" class="form-control" type="date" required>
+            </label>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <label>
+              <label for="time" class="form-label">Time of Incident</label>
+              <input id="time" formControlName="time" class="form-control" type="time" step="1" required>
+            </label>
+          </div>
+          <div class="col-md-4">
+            <label>
+              <input id="location" formControlName="location" class="form-control input" type="text" required>
+              <span>Location of Incident<span style="font-size: smaller;">&nbsp;(Room No)</span></span>
+            </label>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <label>
+              <textarea id="description" formControlName="description" class="form-control input" required></textarea>
+              <span>Description of Complaint</span>
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label>
+              <textarea id="action" formControlName="action" class="form-control input" required></textarea>
+              <span>Action Requested</span>
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label>
+            <input id="typeComplaint" formControlName="typeComplaint" class="form-control input" type="text" required>
+            <span>Type of Complaint</span>
+          </label>
+        </div>
+        <div class="mb-3">
+          <label for="supportingDocument" class="form-label">Supporting Documents</label>
+          <input id="supportingDocument" formControlName="supportingDocument" class="form-control" type="file" (change)="onFileChange($event)">
+        </div>
+        <div class="mb-3">
+          <label for="othersInvolved" class="form-label">Who else was involved in the incident</label>
+          <input id="othersInvolved" formControlName="othersInvolved" class="form-control" type="text">
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <button type="submit" class="btn btn-primary w-25">SUBMIT</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
