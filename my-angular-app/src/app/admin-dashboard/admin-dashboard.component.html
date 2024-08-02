@@ -23,19 +23,19 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <h2>Hostel Data Counts</h2>
-          <div class="stat-item">
+          <div class="stat-item" (click)="navigateToDashboard('Monthly')">
             <h3>Monthly</h3>
             <p>{{ monthlyData.length }}</p> 
           </div>
-          <div class="stat-item">
+          <div class="stat-item" (click)="navigateToDashboard('Weekly')">
             <h3>Weekly</h3>
             <p>{{ weeklyData.length }}</p> <!-- Display count instead of data -->
           </div>
-          <div class="stat-item">
+          <div class="stat-item" (click)="navigateToDashboard('custom')">
             <h3>Custom</h3>
             <p>{{ customData.length }}</p> <!-- Display count instead of data -->
           </div>
-          <div class="stat-item">
+          <div class="stat-item" (click)="navigateToDashboard('corporate')">
             <h3>Corporate</h3>
             <p>{{ corporateData.length }}</p> <!-- Display count instead of data -->
           </div>

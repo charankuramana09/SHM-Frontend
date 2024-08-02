@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HostelDataService } from '../services/hostel-data.service';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -9,14 +11,15 @@ import { HostelDataService } from '../services/hostel-data.service';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  selectedHostel: string = ''; // Set this based on your logic
+  selectedHostel: string = '';
   monthlyData: any[] = [];
   weeklyData: any[] = [];
   customData: any[] = [];
   corporateData: any[] = [];
   totalCount: number = 0;
 
-  constructor(private hostelDataService: HostelDataService) { }
+
+  constructor(private hostelDataService: HostelDataService,private router: Router) { }
 
   ngOnInit(): void {
     this.selectedHostel = this.hostelDataService.getHostelName();
@@ -49,5 +52,8 @@ export class AdminDashboardComponent implements OnInit {
 
   updateTotalCount(): void {
     this.totalCount = this.monthlyData.length + this.weeklyData.length + this.customData.length + this.corporateData.length;
+  }
+  navigateToDashboard(frequencyType: string): void {
+    this.router.navigate(['dashboard'], { queryParams: { frequencyType: frequencyType, hostelName: this.selectedHostel } });
   }
 }
