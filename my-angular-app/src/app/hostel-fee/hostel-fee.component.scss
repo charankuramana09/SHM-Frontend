@@ -1,30 +1,12 @@
-.hostel-fee-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .hostel-fee-container h2 {
-    text-align: center;
-  }
-  
-  .fee-display {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  select {
-    margin: 10px 0;
-    padding: 5px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  h3 {
-    font-size: 18px;
-  }
-  
+.fee-display h3 {
+  font-size: 1.25rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container{
+  max-width: 100vw;
+  margin: 0 auto;
+  background-color: #fffbf0ff;
+}

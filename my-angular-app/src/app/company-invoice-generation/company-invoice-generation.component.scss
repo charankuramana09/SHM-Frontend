@@ -1,5 +1,7 @@
-.container {
-  max-width: 800px;
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 20px;
 }
 
 .table th,
@@ -8,7 +10,21 @@
   vertical-align: middle;
 }
 
-.bg-info-subtle {
-  height: 100vh;
-  padding: 20px;
+.bg{
+background-color:  #fffbf0ff;
 }
+
+h2{
+  font-size: 1.5rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+label{
+  font-size: 1rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
