@@ -1,7 +1,6 @@
 <div class="form">
     <p class="title my-3">Power Bill Form</p>
     
-    <!-- Records Table -->
     <table>
       <thead>
         <tr>
@@ -38,8 +37,7 @@
       </tbody>
     </table>
     
-    <!-- Total Amount Spent -->
-    <div>
+    <div class="col-md-6 mb-3">
       <label>Total Amount Spent</label>
       <input [formControl]="powerBillForm.get('totalAmountSpent')" type="text" disabled>
     </div>
@@ -47,11 +45,11 @@
     <div>
       <label>Receipt Attached</label>
       <label>
-        <input formControlName="receiptAttached" type="radio" value="Yes" required>
+        <input formControlName="receiptAttached" type="radio" name="receiptAttached" value="Yes" required>
         Yes
       </label>
       <label>
-        <input formControlName="receiptAttached" type="radio" value="No" required>
+        <input formControlName="receiptAttached" type="radio" name="receiptAttached" value="No" required>
         No
       </label>
     </div>

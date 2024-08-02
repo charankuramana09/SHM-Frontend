@@ -1,31 +1,7 @@
-<!-- <div class="text-center fs-3 text-uppercase fw-bold my-4">Expense Form</div>
-<form [formGroup]="expenseForm" class="form">
-  <div>
-    <label class="category-label">Select Category</label>
-    <div class="category-options">
-      <label *ngFor="let category of categories">
-        <input type="radio" formControlName="category" [value]="category.value" required>
-        {{ category.label }}
-      </label>
-    </div>
-  </div>
-
-  <app-grocery-form
-    *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'"></app-grocery-form>
-  <app-monthly-rent-form *ngIf="selectedCategory === 'monthly-rent'"></app-monthly-rent-form>
-  <app-power-bill-form *ngIf="selectedCategory === 'power-bill'"></app-power-bill-form>
-  <app-employee-salaries *ngIf="selectedCategory === 'employee-salaries'"></app-employee-salaries>
-
-
-  <button type="button" (click)="onSubmit()">Submit</button>
-  <button type="reset" (click)="onCancel()">Cancel</button>
-</form>
- -->
-
- <div class="container">
-  <div class="text-center fs-3 text-uppercase fw-bold my-4">Expense Form</div>
+<div class="container">
+  
   <form [formGroup]="expenseForm" class="form">
-    <!-- Category Selection -->
+    <div class="text-center fs-3 text-uppercase fw-bold mb-4">Expense Form</div>
     <div>
       <label class="category-label">Select Category</label>
       <div class="category-options">
@@ -36,14 +12,14 @@
       </div>
     </div>
 
-    <!-- Conditionally Display Forms -->
-    <app-grocery-form *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'"></app-grocery-form>
+    
+    <app-grocery-form *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'" [selectedCategory]="selectedCategory"></app-grocery-form>
     <app-monthly-rent-form *ngIf="selectedCategory === 'monthly-rent'"></app-monthly-rent-form>
     <app-power-bill-form *ngIf="selectedCategory === 'power-bill'"></app-power-bill-form>
     <app-employee-salaries *ngIf="selectedCategory === 'employee-salaries'"></app-employee-salaries>
 
-    <!-- Submit and Cancel Buttons -->
-    <div class="row mt-5 justify-content-center">
+   
+    <div class="row mt-3 justify-content-center">
       <div class="col-auto">
         <button type="button" class="btn btn-primary w-100 custom-button" (click)="onSubmit()">Submit</button>
       </div>
