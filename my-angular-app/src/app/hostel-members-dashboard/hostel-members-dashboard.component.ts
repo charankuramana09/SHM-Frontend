@@ -24,9 +24,9 @@ export class HostelMembersDashboardComponent implements OnInit {
     if (this.isBrowser) {
       this.loadMembersFromLocalStorage();
     }
-    if (this.membersData.length === 0) {
+   
       this.getAllMembers();
-    }
+    
   }
 
   getAllMembers(): void {
