@@ -1,3 +1,4 @@
+// auth.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -75,6 +76,14 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.hasToken();
+  }
+
+  getFirstName(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem('firstName') : null;
+  }
+
+  getLastName(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem('lastName') : null;
   }
 
   private hasToken(): boolean {

@@ -18,7 +18,6 @@ export class UserRegistrationComponent {
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
       userType: ['', Validators.required],
-      // feePaidByCompany: [''],
       joiningDate: ['', Validators.required],
       purpose: ['', Validators.required],
       roomSharing: ['', Validators.required],
@@ -26,9 +25,7 @@ export class UserRegistrationComponent {
       mobileNumber: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       alternateMobileNumber: ['', Validators.pattern(/^\d+$/)],
       email: ['', [Validators.required, Validators.email]],
-      // idProofType: ['', Validators.required],
       idProof: [null, Validators.required]
-      // dataConfirmed: [false, Validators.requiredTrue]
     });
   }
 
