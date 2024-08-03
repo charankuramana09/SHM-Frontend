@@ -35,6 +35,7 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { LayoutComponent } from './layout/layout.component';
     HostelFeeComponent,
     PaymentHistoryComponent,
     NavbarComponent,
-    LayoutComponent
+    LayoutComponent,
+    MainComponent
    
   
   ],
