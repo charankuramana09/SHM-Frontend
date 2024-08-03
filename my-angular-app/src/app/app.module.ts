@@ -36,6 +36,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MainComponent } from './main/main.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { MonthlyRentPowerBillComponent } from './forms/monthly-rent-power-bill/monthly-rent-power-bill.component';
+import { GroceryGasPetrolComponent } from './forms/grocery-gas-petrol/grocery-gas-petrol.component';
+import { FormSelectorComponent } from './form-selector/form-selector.component';
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     HostelFeeComponent,
     NavbarComponent,
     LayoutComponent,
-    MainComponent
+    MainComponent,
+    MonthlyRentPowerBillComponent,
+    GroceryGasPetrolComponent,
+    FormSelectorComponent
   ],
   imports: [
     BrowserModule,

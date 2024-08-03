@@ -1,0 +1,36 @@
+<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="purchaseDate">Purchase Date:</label>
+      <input id="purchaseDate" type="date" formControlName="purchaseDate" />
+    </div>
+    <div>
+      <label for="storeName">Store Name:</label>
+      <input id="storeName" formControlName="storeName" />
+    </div>
+    <div>
+      <label for="category">Category:</label>
+      <input id="category" formControlName="category" />
+    </div>
+    <div>
+      <label for="itemDescription">Item Description:</label>
+      <input id="itemDescription" formControlName="itemDescription" />
+    </div>
+    <div>
+      <label for="quantity">Quantity:</label>
+      <input id="quantity" formControlName="quantity" />
+    </div>
+    <div>
+      <label for="unitPrice">Unit Price:</label>
+      <input id="unitPrice" formControlName="unitPrice" />
+    </div>
+    <div>
+      <label for="totalAmount">Total Amount:</label>
+      <input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly />
+    </div>
+    <div>
+      <label for="receiptAttached">Receipt Attached:</label>
+      <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
