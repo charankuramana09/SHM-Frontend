@@ -22,10 +22,10 @@ const routes: Routes = [
   { path: 'signup', component: SignupFormComponent },
   {
     path: '', component: LayoutComponent, children: [
-      { path: 'dashboard', component: HostelMembersDashboardComponent },
+      { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard]  },
       { path: 'fee', component: HostelFeeComponent },
       { path: 'expenses', component: ExpenseFormComponent },
-      { path: 'admin-dashboard', component: AdminDashboardComponent },
+      { path: 'admin-dashboard', component: AdminDashboardComponent,canActivate:[AuthGuard] },
       { path: 'payment-page', component: PaymentFormComponent},
       { path: 'payment-history', component: PaymentHistoryComponent },
       { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
