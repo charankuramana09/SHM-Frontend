@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ExpenseService } from '../services/expense.service';
 
 @Component({
   selector: 'app-expense-form',
@@ -17,9 +18,10 @@ export class ExpenseFormComponent {
     { value: 'gas', label: 'Gas' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private expenseService: ExpenseService) {
     this.expenseForm = this.fb.group({
       category: ['', Validators.required]
+      // Add other common fields here if needed
     });
   }
 
@@ -44,13 +46,36 @@ export class ExpenseFormComponent {
       return;
     }
 
-    const form = this.getFormComponent(this.selectedCategory);
+    const selectedCategory = this.selectedCategory;
+    const form = this.getFormComponent(selectedCategory);
+
     if (form && form.invalid) {
       form.markAllAsTouched();
       return;
     }
 
-    console.log(this.expenseForm.value);
+    const payload = { ...this.expenseForm.value, ...form?.value };
+
+    switch (selectedCategory) {
+      case 'employee-salaries':
+        const receiptFile = form?.get('receiptAttached')?.value;
+        this.expenseService.createEmployeeSalaries(payload, receiptFile).subscribe(response => {
+          console.log('Employee Salaries saved', response);
+        });
+        break;
+      case 'monthly-rent':
+      case 'power-bill':
+        const file = form?.get('receiptAttached')?.value;
+        payload.paidDate = new Date(payload.paidDate); // Ensure date is correctly converted
+        this.expenseService.createHostelPayment(payload, file).subscribe(response => {
+          console.log('Monthly Rent or Power Bill saved', response);
+        });
+        break;
+      default:
+        this.expenseService.createExpense(payload).subscribe(response => {
+          console.log('Expense saved', response);
+        });
+    }
   }
 
   onCancel() {
@@ -68,7 +93,11 @@ export class ExpenseFormComponent {
       case 'power-bill':
         return (document.querySelector('app-power-bill-form') as any)?.powerBillForm;
       case 'employee-salaries':
-        return (document.querySelector('app-employee-salaries') as any)?.salariesForm;
+        return (document.querySelector('app-employee-salaries-form') as any)?.salariesForm;
+      case 'petrol':
+        return (document.querySelector('app-petrol-form') as any)?.petrolForm;
+      case 'gas':
+        return (document.querySelector('app-gas-form') as any)?.gasForm;
       default:
         return null;
     }
