@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HostelDataService } from '../services/hostel-data.service';
 
 import { Router, ActivatedRoute } from '@angular/router';
+import { SharedServiceService } from '../services/shared-service.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -19,11 +21,18 @@ export class AdminDashboardComponent implements OnInit {
   totalCount: number = 0;
 
 
-  constructor(private hostelDataService: HostelDataService,private router: Router) { }
+  constructor(private authService:AuthService, private hostelDataService: HostelDataService,private router: Router,   private sharedService: SharedServiceService) { }
 
   ngOnInit(): void {
-    this.selectedHostel = this.hostelDataService.getHostelName();
-    this.fetchAllData();
+    this.authService.roles$.subscribe(roles => {
+      if (roles.includes('ROLE_ADMIN') || roles.includes('ROLE_SUPERADMIN') || roles.includes('ROLE_SUPERVISOR')) {
+        this.selectedHostel = this.hostelDataService.getHostelName();
+        this.sharedService.fetchData$.subscribe(() => this.fetchAllData());
+      } else {
+        // Redirect or show an error if the user doesn't have the right role
+        this.router.navigate(['/unauthorized']); // Adjust this route as needed
+      }
+    });
   }
   setFilterCriteria(hostelName: string): void {
     this.selectedHostel = hostelName;

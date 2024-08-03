@@ -97,7 +97,7 @@ export class SignupFormComponent {
       lastName: formValues.lastName,
       email: formValues.email,
       password: formValues.password,
-      authorities: this.isSuperAdmin ? [formValues.authorities] : []
+      authorities: this.isSuperAdmin ? [formValues.authorities] : null
     };
 
 
