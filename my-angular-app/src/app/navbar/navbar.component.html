@@ -1,0 +1,20 @@
+<nav *ngIf="isLoggedIn" class="navbar">
+  <ul>
+    <li><a routerLink="">Login</a></li>
+    <li><a routerLink="/signup">Sign Up</a></li>
+    <li><a routerLink="/registration">Registration</a></li>
+    <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li> 
+    
+    <!-- <li><a routerLink="/complaint">Complaints</a></li> -->
+    <li><a routerLink="/expenses">Expenses</a></li>
+    <li><a routerLink="/payment-page">Payments</a></li>
+    <li><a routerLink="/payment-history">Payments History</a></li>
+    <li><a routerLink="/company-invoice">Invoices</a></li>
+    <li><a routerLink="/complaint">Complaints</a></li>
+    <li><a routerLink="/queries">Queries</a></li> 
+    <li><a routerLink="/fee">Hostal Fee</a></li>
+  </ul>
+</nav>
+<div *ngIf="!isLoggedIn">
+  <!-- Content for users who are not logged in -->
+</div>
