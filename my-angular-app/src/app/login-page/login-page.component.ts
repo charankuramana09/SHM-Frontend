@@ -79,7 +79,14 @@ export class LoginPageComponent implements OnInit {
         console.log('Login successful:', response);
         const isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
         this.sharedService.setSuperAdminStatus(isSuperAdmin);
-        this.router.navigate(['/admin-dashboard']);
+        const role=JSON.stringify(response.authorities);
+        if(role.includes('ROLE_SUPERADMIN')||role.includes('ROLE_ADMIN')||role.includes('ROLE_SUPERVISOR')){
+        this.router.navigate(['/admin-dashboard']).then(() => {
+          this.sharedService.triggerDataFetch();
+        });
+      }else{
+        
+      }
       },
       error: (error) => {
         if (error.status === 404) {
