@@ -18,7 +18,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8081/api';
+  private apiUrl = 'http://localhost:8082/api';
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private isSuperAdminSubject = new BehaviorSubject<boolean>(this.getSuperAdminStatus());
