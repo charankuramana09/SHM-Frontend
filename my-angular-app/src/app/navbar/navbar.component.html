@@ -11,7 +11,7 @@
 <nav *ngIf="isLoggedIn" class="navbar">
   <ul>
     <!-- <li><a routerLink="">Login</a></li> -->
-    <li><a routerLink="/signup">Sign Up</a></li>
+    <li *ngIf="isSuperAdmin"><a routerLink="/signup">Create a profile for Admin/Supervisor</a></li>
     <!-- <li><a routerLink="/registration">Registration</a></li> -->
     <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
 

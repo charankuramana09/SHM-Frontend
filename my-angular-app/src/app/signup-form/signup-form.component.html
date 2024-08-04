@@ -1,6 +1,6 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
   <p class="title mb-0">Join Us Today!</p>
-  <p class="message">Sign up now to become a member.</p>
+  <p class="message">{{ successMessage }}</p>
 
   <div *ngIf="isSuperAdmin" class="radio-buttons-container d-flex justify-content-around">
     <div class="radio-button">
@@ -84,10 +84,9 @@
   </div>
 
   <button type="submit" class="submit my-2 fw-bold">
-    SIGN UP
+    {{signUpButtonMessage}}
   </button>
-
-  <p class="signin fs-6">
+  <p class="signin fs-6"  *ngIf="isUser">
     Already have an account?
     <a [routerLink]="['']" class="text-decoration-none fw-bold fs-6">Login</a>
   </p>
