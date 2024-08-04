@@ -62,4 +62,5 @@ export class GroceryGasPetrolComponent implements OnInit {
       }
     );
   }
+  
 }

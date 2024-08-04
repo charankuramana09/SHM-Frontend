@@ -1,36 +1,32 @@
-<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="purchaseDate">Purchase Date:</label>
-      <input id="purchaseDate" type="date" formControlName="purchaseDate" />
-    </div>
-    <div>
-      <label for="storeName">Store Name:</label>
-      <input id="storeName" formControlName="storeName" />
-    </div>
-    <div>
-      <label for="category">Category:</label>
-      <input id="category" formControlName="category" />
-    </div>
-    <div>
-      <label for="itemDescription">Item Description:</label>
-      <input id="itemDescription" formControlName="itemDescription" />
-    </div>
-    <div>
-      <label for="quantity">Quantity:</label>
-      <input id="quantity" formControlName="quantity" />
-    </div>
-    <div>
-      <label for="unitPrice">Unit Price:</label>
-      <input id="unitPrice" formControlName="unitPrice" />
-    </div>
-    <div>
-      <label for="totalAmount">Total Amount:</label>
-      <input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly />
-    </div>
-    <div>
-      <label for="receiptAttached">Receipt Attached:</label>
-      <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
-    </div>
-    <button type="submit">Submit</button>
-  </form>
-  
+<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table">
+  <table>
+      <thead>
+          <tr>
+              <th>Purchase Date</th>
+              <th>Store Name</th>
+              <th>Category</th>
+              <th>Item Description</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Total Amount</th>
+              <th>Receipt Attached</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td><input id="purchaseDate" type="date" formControlName="purchaseDate" /></td>
+              <td><input id="storeName" formControlName="storeName" /></td>
+              <td><input id="category" formControlName="category" /></td>
+              <td><input id="itemDescription" formControlName="itemDescription" /></td>
+              <td><input id="quantity" formControlName="quantity" (input)="calculateTotal()" /></td>
+              <td><input id="unitPrice" formControlName="unitPrice" (input)="calculateTotal()" /></td>
+              <td><input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly /></td>
+              <td><input id="receiptAttached" type="file" (change)="onFileChange($event)" /></td>
+              <td>
+                  <button type="submit">Submit</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</form>

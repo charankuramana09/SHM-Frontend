@@ -9,6 +9,7 @@ import { DataService } from '../../services/data.service';
 export class EmployeeSalariesComponent implements OnInit{
   employeeSalariesForm: FormGroup;
   selectedFile: File | null = null;
+  items = [{}]; 
 
   constructor(private fb: FormBuilder, private dataService: DataService) {
     this.employeeSalariesForm = this.fb.group({
@@ -37,5 +38,12 @@ export class EmployeeSalariesComponent implements OnInit{
     }, error => {
         console.error('Error submitting form', error);
     });
+}
+addRow() {
+  this.items.push({});
+}
+
+deleteRow(index: number) {
+  this.items.splice(index, 1);
 }
 }
