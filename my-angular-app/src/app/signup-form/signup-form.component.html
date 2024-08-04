@@ -25,10 +25,10 @@
       <input formControlName="firstName" class="input" type="text" placeholder="" required>
       <span>Firstname</span>
     </label>
-    <div *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid" class="error-message">
+    <!-- <div *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid" class="error-message">
       <div *ngIf="signupForm.get('firstName')?.errors?.['required']">Firstname is required.</div>
       <div *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Firstname cannot exceed 25 characters.</div>
-    </div>
+    </div> -->
     
     <label>
       <input formControlName="lastName" class="input" type="text" placeholder="" required>

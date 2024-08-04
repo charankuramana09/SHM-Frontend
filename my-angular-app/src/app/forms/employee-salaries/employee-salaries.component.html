@@ -1,0 +1,24 @@
+<form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="empName">Employee Name:</label>
+      <input id="empName" formControlName="empName" />
+    </div>
+    <div>
+      <label for="designation">Designation:</label>
+      <input id="designation" formControlName="designation" />
+    </div>
+    <div>
+      <label for="salary">Salary:</label>
+      <input id="salary" formControlName="salary" />
+    </div>
+    <div>
+      <label for="paymentDate">Payment Date:</label>
+      <input id="paymentDate" type="date" formControlName="paymentDate" />
+    </div>
+    <div>
+      <label for="receiptAttached">Receipt Attached:</label>
+      <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  

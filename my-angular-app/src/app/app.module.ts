@@ -28,7 +28,6 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MonthlyRentFormComponent } from './monthly-rent-form/monthly-rent-form.component';
-import { EmployeeSalariesComponent } from './employee-salaries/employee-salaries.component';
 import { PowerBillFormComponent } from './power-bill-form/power-bill-form.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
@@ -36,6 +35,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MainComponent } from './main/main.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { MonthlyRentPowerBillComponent } from './forms/monthly-rent-power-bill/monthly-rent-power-bill.component';
+import { GroceryGasPetrolComponent } from './forms/grocery-gas-petrol/grocery-gas-petrol.component';
+import { FormSelectorComponent } from './form-selector/form-selector.component';
+import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-salaries.component';
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     HostelFeeComponent,
     NavbarComponent,
     LayoutComponent,
-    MainComponent
+    MainComponent,
+    MonthlyRentPowerBillComponent,
+    GroceryGasPetrolComponent,
+    FormSelectorComponent
   ],
   imports: [
     BrowserModule,
