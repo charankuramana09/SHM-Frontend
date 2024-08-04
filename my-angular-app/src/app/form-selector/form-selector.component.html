@@ -1,6 +1,48 @@
-<div class="container">
+<!-- <div class="container">
     <div class="form-wrapper">
       <div>
+        <label>
+          <input type="radio" name="category" value="monthlyRent" (change)="onCategoryChange($event)" />
+          Monthly Rent
+        </label>
+        <label>
+          <input type="radio" name="category" value="powerBill" (change)="onCategoryChange($event)" />
+          Power Bill
+        </label>
+        <label>
+          <input type="radio" name="category" value="employeeSalaries" (change)="onCategoryChange($event)" />
+          Employee Salaries
+        </label>
+        <label>
+          <input type="radio" name="category" value="grocery" (change)="onCategoryChange($event)" />
+          Grocery
+        </label>
+        <label>
+          <input type="radio" name="category" value="gas" (change)="onCategoryChange($event)" />
+          Gas
+        </label>
+        <label>
+          <input type="radio" name="category" value="petrol" (change)="onCategoryChange($event)" />
+          Petrol
+        </label>
+      </div>
+  
+      <div *ngIf="selectedCategory === 'monthlyRent' || selectedCategory === 'powerBill'">
+        <app-monthly-rent-power-bill [category]="selectedCategory"></app-monthly-rent-power-bill>
+      </div>
+      <div *ngIf="selectedCategory === 'employeeSalaries'">
+        <app-employee-salaries></app-employee-salaries>
+      </div>
+      <div *ngIf="selectedCategory === 'grocery' || selectedCategory === 'gas' || selectedCategory === 'petrol'">
+        <app-grocery-gas-petrol [category]="selectedCategory"></app-grocery-gas-petrol>
+      </div>
+    </div>
+  </div>
+   -->
+
+   <div class="container d-flex flex-column justify-content-center align-items-center col-sm-8">
+    <div class="form-wrapper">
+      <div class="radio-group">
         <label>
           <input type="radio" name="category" value="monthlyRent" (change)="onCategoryChange($event)" />
           Monthly Rent
