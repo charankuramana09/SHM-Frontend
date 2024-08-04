@@ -1,0 +1,29 @@
+::ng-deep .mat-dialog-container {
+    max-width: 100%; 
+    width: 40%;  
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa; // Light background color
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mat-dialog-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff; // Primary color
+  }
+  
+  .mat-dialog-content {
+    font-size: 1rem;
+    color: #495057; // Text color
+  }
+  
+  .mat-dialog-actions {
+    margin-top: 20px;
+  }
+  
+  button.mat-button {
+    margin: 0;
+  }
+  
+  

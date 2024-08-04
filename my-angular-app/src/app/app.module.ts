@@ -39,6 +39,8 @@ import { MonthlyRentPowerBillComponent } from './forms/monthly-rent-power-bill/m
 import { GroceryGasPetrolComponent } from './forms/grocery-gas-petrol/grocery-gas-petrol.component';
 import { FormSelectorComponent } from './form-selector/form-selector.component';
 import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-salaries.component';
+import { RegistrationSuccessDialogComponent } from './registration-success-dialog/registration-success-dialog.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 @NgModule({
@@ -71,7 +73,8 @@ import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-sa
     MainComponent,
     MonthlyRentPowerBillComponent,
     GroceryGasPetrolComponent,
-    FormSelectorComponent
+    FormSelectorComponent,
+    RegistrationSuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-sa
     provideClientHydration(),
     provideHttpClient(withFetch()),
     CaptchaService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
 })
