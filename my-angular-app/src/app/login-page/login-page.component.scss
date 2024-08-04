@@ -1,24 +1,34 @@
-.login-container {
+.main-content {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  position: relative;
   background: url('../../assets/img/pexels-magda-ehlers-pexels-15273741.jpg') no-repeat center center/cover;
+  position: relative;
 
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
+  // .main-content::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   z-index: 1;
+  // }
+  // .overlay {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   background-color: rgba(0, 0, 0, 0.5);
+  //   z-index: 1;
+  // }
 
-  .row {
-    z-index: 2;
-  }
+  // .row {
+  //   z-index: 2;
+  // }
 }
 
 .login,
@@ -39,19 +49,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 650px;
-  width: 600px;
+  // min-height: 650px;
+  // width: 600px;
   flex-direction: column;
-  gap: 35px;
+  // gap: 35px;
   background-color: #eff5f0ff;
   border-radius: 20px;
+  padding: 20px 60px;
 }
 
 
-.error-message
-{
-  color: red;
-}
+// .error-message
+// {
+//   color: red;
+// }
 
 .inputBox {
   position: relative;
@@ -180,43 +191,12 @@
 //   box-shadow: 0 0 10px #4c8bf580;
 // }
 
-.container {
-  background: url('../../assets/img/pexels-magda-ehlers-pexels-15273741.jpg') no-repeat center center/cover;
-  position: relative;
-}
-
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.card {
-  position: relative;
-  z-index: 2;
-  background-color: #eff5f0ff;
-  border-radius: 20px;
-}
-
-.text-danger {
-  font-size: 0.875em;
-}
-
-// .login-container {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: calc(100vh - var(--header-height) - var(--footer-height));
-//   position: relative;
+// .container {
 //   background: url('../../assets/img/pexels-magda-ehlers-pexels-15273741.jpg') no-repeat center center/cover;
+//   position: relative;
 // }
 
-// .login-container::before {
+// .container::before {
 //   content: '';
 //   position: absolute;
 //   top: 0;
@@ -227,112 +207,13 @@
 //   z-index: 1;
 // }
 
-// .login-container .card {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   gap: 35px;
-//   min-height: 650px;
-//   width: 100%;
-//   max-width: 600px;
+// .card {
+//   position: relative;
+//   z-index: 2;
 //   background-color: #eff5f0ff;
 //   border-radius: 20px;
-//   z-index: 2;
-//   padding: 20px;
-//   box-sizing: border-box;
 // }
 
-// .login,
-// .login-tag {
-//   color: #0e2954ff;
-//   text-transform: uppercase;
-//   letter-spacing: 2px;
-//   display: block;
-//   font-weight: bold;
-//   font-size: x-large;
-// }
-
-// .login-tag {
-//   font-size: 12px;
-// }
-
-// .error-message {
-//   color: red;
-// }
-
-// .inputBox {
-//   position: relative;
-//   width: 100%;
-//   max-width: 350px;
-// }
-
-// .inputBox input {
-//   width: 100%;
-//   padding: 16px;
-//   outline: none;
-//   border: none;
-//   color: #0e2954ff;
-//   font-size: 1em;
-//   background: transparent;
-//   border-left: 2px solid #000;
-//   border-bottom: 2px solid #000;
-//   transition: 0.1s;
-//   border-bottom-left-radius: 8px;
-// }
-
-// .inputBox input:valid,
-// .inputBox input:focus {
-//   border: 2px solid #000;
-//   border-radius: 8px;
-// }
-
-// .inputBox input:valid ~ span,
-// .inputBox input:focus ~ span {
-//   transform: translateX(220px) translateY(-15px);
-//   font-size: 0.8em;
-//   padding: 5px 10px;
-//   background: #0e2954ff;
-//   letter-spacing: 0.2em;
-//   color: #fff;
-//   border: 2px;
-// }
-
-// .inputBox span {
-//   position: absolute;
-//   left: 0;
-//   transform: translateY(-4px);
-//   margin-left: 10px;
-//   padding: 10px;
-//   pointer-events: none;
-//   font-size: 12px;
-//   color: #0e2954ff;
-//   text-transform: uppercase;
-//   transition: 0.5s;
-//   letter-spacing: 3px;
-//   border-radius: 8px;
-// }
-
-// .enter {
-//   height: 45px;
-//   width: 200px;
-//   border: 2px solid #000;
-//   cursor: pointer;
-//   background-color: transparent;
-//   transition: 0.5s;
-//   text-transform: uppercase;
-//   letter-spacing: 2px;
-// }
-
-// .enter:hover {
-//   background-color: #0e2954ff;
-//   color: white;
-// }
-
-// .signin {
-//   text-align: center;
-// }
-
-// .signin a {
-//   color: #0e2954ff;
+// .text-danger {
+//   font-size: 0.875em;
 // }

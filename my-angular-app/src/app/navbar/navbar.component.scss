@@ -1,49 +1,128 @@
+// .navbar {
+//     position: fixed;
+//     left: 0;
+//     top: 50px;
+//     height: 100%;
+//     width: 200px;
+//     background-color: #2c3e50;
+//     color: white;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     padding-top: 20px;
+//   }
+  
+//   .navbar ul {
+//     list-style: none;
+//     padding: 0;
+//     width: 100%;
+//   }
+  
+//   .navbar ul li {
+//     width: 100%;
+//   }
+
+//   a{
+//       font-size: 1rem; 
+//       font-family: "Poppins", sans-serif;
+//       font-weight: 400;
+//       font-style: normal;
+//   }
+  
+//   .navbar ul li a {
+//     display: block;
+//     color: white;
+//     text-decoration: none;
+//     padding: 15px 20px;
+//     width: 100%;
+//     transition: background-color 0.3s ease;
+//   }
+  
+//   .navbar ul li a:hover {
+//     background-color: #34495e;
+//     cursor: pointer;
+//   }
+  
+//   .navbar ul li a.active {
+//     background-color: #1abc9c;
+//   }
+  
+
+/* Default styles */
 .navbar {
-    position: fixed;
-    left: 0;
-    top: 50px;
-    height: 100%;
-    width: 200px;
-    background-color: #2c3e50;
-    color: white;
+  position: fixed;
+  left: 0;
+  top: 50px;
+  height: 100%;
+  width: 200px;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s ease;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.navbar ul li {
+  width: 100%;
+}
+
+a {
+  font-size: 1rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.navbar ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+  background-color: #34495e;
+  cursor: pointer;
+}
+
+.navbar ul li a.active {
+  background-color: #1abc9c;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .navbar ul {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
   }
-  
-  .navbar ul {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-  }
-  
+
   .navbar ul li {
     width: 100%;
   }
+}
 
-  a{
-      font-size: 1rem; 
-      font-family: "Poppins", sans-serif;
-      font-weight: 400;
-      font-style: normal;
+@media (max-width: 576px) {
+  .navbar {
+    padding-top: 10px;
   }
-  
+
   .navbar ul li a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 15px 20px;
-    width: 100%;
-    transition: background-color 0.3s ease;
+    padding: 10px 15px;
   }
-  
-  .navbar ul li a:hover {
-    background-color: #34495e;
-    cursor: pointer;
-  }
-  
-  .navbar ul li a.active {
-    background-color: #1abc9c;
-  }
-  
+}
