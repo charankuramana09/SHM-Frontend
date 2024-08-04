@@ -41,6 +41,7 @@ import { FormSelectorComponent } from './form-selector/form-selector.component';
 import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-salaries.component';
 import { RegistrationSuccessDialogComponent } from './registration-success-dialog/registration-success-dialog.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MainComponent,
     MonthlyRentPowerBillComponent,
     GroceryGasPetrolComponent,
-    FormSelectorComponent
+    FormSelectorComponent,
+    PaymentStatusComponent
   ],
   imports: [
     BrowserModule,
