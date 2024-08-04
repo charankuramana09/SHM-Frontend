@@ -1,4 +1,3 @@
-// login-page.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,6 +17,8 @@ export class LoginPageComponent implements OnInit {
   mathCaptchaError: string | null = null;
   captchaValid: boolean = false;
   mathCaptchaValid: boolean = false;
+  
+  isUser: boolean = false;;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Subscribe to form value changes to clear error messages dynamically
     this.loginForm.get('captcha')?.valueChanges.subscribe(() => {
       if (this.captchaError && this.captchaValid) {
         this.captchaError = null;
@@ -48,13 +50,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Reset previous error messages
     this.emailError = null;
     this.passwordError = null;
     this.captchaError = null;
     this.mathCaptchaError = null;
 
+    // Validate form and CAPTCHA fields
     if (this.loginForm.invalid || !this.captchaValid || !this.mathCaptchaValid) {
-      this.loginForm.markAllAsTouched();
+      this.loginForm.markAllAsTouched(); 
 
       if (!this.captchaValid) {
         this.captchaError = 'Invalid CAPTCHA.';
@@ -74,15 +78,18 @@ export class LoginPageComponent implements OnInit {
     const loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe({
       next: (response) => {
+        console.log('Login successful:', response);
         const isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
         this.sharedService.setSuperAdminStatus(isSuperAdmin);
         const role=JSON.stringify(response.authorities);
         if(role.includes('ROLE_SUPERADMIN')||role.includes('ROLE_ADMIN')||role.includes('ROLE_SUPERVISOR')){
-        this.router.navigate(['/admin-dashboard']).then(() => {
+        this.router.navigate(['/nav-bar']).then(() => {
           this.sharedService.triggerDataFetch();
         });
-      }else{
-        
+      }else{ 
+        const isUser = response.authorities.includes('ROLE_USER');
+        this.sharedService.setUserStatus(isUser);
+        this.router.navigate(['/nav-bar']);
       }
       },
       error: (error) => {
@@ -98,6 +105,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  // Event handler for CAPTCHA validity change
   onCaptchaValidityChange(isValid: boolean): void {
     this.captchaValid = isValid;
     if (isValid && this.captchaError) {
@@ -105,10 +113,15 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  // Event handler for mathematical CAPTCHA validity change
   onMathCaptchaValidityChange(isValid: boolean): void {
     this.mathCaptchaValid = isValid;
     if (isValid && this.mathCaptchaError) {
       this.mathCaptchaError = null;
     }
+  }
+  
+  setUserStatus(status: boolean): void {
+    this.isUser = status;
   }
 }

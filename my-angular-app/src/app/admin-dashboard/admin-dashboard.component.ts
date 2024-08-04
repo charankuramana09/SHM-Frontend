@@ -65,4 +65,5 @@ export class AdminDashboardComponent implements OnInit {
   navigateToDashboard(frequencyType: string): void {
     this.router.navigate(['dashboard'], { queryParams: { frequencyType: frequencyType, hostelName: this.selectedHostel } });
   }
+  
 }

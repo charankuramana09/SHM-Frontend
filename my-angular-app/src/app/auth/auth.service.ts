@@ -23,6 +23,8 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private isSuperAdminSubject = new BehaviorSubject<boolean>(this.getSuperAdminStatus());
   public isSuperAdmin$ = this.isSuperAdminSubject.asObservable();
+  private isUserSubject = new BehaviorSubject<boolean>(this.getUserStatus());
+  public isUserAdmin$ = this.isUserSubject.asObservable();
   private rolesSubject = new BehaviorSubject<string[]>(this.getRoles());
   public roles$ = this.rolesSubject.asObservable();
   constructor(
@@ -93,6 +95,14 @@ export class AuthService {
   private getSuperAdminStatus(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const status = localStorage.getItem('isSuperAdmin');
+      return status ? JSON.parse(status) : false;
+    }
+    return false;
+  }
+
+  private getUserStatus(): boolean {
+    if (isPlatformBrowser(this.platformId)) {
+      const status = JSON.stringify(localStorage.getItem('authorities'));
       return status ? JSON.parse(status) : false;
     }
     return false;
