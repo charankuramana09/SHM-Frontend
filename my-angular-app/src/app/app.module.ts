@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CompanyInvoiceGenerationComponent } from './company-invoice-generation/company-invoice-generation.component';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { HostelMembersDashboardComponent } from './hostel-members-dashboard/hostel-members-dashboard.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,6 @@ import { CaptchaComponent } from './captcha/captcha.component';
 import { CaptchaService } from './services/captcha.service';
 import { MathCaptchaComponent } from './math-captcha/math-captcha.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
-import { AuthInterceptor } from './auth/auth.interceptor';
 import { GroceryFormComponent } from './grocery-form/grocery-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -35,6 +34,11 @@ import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MainComponent } from './main/main.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { MonthlyRentPowerBillComponent } from './forms/monthly-rent-power-bill/monthly-rent-power-bill.component';
+import { GroceryGasPetrolComponent } from './forms/grocery-gas-petrol/grocery-gas-petrol.component';
+import { FormSelectorComponent } from './form-selector/form-selector.component';
 
 
 @NgModule({
@@ -42,8 +46,8 @@ import { LayoutComponent } from './layout/layout.component';
     AppComponent,
     CompanyInvoiceGenerationComponent,
     HostelMembersDashboardComponent,
-    PaymentHistoryComponent,
-    ComplaintFormComponent,
+    PaymentHistoryComponent, // Only list once
+    ComplaintFormComponent, // Only list once
     SignupFormComponent,
     SignupScreenComponent,
     LoginPageComponent,
@@ -51,7 +55,6 @@ import { LayoutComponent } from './layout/layout.component';
     UserRegistrationComponent,
     CaptchaComponent,
     MathCaptchaComponent,
-    ComplaintFormComponent,
     GroceryFormComponent,
     FooterComponent,
     HeaderComponent,
@@ -63,24 +66,26 @@ import { LayoutComponent } from './layout/layout.component';
     PowerBillFormComponent,
     ExpenseFormComponent,
     HostelFeeComponent,
-    PaymentHistoryComponent,
     NavbarComponent,
-    LayoutComponent
-   
-  
+    LayoutComponent,
+    MainComponent,
+    MonthlyRentPowerBillComponent,
+    GroceryGasPetrolComponent,
+    FormSelectorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
- 
+    HttpClientModule,
     AppRoutingModule,
     RouterModule,
-   
     ReactiveFormsModule
   ],
-  providers: [provideClientHydration(), provideHttpClient(withFetch()),CaptchaService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-
+  providers: [
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    CaptchaService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

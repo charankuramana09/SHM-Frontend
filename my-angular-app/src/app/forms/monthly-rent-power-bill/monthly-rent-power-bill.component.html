@@ -1,0 +1,27 @@
+<form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="hostelName">Hostel Name:</label>
+        <input id="hostelName" formControlName="hostelName" />
+    </div>
+    <div>
+        <label for="ownerName">Owner Name:</label>
+        <input id="ownerName" formControlName="ownerName" />
+    </div>
+    <div>
+        <label for="paidDate">Paid Date:</label>
+        <input id="paidDate" type="date" formControlName="paidDate" />
+    </div>
+    <div>
+        <label for="paidAmount">Paid Amount:</label>
+        <input id="paidAmount" type="number" formControlName="paidAmount" />
+    </div>
+    <div>
+        <label for="receiptAttached">Receipt Attached:</label>
+        <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
+    </div>
+    <div>
+        <label for="totalAmount">Total Amount:</label>
+        <input id="totalAmount" type="number" formControlName="totalAmount" />
+    </div>
+    <button type="submit">Submit</button>
+</form>

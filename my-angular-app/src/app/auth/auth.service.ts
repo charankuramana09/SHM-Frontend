@@ -1,3 +1,4 @@
+// auth.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -22,7 +23,8 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private isSuperAdminSubject = new BehaviorSubject<boolean>(this.getSuperAdminStatus());
   public isSuperAdmin$ = this.isSuperAdminSubject.asObservable();
-
+  private rolesSubject = new BehaviorSubject<string[]>(this.getRoles());
+  public roles$ = this.rolesSubject.asObservable();
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -30,9 +32,9 @@ export class AuthService {
   ) { }
 
   login(loginData: { email: string, password: string }): Observable<any> {
-    return this.http.post<{ jwtToken: string, authorities: string[], firstName: string, lastName: string }>(`${this.apiUrl}/login`, loginData).pipe(
-      tap(response => {
-        if (isPlatformBrowser(this.platformId)) {
+      return this.http.post<{ jwtToken: string, authorities: string[], firstName: string, lastName: string }>(`${this.apiUrl}/login`, loginData).pipe(
+        tap(response => {
+          if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('jwtToken', response.jwtToken);
           localStorage.setItem('authorities', JSON.stringify(response.authorities));
           localStorage.setItem('firstName', response.firstName);
@@ -40,11 +42,19 @@ export class AuthService {
 
           const isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
           localStorage.setItem('isSuperAdmin', JSON.stringify(isSuperAdmin));
+          this.rolesSubject.next(response.authorities); // Update roles
           this.isSuperAdminSubject.next(isSuperAdmin);
           this.isAuthenticatedSubject.next(true);
         }
       })
     );
+  }
+  private getRoles(): string[] {
+    if (isPlatformBrowser(this.platformId)) {
+      const roles = localStorage.getItem('authorities');
+      return roles ? JSON.parse(roles) : [];
+    }
+    return [];
   }
 
   registerUser(user: User): Observable<User> {
@@ -66,6 +76,14 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.hasToken();
+  }
+
+  getFirstName(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem('firstName') : null;
+  }
+
+  getLastName(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem('lastName') : null;
   }
 
   private hasToken(): boolean {
