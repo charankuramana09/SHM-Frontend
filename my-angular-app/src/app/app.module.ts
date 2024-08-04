@@ -39,6 +39,7 @@ import { MonthlyRentPowerBillComponent } from './forms/monthly-rent-power-bill/m
 import { GroceryGasPetrolComponent } from './forms/grocery-gas-petrol/grocery-gas-petrol.component';
 import { FormSelectorComponent } from './form-selector/form-selector.component';
 import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-salaries.component';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-sa
     MainComponent,
     MonthlyRentPowerBillComponent,
     GroceryGasPetrolComponent,
-    FormSelectorComponent
+    FormSelectorComponent,
+    PaymentStatusComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+.container {
+  max-width: 800px; /* Set a maximum width for the table */
+  margin: 0 auto; /* Center the container */
+}
+
+.table {
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.table-row-animation {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.table-row-animation:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.02); /* Slightly enlarge the row on hover */
+}
+
+thead th {
+  font-weight: bold; /* Bold header text */
+  text-align: center; /* Center align header text */
+}
+
+tbody td {
+  vertical-align: middle; /* Vertically center the content */
+  text-align: center; /* Center align cell content */
+}
+
+.table-bordered {
+  border: 2px solid #007bff; /* Blue border for the table */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Light background for odd rows */
+}
