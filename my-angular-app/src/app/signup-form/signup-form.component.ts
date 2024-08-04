@@ -119,7 +119,7 @@ export class SignupFormComponent {
         if(this.isSuperAdmin){
           this.openDialog();
         }
-        this.router.navigate(['/login-page']);
+        this.router.navigate(['']);
       },
       error: (error) => {
         console.error('Registration error:', error);
