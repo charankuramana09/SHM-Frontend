@@ -1,24 +1,31 @@
-<form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="empName">Employee Name:</label>
-      <input id="empName" formControlName="empName" />
-    </div>
-    <div>
-      <label for="designation">Designation:</label>
-      <input id="designation" formControlName="designation" />
-    </div>
-    <div>
-      <label for="salary">Salary:</label>
-      <input id="salary" formControlName="salary" />
-    </div>
-    <div>
-      <label for="paymentDate">Payment Date:</label>
-      <input id="paymentDate" type="date" formControlName="paymentDate" />
-    </div>
-    <div>
-      <label for="receiptAttached">Receipt Attached:</label>
-      <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
-    </div>
-    <button type="submit">Submit</button>
-  </form>
-  
+<form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()" class="form-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Employee Name</th>
+        <th>Designation</th>
+        <th>Salary</th>
+        <th>Payment Date</th>
+        <th>Receipt Attached</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <td><input id="empName" formControlName="empName" /></td>
+        <td><input id="designation" formControlName="designation" /></td>
+        <td><input id="salary" type="number" formControlName="salary" /></td>
+        <td><input id="paymentDate" type="date" formControlName="paymentDate" /></td>
+        <td><input id="receiptAttached" type="file" (change)="onFileChange($event)" /></td>
+        <td>
+          <button type="button" (click)="addRow()">➕</button>
+          <button type="button" (click)="deleteRow(i)">🗑️</button>
+      </td>
+        
+      </tr>
+      <tr>
+        <button type="submit">Submit</button>
+      </tr>
+    </tbody>
+  </table>
+</form>
