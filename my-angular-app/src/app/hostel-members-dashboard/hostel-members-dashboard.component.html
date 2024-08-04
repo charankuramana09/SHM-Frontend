@@ -1,7 +1,6 @@
 <div class="dashboard">
   <div class="statistics">
-    <div class="stat-item" cls
-    >
+    <div class="stat-item" (click)="loadDefaultData()">
       <h3>{{ totalMembersCount }}</h3>
       <p>Hostel Members</p>
     </div>
@@ -43,11 +42,11 @@
       <tbody>
         <tr *ngFor="let member of filteredMembers">
           <td><input type="checkbox"></td>
-          <td>{{ member.firstName + member.lastName }}</td>
+          <td>{{ member.firstName + ' ' + member.lastName }}</td>
           <td>{{ member.mobileNumber }}</td>
           <td>{{ member.joiningDate | date }}</td>
           <td>{{ member.paidAmount | currency:'INR' }}</td>
-          <td>{{ member.pendingFee | currency:'INR' }}</td>
+          <td>{{ member.pendingAmount | currency:'INR' }}</td>
           <td>{{ member.paymentETA | date }}</td>
           <td>
             <button class="btn btn-info btn-sm" [routerLink]="['/payment-history']">Payment History</button>

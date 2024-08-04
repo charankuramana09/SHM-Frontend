@@ -1,29 +1,20 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HostelMember } from '../models/HostelMember';
-import { HostelDataService } from './hostel-data.service';
-
-
-
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HostelService {
-  hostelName: string;
-  constructor(private http: HttpClient, hostelDataService:HostelDataService) {
-    this.hostelName = hostelDataService.getHostelName();
-   
-  }
- 
-  private apiUrl = 'http://localhost:8081/admin/filter/hostelname';
+  private apiUrl = 'http://localhost:8081/admin/filter/hostelname'; // Ensure this URL is correct
 
-  
+  constructor(private http: HttpClient) {}
 
-  getHostelMembers(): Observable<HostelMember[]> {
-    const params = new HttpParams().set('hostelName', this.hostelName)
-    return this.http.get<HostelMember[]>(this.apiUrl, { params });
-    
+  getHostelMembers(hostelName: string, frequencyType: string): Observable<Map<string, any>[]> {
+    let params = new HttpParams()
+      .set('frequencyType', frequencyType)
+      .set('hostelName', hostelName);
+
+    return this.http.get<Map<string, any>[]>(this.apiUrl, { params });
   }
 }

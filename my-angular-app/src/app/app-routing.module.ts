@@ -17,7 +17,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
-import { FormSelectorComponent } from './form-selector/form-selector.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
@@ -33,7 +34,9 @@ const routes: Routes = [
       { path: 'registration', component: UserRegistrationComponent},
       { path: 'complaint', component: ComplaintFormComponent },
       { path: 'queries', component: QuarysComplaintsComponent },
-      { path: 'dashboard', component: HostelMembersDashboardComponent}
+      {path: 'app-main', component: MainComponent },
+      {path: 'user-profile', component: UserProfileComponent },
+      {path: 'nav-bar', component: NavbarComponent }
       // Other routes requiring the navbar
     ]
   },

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { HostelMember } from '../models/HostelMember';
 import { HostelService } from '../services/hostel.service';
+import { ActivatedRoute } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { HostelMember } from '../models/HostelMember';
 
 @Component({
   selector: 'app-hostel-members-dashboard',
@@ -17,26 +18,67 @@ export class HostelMembersDashboardComponent implements OnInit {
   filterStatus: 'active' | 'inactive' = 'active';
   filterCriteria: string = 'all';
   isBrowser: boolean;
+  frequencyType: string = '';
+  hostelName: string = '';
 
-  constructor(private hostelService: HostelService, @Inject(PLATFORM_ID) private platformId: Object) {this.isBrowser = isPlatformBrowser(this.platformId);}
+  constructor(
+    private hostelService: HostelService, 
+    private route: ActivatedRoute, 
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { 
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit(): void {
     if (this.isBrowser) {
       this.loadMembersFromLocalStorage();
     }
-   
-      this.getAllMembers();
-    
+
+    // Load default data initially
+    this.loadDefaultData();  
   }
 
-  getAllMembers(): void {
-    this.hostelService.getHostelMembers().subscribe(
-      (data: HostelMember[]) => {
-        this.membersData = data;
+  loadDefaultData(): void {
+    this.filterCriteria = 'all'; // Reset filter criteria
+    this.route.queryParams.subscribe(params => {
+      this.frequencyType = params['frequencyType'] || '';
+      this.hostelName = params['hostelName'] || '';
+      this.fetchMembersData();
+    });
+  }
+
+  fetchMembersData(): void {
+    this.hostelService.getHostelMembers(this.hostelName, this.frequencyType).subscribe(
+      (data: Map<string, any>[]) => {
+        // Convert list of maps to HostelMember array
+        this.membersData = data.map(item => ({
+          userId: item['userId'],
+          firstName: item['firstName'],
+          lastName: item['lastName'],
+          gender: item['gender'],
+          joiningDate: item['joiningDate'],
+          purpose: item['purpose'],
+          roomSharing: item['roomSharing'],
+          frequency: item['frequency'],
+          userType: item['userType'],
+          mobileNumber: item['mobileNumber'],
+          alternateMobileNumber: item['alternateMobileNumber'],
+          email: item['email'],
+          idProof: item['idProof'],
+          status: item['status'],
+          paidAmount: item['paidAmount'],
+          pendingAmount: item['pendingAmount'],
+          advancePayment: item['advancePayment'],
+          hostelName: item['hostelName'],
+          paymentETA: item['paymentETA'],
+          roomNumber: item['roomNumber'],
+          roomType: item['roomType']
+        }));
+
         if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
           this.saveMembersToLocalStorage();
         }
-       
+
         this.applyFilters();
       },
       error => console.error('Error fetching members data', error)
@@ -47,11 +89,16 @@ export class HostelMembersDashboardComponent implements OnInit {
     const storedMembers = localStorage.getItem('hostelMembers');
     if (storedMembers) {
       this.membersData = JSON.parse(storedMembers);
+      this.applyFilters();
     }
   }
 
   saveMembersToLocalStorage(): void {
-    localStorage.setItem('hostelMembers', JSON.stringify(this.membersData));
+    try {
+      localStorage.setItem('hostelMembers', JSON.stringify(this.membersData));
+    } catch (e) {
+      console.error('Error saving to localStorage', e);
+    }
   }
 
   setFilterCriteria(criteria: string): void {
