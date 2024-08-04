@@ -19,6 +19,7 @@ import { ComplaintFormComponent } from './complaint-form/complaint-form.componen
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormSelectorComponent } from './form-selector/form-selector.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
