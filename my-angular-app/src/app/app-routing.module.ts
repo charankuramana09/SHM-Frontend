@@ -17,6 +17,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { QuarysComplaintsComponent } from './quarys-complaints/quarys-complaints.component';
 import { ComplaintFormComponent } from './complaint-form/complaint-form.component';
 import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
+import { FormSelectorComponent } from './form-selector/form-selector.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent, children: [
       { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard]  },
       { path: 'fee', component: HostelFeeComponent },
-      { path: 'expenses', component: ExpenseFormComponent },
+      { path: 'expenses', component: FormSelectorComponent },
       { path: 'admin-dashboard', component: AdminDashboardComponent,canActivate:[AuthGuard] },
       { path: 'payment-page', component: PaymentFormComponent},
       { path: 'payment-history', component: PaymentHistoryComponent },
