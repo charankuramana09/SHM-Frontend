@@ -20,6 +20,7 @@ import { HostelFeeComponent } from './hostel-fee/hostel-fee.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormSelectorComponent } from './form-selector/form-selector.component';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
       { path: 'expenses', component: FormSelectorComponent },
       { path: 'admin-dashboard', component: AdminDashboardComponent,canActivate:[AuthGuard] },
       { path: 'payment-page', component: PaymentFormComponent},
-      { path: 'payment-history', component: PaymentHistoryComponent },
+      // { path: 'payment-history', component: PaymentHistoryComponent },
+      { path: 'payment-history', component: PaymentStatusComponent },
       { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
       { path: 'registration', component: UserRegistrationComponent},
       { path: 'complaint', component: ComplaintFormComponent },

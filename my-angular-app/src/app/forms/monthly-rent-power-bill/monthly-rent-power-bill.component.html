@@ -1,4 +1,4 @@
-<form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()">
     <div>
         <label for="hostelName">Hostel Name:</label>
         <input id="hostelName" formControlName="hostelName" />
@@ -24,4 +24,85 @@
         <input id="totalAmount" type="number" formControlName="totalAmount" />
     </div>
     <button type="submit">Submit</button>
-</form>
+</form> -->
+
+<!-- <div class="container">
+    <div class="form-wrapper">
+      <form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()">
+        <table>
+          <thead>
+            <tr>
+              <th>Hostel Name</th>
+              <th>Owner Name</th>
+              <th>Paid Amount</th>
+              <th>Paid Date</th>
+              <th>Receipt Attached</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let control of monthlyRentForm.controls.rentDetails['controls']; let i = index">
+              <td><input type="text" [formControl]="control.get('hostelName')" /></td>
+              <td><input type="text" [formControl]="control.get('ownerName')" /></td>
+              <td><input type="number" [formControl]="control.get('paidAmount')" /></td>
+              <td><input type="date" [formControl]="control.get('paidDate')" /></td>
+              <td><input type="file" (change)="onFileChange($event, i)" /></td>
+              <td>
+                <button type="button" (click)="removeRow(i)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="6" style="text-align: center;">
+                <button type="button" (click)="addRow()">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <label for="totalAmount">Total Amount:</label>
+          <input id="totalAmount" type="number" formControlName="totalAmount" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  
+ -->
+
+ <form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead>
+        <tr>
+          <th>Hostel Name</th>
+          <th>Owner Name</th>
+          <th>Paid Date</th>
+          <th>Paid Amount</th>
+          <th>Receipt Attached</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rentDetail of rentDetails.controls; let i = index" [formGroup]="rentDetail">
+          <td><input formControlName="hostelName" /></td>
+          <td><input formControlName="ownerName" /></td>
+          <td><input type="date" formControlName="paidDate" /></td>
+          <td><input type="number" formControlName="paidAmount" /></td>
+          <td><input type="file" (change)="onFileChange($event, i)" /></td>
+          <td>
+            <button type="button" (click)="addRow()"><i class="fas fa-plus"></i></button>
+            <button type="button" (click)="removeRow(i)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <label for="totalAmount">Total Amount:</label>
+      <input id="totalAmount" type="number" formControlName="totalAmount" />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  

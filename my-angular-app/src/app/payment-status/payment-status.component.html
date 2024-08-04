@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <h3 class="text-center my-4">Payment History</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped shadow-sm rounded">
+      <thead class="thead-dark bg-primary text-white">
+        <tr>
+          <th>User ID</th>
+          <th>User Name</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of paymentDetails" class="table-row-animation">
+          <td>{{ payment.userId }}</td>
+          <td>{{ payment.userName }}</td>
+          <td>{{ payment.phone }}</td>
+          <td>{{ payment.amount | currency: 'INR' }}</td>
+          <td>{{ payment.paymentDate | date: 'mediumDate' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

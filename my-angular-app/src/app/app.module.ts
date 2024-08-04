@@ -73,8 +73,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MainComponent,
     MonthlyRentPowerBillComponent,
     GroceryGasPetrolComponent,
-    FormSelectorComponent,
-    RegistrationSuccessDialogComponent
+    FormSelectorComponent
   ],
   imports: [
     BrowserModule,
