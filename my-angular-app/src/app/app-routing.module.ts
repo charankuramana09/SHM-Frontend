@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
       { path: 'complaint', component: UserRegistrationComponent },
       { path: 'queries', component: QuarysComplaintsComponent },
+      { path: 'dashboard', component: HostelMembersDashboardComponent}
       // Other routes requiring the navbar
     ]
   },
