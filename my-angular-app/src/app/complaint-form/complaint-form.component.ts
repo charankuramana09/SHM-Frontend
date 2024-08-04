@@ -49,14 +49,18 @@ export class ComplaintFormComponent implements OnInit {
     if (this.complaintForm.valid) {
       console.log('Complaint form is valid');
       const formData = new FormData();
-      formData.append('complaintForm', JSON.stringify(this.complaintForm.value));
-      console.log('Form data appended:', this.complaintForm.value);
-
+  
+      // Exclude supportingDocument from the JSON string
+      const formValue = { ...this.complaintForm.value };
+      delete formValue.supportingDocument;
+      formData.append('complaintForm', JSON.stringify(formValue));
+      console.log('Form data appended:', formValue);
+  
       if (this.selectedFile) {
         formData.append('supportingDocument', this.selectedFile, this.selectedFile.name);
         console.log('Supporting document appended:', this.selectedFile.name);
       }
-
+  
       this.complaintService.submitComplaint(formData).subscribe(
         response => {
           console.log('Complaint submitted successfully!', response);
@@ -69,4 +73,5 @@ export class ComplaintFormComponent implements OnInit {
       console.log('Complaint form is invalid');
     }
   }
+  
 }
