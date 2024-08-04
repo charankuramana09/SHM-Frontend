@@ -27,29 +27,38 @@ export class UserRegistrationComponent {
       email: ['', [Validators.required, Validators.email]],
       idProof: [null, Validators.required]
     });
+    console.log('UserRegistrationComponent initialized.');
   }
 
   onUserTypeChange(event: any): void {
+    console.log('User type changed:', event.target.value);
     this.isCorporate = event.target.value === 'corporate';
     if (this.isCorporate) {
       this.userDetails.get('feePaidByCompany')?.setValidators(Validators.required);
+      console.log('Corporate user detected. Fee paid by company is now required.');
     } else {
       this.userDetails.get('feePaidByCompany')?.clearValidators();
+      console.log('Non-corporate user detected. Fee paid by company is no longer required.');
     }
     this.userDetails.get('feePaidByCompany')?.updateValueAndValidity();
+    console.log('Validators updated for feePaidByCompany.');
   }
 
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      console.log('File selected:', file.name);
       this.userDetails.patchValue({
         idProof: file
       });
+      console.log('File patch value updated.');
     }
   }
 
   onSubmit(): void {
+    console.log('Form submit triggered.');
     if (this.userDetails.valid) {
+      console.log('Form is valid. Preparing form data for submission.');
       const formData = new FormData();
       Object.keys(this.userDetails.value).forEach(key => {
         if (key === 'idProof') {
@@ -63,6 +72,7 @@ export class UserRegistrationComponent {
       delete userDetailsCopy.idProof;
       formData.append('userDetails', JSON.stringify(userDetailsCopy));
 
+      console.log('Form data prepared. Submitting to server.');
       this.http.post('http://localhost:8084/user/save', formData)
         .subscribe(response => {
           console.log('Form submitted successfully!', response);

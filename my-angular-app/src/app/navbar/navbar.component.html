@@ -1,9 +1,9 @@
 <nav *ngIf="isUser" class="navbar">
   <ul>
-    <li><a routerLink="/registration">Registration</a></li>
-    <li><a routerLink="/user-profile">Profile</a></li>
-    <li><a routerLink="/complaint">Complaints</a></li>
-    <li><a routerLink="/payment-page">Payments</a></li>
+    <li *ngIf="isUserRegistration"><a routerLink="/registration">Registration</a></li>
+    <li *ngIf="!isUserRegistration"><a routerLink="/user-profile">Profile</a></li>
+    <li *ngIf="!isUserRegistration"><a routerLink="/complaint">Complaints</a></li>
+    <li *ngIf="!isUserRegistration"><a routerLink="/payment-page">Payments</a></li>
     <li><a routerLink="/fee">Hostal Fee</a></li>
 
   </ul>

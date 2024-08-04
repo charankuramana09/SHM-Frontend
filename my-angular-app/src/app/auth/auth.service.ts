@@ -41,7 +41,7 @@ export class AuthService {
           localStorage.setItem('authorities', JSON.stringify(response.authorities));
           localStorage.setItem('firstName', response.firstName);
           localStorage.setItem('lastName', response.lastName);
-
+          localStorage.setItem('email', response.email);
           const isSuperAdmin = response.authorities.includes('ROLE_SUPERADMIN');
           localStorage.setItem('isSuperAdmin', JSON.stringify(isSuperAdmin));
           this.rolesSubject.next(response.authorities); // Update roles

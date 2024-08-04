@@ -10,6 +10,7 @@ export class PaymentFormComponent {
   paymentLink: string | null = null;
   paymentStatus: any = null;
   private backendUrl = 'http://localhost:8085/payment';
+  private getstatusUrl = 'http://localhost:8082/edge';
 
   constructor(private http: HttpClient) {}
 
@@ -35,7 +36,7 @@ export class PaymentFormComponent {
       .set('paymentId', paymentId)
       .set('userId', userId);
 
-    this.http.get<any>(`${this.backendUrl}/getPaymentStatus`, { params })
+    this.http.put<any>(`${this.getstatusUrl}/updatePayment`, null, { params })
       .subscribe(response => {
         this.paymentStatus = response;
       }, error => {

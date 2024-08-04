@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserProfileService {
 
   private membersData: HostelMember[] = [];
-  private apiUrl = 'http://localhost:8084/user/getId/6'; // Update with your API endpoint
+  private apiUrl = 'http://localhost:8084/user'; 
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,17 @@ export class UserProfileService {
     this.membersData = data;
   }
 
-  getUserProfiles(): Observable<HostelMember[]> {
-    return this.http.get<HostelMember[]>(this.apiUrl);
+  
+
+  getUserByEmail(email: string): Observable<HostelMember[]> {
+    const url = `${this.apiUrl}/getUserData/${email}`;
+    return this.http.get<HostelMember[]>(url);
+  }
+
+  getUserDataBoolean(email: string): Observable<boolean> {
+    const url = `${this.apiUrl}/getUserDataBoolean/${email}`;
+    return this.http.get<boolean>(url);
   }
 }
+
+

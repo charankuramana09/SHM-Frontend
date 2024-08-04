@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { SharedServiceService } from '../services/shared-service.service';
+import { UserProfileService } from '../services/user-profile.service';
+import { HostelMember } from '../models/HostelMember';
 
 @Component({
   selector: 'app-login-page',
@@ -17,14 +19,14 @@ export class LoginPageComponent implements OnInit {
   mathCaptchaError: string | null = null;
   captchaValid: boolean = false;
   mathCaptchaValid: boolean = false;
-  
   isUser: boolean = false;;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private sharedService: SharedServiceService
+    private sharedService: SharedServiceService,
+    private userProfileService:UserProfileService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -87,6 +89,14 @@ export class LoginPageComponent implements OnInit {
           this.sharedService.triggerDataFetch();
         });
       }else{ 
+
+        const email=localStorage.getItem("email");
+        this.userProfileService.getUserDataBoolean(email).subscribe((data) => {
+          this.sharedService.setuserRegistrationStatus(data);
+        });
+       
+        
+
         const isUser = response.authorities.includes('ROLE_USER');
         this.sharedService.setUserStatus(isUser);
         this.router.navigate(['/nav-bar']);

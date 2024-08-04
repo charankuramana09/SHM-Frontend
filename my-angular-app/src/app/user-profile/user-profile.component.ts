@@ -14,7 +14,8 @@ export class UserProfileComponent implements OnInit{
   constructor(private userProfileService: UserProfileService) {}
 
   ngOnInit(): void {
-    this.userProfileService.getUserProfiles().subscribe((data) => {
+    const email=localStorage.getItem("email");
+    this.userProfileService.getUserByEmail(email).subscribe((data) => {
       this.userProfile = data;
     });
   }
