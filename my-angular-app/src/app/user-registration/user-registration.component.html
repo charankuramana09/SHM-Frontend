@@ -1,7 +1,7 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <form [formGroup]="userDetails" (ngSubmit)="onSubmit()">
     <div class="row">
-      <!-- User Info -->
+    
       <div class="col-md-6">
         <h5>1. User Info</h5>
         <div class="form-group">
@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <!-- User Type -->
+      
         <div class="form-group">
           <label>User Type</label>
           <div>
@@ -39,7 +39,6 @@
           </div>
         </div>
 
-        <!-- Fee Paid by Company (conditional) -->
         <div *ngIf="isCorporate">
           <div class="form-group">
             <label>Is fee paid by the company?</label>
@@ -93,7 +92,7 @@
           </select>
         </div>
       </div>
-      <!-- Contact Info -->
+      
       <div class="col-md-6">
         <h5>2. Contact Info</h5>
         <div class="form-group">
@@ -107,6 +106,138 @@
         <div class="form-group">
           <label for="email">Email ID</label>
           <input type="email" name="email" class="form-control" id="email" formControlName="email" placeholder="Yourname@gmail.com">
+        </div>
+        <h5>3. ID Proof Info</h5>
+        <div class="form-group">
+          <label for="idProofType">Select ID Proof</label>
+          <select class="form-control" id="idProofType">
+            <option value="">Select</option>
+            <option value="Aadhar Card">Aadhar Card</option>
+            <option value="PAN Card">PAN Card</option>
+            <option value="Driving License">Driving License</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="idProof">Upload ID Proof</label>
+          <input type="file" name="idProof" class="form-control-file" id="idProof" (change)="onFileChange($event)">
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-check mt-3">
+      <input type="checkbox" class="form-check-input" id="dataConfirmed">
+      <label class="form-check-label" for="dataConfirmed">I confirm that the data filled is correct</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!userDetails.valid">Submit</button>
+  </form>
+</div> -->
+
+
+<div class="container m-5">
+  <form [formGroup]="userDetails" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- User Info -->
+      <div class="col-12 col-md-6 mb-3">
+        <h5>1. User Info</h5>
+        <div class="form-group">
+          <label for="firstName" class="text">First Name:</label>
+          <input type="text" name="firstName" id="firstName" formControlName="firstName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="lastName" class="text">Last Name:</label>
+          <input type="text" name="lastName" id="lastName" formControlName="lastName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="gender" type="radio" formControlName="gender" id="male" value="male">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="gender" type="radio" formControlName="gender" id="female" value="female">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>User Type</label>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="userType" type="radio" formControlName="userType" id="corporate" value="corporate" (change)="onUserTypeChange($event)">
+              <label class="form-check-label" for="corporate">Corporate</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" name="userType" type="radio" formControlName="userType" id="regular" value="regular" (change)="onUserTypeChange($event)">
+              <label class="form-check-label" for="regular">Regular</label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isCorporate">
+          <div class="form-group">
+            <label>Is fee paid by the company?</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="feeYes" value="yes">
+                <label class="form-check-label" for="feeYes">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="feeNo" value="no">
+                <label class="form-check-label" for="feeNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="joiningDate">Joining Date</label>
+          <input type="date" name="joiningDate" class="form-control" id="joiningDate" formControlName="joiningDate">
+        </div>
+        <div class="form-group">
+          <label for="purpose">Purpose</label>
+          <select class="form-control" name="purpose" id="purpose" formControlName="purpose">
+            <option value="">Select</option>
+            <option value="Education">Education</option>
+            <option value="Working">Working</option>
+            <option value="Visiting">Visiting</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Job Searching">Job Searching</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="roomSharing">Room Sharing</label>
+          <select class="form-control" name="roomSharing" id="roomSharing" formControlName="roomSharing">
+            <option value="">Select</option>
+            <option value="Individual">Individual</option>
+            <option value="1 Sharing">1 Sharing</option>
+            <option value="2 Sharing">2 Sharing</option>
+            <option value="3 Sharing">3 Sharing</option>
+            <option value="4 Sharing">4 Sharing</option>
+            <option value="5 Sharing">5 Sharing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="frequency">Frequency <small>(day/monthly/custom)</small></label>
+          <select class="form-control" name="frequency" id="frequency" formControlName="frequency">
+            <option value="">Select frequency</option>
+            <option value="Daily">Daily</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Custom">Custom</option>
+          </select>
+        </div>
+      </div>
+      <!-- Contact Info -->
+      <div class="col-12 col-md-6 mb-3">
+        <h5>2. Contact Info</h5>
+        <div class="form-group">
+          <label for="mobileNumber">Contact No.</label>
+          <input type="text" name="mobileNumber" class="form-control" id="mobileNumber" formControlName="mobileNumber" placeholder="Enter contact no.">
+        </div>
+        <div class="form-group">
+          <label for="alternateMobileNumber">Alternative Contact No.</label>
+          <input type="text" class="form-control" name="alternateMobileNumber" id="alternateMobileNumber" formControlName="alternateMobileNumber" placeholder="Enter alternative contact no.">
+        </div>
+        <div class="form-group">
+          <label for="email">Email ID</label>
+          <input type="email" name="email" class="form-control" id="email" formControlName="email" placeholder="Yourname@gmail.com" readonly>
         </div>
         <h5>3. ID Proof Info</h5>
         <div class="form-group">
