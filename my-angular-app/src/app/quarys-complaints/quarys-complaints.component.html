@@ -13,14 +13,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let complaint of dbcomplaints">
-          <td>{{ complaint.id }}</td>
-          <td>{{ complaint.name }}</td>
+          <td>{{ complaint.complaintId }}</td>
+          <td>{{ complaint.firstName  }}{{ complaint.lastName  }}  </td>
           <td>{{ complaint.email }}</td>
           <td>{{ complaint.description }}</td>
           <td>{{ complaint.status }}</td>
           <td>
-            <button class="btn btn-success" (click)="acceptComplaint(complaint.id)">Accept</button>
-            <button class="btn btn-danger" (click)="rejectComplaint(complaint.id)">Reject</button>
+            <button class="btn btn-success m-1" (click)="acceptComplaint(complaint.complaintId)">Accept</button>
+            <button class="btn btn-danger m-1" (click)="rejectComplaint(complaint.complaintId)">Reject</button>
           </td>
         </tr>
       </tbody>

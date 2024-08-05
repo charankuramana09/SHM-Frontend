@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ComplaintFormResponseDTO, QueryComplaintService } from '../services/query-complaint.service';
+import { ComplaintFormResponseDTO, QueryComplaintService, Status } from '../services/query-complaint.service';
 
 @Component({
   selector: 'app-quarys-complaints',
@@ -26,14 +26,31 @@ export class QuarysComplaintsComponent implements OnInit {
       console.log(this.dbcomplaints);
     });
   }
+  // acceptComplaint(id: number): void {
+  //    const Status1 = { status: 'Accepted' };
+  //   this.queryComplaintService.updateComplaintStatus(id, Status1 ).subscribe(() => {
+  //     this.fetchComplaints(); // Refresh the list after updating
+  //   });
+  // }
   acceptComplaint(id: number): void {
-    this.queryComplaintService.updateComplaintStatus(id, 'accepted').subscribe(() => {
-      this.fetchComplaints(); // Refresh the list after updating
-    });
+    const status: Status = Status.accepted;
+    if (id) {
+      this.queryComplaintService.updateComplaintStatus(id, status).subscribe(() => {
+        this.fetchComplaints(); // Refresh the list after updating
+      }, error => {
+        console.error("Error updating complaint status:", error);
+      });
+    } else {
+      console.error("Complaint ID is undefined.");
+    }
   }
+  
+  
+  
 
-  rejectComplaint(id: number): void {
-    this.queryComplaintService.updateComplaintStatus(id, 'rejected').subscribe(() => {
+  rejectComplaint(complaintId: number): void {
+    const status: Status = Status.rejected;
+    this.queryComplaintService.updateComplaintStatus(complaintId, status ).subscribe(() => {
       this.fetchComplaints(); // Refresh the list after updating
     });
   }
