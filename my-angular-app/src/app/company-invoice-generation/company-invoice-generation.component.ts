@@ -3,6 +3,10 @@ import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { AdminService } from '../services/admin.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -140,16 +144,32 @@ export class CompanyInvoiceGenerationComponent {
   }
 
 //calling service function
-constructor(private adminService: AdminService) { }
-sendInvoice() {
+constructor(
+  private adminService: AdminService,
+  public dialog: MatDialog,
+  public snackBar:MatSnackBar,
+  private router:Router) { }
+  sendInvoice() {
 
-  // Assuming doc is your jsPDF instance and you have generated the PDF
-
-  this.adminService.sendInvoice(this.pdfOutput, this.email, this.companyName).subscribe(
-    response => console.log('Email sent successfully!', response),
-    error => console.error('Error sending email:', error)
-  );
-}
+    // Assuming doc is your jsPDF instance and you have generated the PDF
+  
+    this.adminService.sendInvoice(this.pdfOutput, this.email, this.companyName).subscribe(
+      response => {
+        console.log('Email sent successfully!', response);
+        this.snackBar.open('Email sent successfully!', 'Close', {
+          duration: 3000,
+        });
+        this.router.navigate(['/admin-dashboard']);
+      },
+      error => {
+        console.error('Error sending email:', error);
+        this.snackBar.open('Error sending email.', 'Close', {
+          duration: 3000
+        });
+      }
+    );
+  
+  }
 validateNumbers() {
   this.adminService.validateMobileNumbers(this.mobileNumbers).subscribe(
     response => {
@@ -163,7 +183,9 @@ validateNumbers() {
     this.existingMobileNumbers.includes(emp.Mobile)
 
   );
+
   this.processMatchedData();
+ 
 },
 error => {
   this.errorMessage = 'An error occurred while validating mobile numbers.';
@@ -181,5 +203,13 @@ console.log("existingMobilenumber : " , this.existingMobileNumbers);
 console.log("Matched Data:", this.matchedData);
 
 
+} openDialog(): void {
+  const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+    width: '40%',
+    data: { data: 'Successfully',message: 'Invoice has been sent ' } // Pass the data object with authorityName
+  });
+  dialogRef.afterClosed().subscribe(() => {
+    this.router.navigate(['/admin-dashboard']); // Navigate after dialog is closed
+  });
 }
 }

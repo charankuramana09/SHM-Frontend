@@ -134,7 +134,7 @@ export class SignupFormComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
       width: '40%',
-      data: { authorityName: this.authorityName } // Pass the data object with authorityName
+      data: { data: this.authorityName,message:'Profile creation is successful for' } // Pass the data object with authorityName
     });
 
     dialogRef.afterClosed().subscribe(() => {

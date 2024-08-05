@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExpenseService } from '../services/expense.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
 
 @Component({
   selector: 'app-expense-form',
@@ -18,7 +21,13 @@ export class ExpenseFormComponent {
     { value: 'gas', label: 'Gas' }
   ];
 
-  constructor(private fb: FormBuilder, private expenseService: ExpenseService) {
+  constructor(
+    private fb: FormBuilder, 
+    private expenseService: ExpenseService,
+    private router: Router,
+    public dialog: MatDialog,
+
+  ) {
     this.expenseForm = this.fb.group({
       category: ['', Validators.required]
       // Add other common fields here if needed
@@ -60,6 +69,7 @@ export class ExpenseFormComponent {
       case 'employee-salaries':
         const receiptFile = form?.get('receiptAttached')?.value;
         this.expenseService.createEmployeeSalaries(payload, receiptFile).subscribe(response => {
+          this. openDialog();
           console.log('Employee Salaries saved', response);
         });
         break;
@@ -68,11 +78,13 @@ export class ExpenseFormComponent {
         const file = form?.get('receiptAttached')?.value;
         payload.paidDate = new Date(payload.paidDate); // Ensure date is correctly converted
         this.expenseService.createHostelPayment(payload, file).subscribe(response => {
+          this. openDialog();
           console.log('Monthly Rent or Power Bill saved', response);
         });
         break;
       default:
         this.expenseService.createExpense(payload).subscribe(response => {
+          this. openDialog();
           console.log('Expense saved', response);
         });
     }
@@ -101,5 +113,15 @@ export class ExpenseFormComponent {
       default:
         return null;
     }
+  }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { data: 'updated',message: 'expences data ' } // Pass the data object with authorityName
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/expences']); // Navigate after dialog is closed
+    });
   }
 }

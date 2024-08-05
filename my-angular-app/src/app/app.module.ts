@@ -42,7 +42,7 @@ import { EmployeeSalariesComponent } from './forms/employee-salaries/employee-sa
 import { RegistrationSuccessDialogComponent } from './registration-success-dialog/registration-success-dialog.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,8 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [
     provideClientHydration(),

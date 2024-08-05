@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QueryComplaintService } from '../services/query-complaint.service';
+import { ComplaintFormResponseDTO, QueryComplaintService } from '../services/query-complaint.service';
 
 @Component({
   selector: 'app-quarys-complaints',
@@ -8,6 +8,7 @@ import { QueryComplaintService } from '../services/query-complaint.service';
 })
 export class QuarysComplaintsComponent implements OnInit {
   complaints: any[] = [];
+  dbcomplaints: ComplaintFormResponseDTO[] = [];
 
   constructor(private queryComplaintService: QueryComplaintService) {}
 
@@ -19,8 +20,12 @@ export class QuarysComplaintsComponent implements OnInit {
     this.queryComplaintService.getComplaints().subscribe((data) => {
       this.complaints = data;
     });
+    //db data
+    this.queryComplaintService.getAllComplaints().subscribe(data => {
+      this.dbcomplaints = data;
+      console.log(this.dbcomplaints);
+    });
   }
-
   acceptComplaint(id: number): void {
     this.queryComplaintService.updateComplaintStatus(id, 'accepted').subscribe(() => {
       this.fetchComplaints(); // Refresh the list after updating

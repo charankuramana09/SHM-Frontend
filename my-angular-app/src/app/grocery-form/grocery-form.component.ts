@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
 
 @Component({
   selector: 'app-grocery-form',
@@ -10,7 +13,9 @@ export class GroceryFormComponent {
   @Input() selectedCategory: string;
   groceryForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    public dialog: MatDialog,) {
     this.groceryForm = this.fb.group({
       purchaseDate: ['', Validators.required],
       storeName: ['', Validators.required],
@@ -73,5 +78,14 @@ export class GroceryFormComponent {
     }
 
     console.log(this.groceryForm.value);
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { data: 'updated',message: 'expences data ' } // Pass the data object with authorityName
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/expences']); // Navigate after dialog is closed
+    });
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComplaintService } from '../services/complaint.service';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-complaint-form',
@@ -13,7 +16,9 @@ export class ComplaintFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private complaintService: ComplaintService
+    private complaintService: ComplaintService,
+    public dialog: MatDialog,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +69,7 @@ export class ComplaintFormComponent implements OnInit {
       this.complaintService.submitComplaint(formData).subscribe(
         response => {
           console.log('Complaint submitted successfully!', response);
+          this.openDialog();
         },
         error => {
           console.error('Error submitting complaint', error);
@@ -73,5 +79,13 @@ export class ComplaintFormComponent implements OnInit {
       console.log('Complaint form is invalid');
     }
   }
-  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { data: 'received',message: 'complaint has been ' } // Pass the data object with authorityName
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/user-profile']); // Navigate after dialog is closed
+    });
+  }
 }
