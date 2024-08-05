@@ -1,32 +1,46 @@
 <form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table">
-  <table>
+    <div class="top-section">
+      <div class="form-group">
+        <label for="purchaseDate">Purchase Date</label>
+        <input id="purchaseDate" type="date" formControlName="purchaseDate" /><br>
+        <label for="storeName">Store Name</label>
+        <input id="storeName" formControlName="storeName" />
+      </div>
+      
+      
+    </div>
+  
+    <table>
       <thead>
-          <tr>
-              <th>Purchase Date</th>
-              <th>Store Name</th>
-              <th>Category</th>
-              <th>Item Description</th>
-              <th>Quantity</th>
-              <th>Unit Price</th>
-              <th>Total Amount</th>
-              <th>Receipt Attached</th>
-              <th>Actions</th>
-          </tr>
+        <tr>
+          <th>Category</th>
+          <th>Item Description</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Amount</th>
+          <th>Actions</th>
+        </tr>
       </thead>
       <tbody>
-          <tr>
-              <td><input id="purchaseDate" type="date" formControlName="purchaseDate" /></td>
-              <td><input id="storeName" formControlName="storeName" /></td>
-              <td><input id="category" formControlName="category" /></td>
-              <td><input id="itemDescription" formControlName="itemDescription" /></td>
-              <td><input id="quantity" formControlName="quantity" (input)="calculateTotal()" /></td>
-              <td><input id="unitPrice" formControlName="unitPrice" (input)="calculateTotal()" /></td>
-              <td><input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly /></td>
-              <td><input id="receiptAttached" type="file" (change)="onFileChange($event)" /></td>
-              <td>
-                  <button type="submit">Submit</button>
-              </td>
-          </tr>
+        <tr *ngFor="let item of items; let i = index">
+          <td><input id="category" formControlName="category" /></td>
+          <td><input id="itemDescription" formControlName="itemDescription" /></td>
+          <td><input id="quantity" formControlName="quantity" (input)="calculateTotal()" /></td>
+          <td><input id="unitPrice" formControlName="unitPrice" (input)="calculateTotal()" /></td>
+          <td><input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly /></td>
+          <td>
+            <button type="button" class="icon-button" (click)="addRow()">➕</button><br>
+            <button type="button" class="icon-button" (click)="deleteRow(i)">🗑️</button>
+          </td>
+        </tr>
       </tbody>
-  </table>
-</form>
+    </table>
+    <div class="form-group">
+        <label for="receiptAttached">Receipt Attached</label>
+        <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
+      </div>
+    <div class="bottom-section">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+  
