@@ -1,6 +1,4 @@
-<div class="payment-container">
-  <div class="overlay"></div>
-  <div class="row">
+<!-- <div class="payment-container d-flex flex-column justify-content-center align-items-center min-vh-100">
     <div class="card">
       <form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm" class="form">
         <span class="login">Create Payment Link</span>
@@ -51,5 +49,54 @@
         <p>Payment Message: {{ paymentStatus.message }}</p>
       </div>
     </div>
+</div> -->
+
+<div class="payment-container d-flex flex-column justify-content-center align-items-center min-vh-100">
+  <div class="card d-flex flex-row justify-content-between">
+    <!-- Create Payment Link Form -->
+    <form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm" class="form create-payment-form">
+      <span class="login">Create Payment Link</span>
+      <div class="input_container">
+        <label for="userId" class="input_label">User ID</label>
+        <input type="text" id="userId" name="userId" ngModel required class="input_field">
+      </div>
+      <div class="input_container">
+        <label for="userName" class="input_label">User Name</label>
+        <input type="text" id="userName" name="userName" ngModel required class="input_field">
+      </div>
+      <div class="input_container">
+        <label for="phone" class="input_label">Phone</label>
+        <input type="text" id="phone" name="phone" ngModel required class="input_field">
+      </div>
+      <div class="input_container">
+        <label for="amount" class="input_label">Amount</label>
+        <input type="number" id="amount" name="amount" ngModel required class="input_field">
+      </div>
+      <button type="submit" class="purchase--btn">Create Payment Link</button>
+      
+      <div class="payment-link" *ngIf="paymentLink">
+        <p>Payment Link: <a [href]="paymentLink" target="_blank">{{ paymentLink }}</a></p>
+      </div>
+    </form>
+    <div>or</div>
+    <!-- Get Payment Status Form -->
+    <form (ngSubmit)="getPaymentStatus(paymentId.value, userIdForStatus.value)" class="form get-payment-status-form">
+      <span class="login">Get Payment Status</span>
+      <div class="input_container">
+        <label for="paymentId" class="input_label">Payment ID</label>
+        <input type="text" id="paymentId" #paymentId required class="input_field">
+      </div>
+      <div class="input_container">
+        <label for="userIdForStatus" class="input_label">User ID</label>
+        <input type="text" id="userIdForStatus" #userIdForStatus required class="input_field">
+      </div>
+      <button type="submit" class="purchase--btn">Get Payment Status</button>
+      
+      <div class="payment-status" *ngIf="paymentStatus">
+        <p>Payment Status: {{ paymentStatus.status }}</p>
+        <p>Payment Message: {{ paymentStatus.message }}</p>
+      </div>
+    </form>
   </div>
 </div>
+
