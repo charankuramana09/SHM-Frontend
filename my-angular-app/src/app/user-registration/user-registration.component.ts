@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { SharedServiceService } from '../services/shared-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -12,7 +14,7 @@ export class UserRegistrationComponent {
   userDetails: FormGroup;
   isCorporate: boolean = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private sharedService:SharedServiceService,private router:Router) {
     this.userDetails = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -75,6 +77,8 @@ export class UserRegistrationComponent {
       console.log('Form data prepared. Submitting to server.');
       this.http.post('http://localhost:8084/user/save', formData)
         .subscribe(response => {
+          this.sharedService.setuserRegistrationStatus(true);
+          this.router.navigate(['/nav-bar']);
           console.log('Form submitted successfully!', response);
         }, error => {
           console.error('Form submission error:', error);
