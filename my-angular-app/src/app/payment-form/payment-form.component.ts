@@ -18,8 +18,8 @@ export class PaymentFormComponent {
 
   constructor(private http: HttpClient,
     public dialog: MatDialog,
-    private router:Router,
-  private sharedService: SharedServiceService) {}
+    private router: Router,
+    private sharedService: SharedServiceService) { }
 
   onSubmit(paymentForm: any) {
     const formData = paymentForm.value;
@@ -56,7 +56,7 @@ export class PaymentFormComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
       width: '40%',
-      data: { data: this.paymentStatus,message:'Yours payment status ', } // Pass the data object with authorityName
+      data: { data: this.paymentStatus, message: 'Yours payment status ', } // Pass the data object with authorityName
     });
     dialogRef.afterClosed().subscribe(() => {
       this.router.navigate(['/user-profile']); // Navigate after dialog is closed
