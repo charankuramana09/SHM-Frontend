@@ -40,7 +40,8 @@ const routes: Routes = [
       {path: 'app-main', component: MainComponent,canActivate:[AuthGuard]},
       {path: 'user-profile', component: UserProfileComponent,canActivate:[AuthGuard]},
       {path: 'nav-bar', component: NavbarComponent,canActivate:[AuthGuard]},
-      {path:'expences', component:FormSelectorComponent,canActivate:[AuthGuard]}
+      {path:'expences', component:FormSelectorComponent,canActivate:[AuthGuard]},
+      { path: '**', redirectTo: '' }
       // Other routes requiring the navbar
     ]
   },
