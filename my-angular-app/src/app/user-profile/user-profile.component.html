@@ -82,7 +82,7 @@
           </div>
           <div class="col-md-6">
             <h5>Financial Information</h5>
-            <p><strong>Status:</strong> {{ userProfile.status }}</p>
+            <p><strong>Status:</strong> {{ userProfile.paymentStatus }}</p>
             <p><strong>Paid Amount:</strong> {{ userProfile.paidAmount | currency:'INR':'symbol':'1.2-2'  }}</p>
             <p><strong>Pending Amount:</strong> {{ userProfile.pendingAmount | currency:'INR':'symbol':'1.2-2'  }}</p>
             <p><strong>Advance Payment:</strong> {{ userProfile.advancePayment | currency:'INR':'symbol':'1.2-2'  }}</p>
