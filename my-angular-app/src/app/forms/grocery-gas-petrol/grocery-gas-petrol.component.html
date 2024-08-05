@@ -1,4 +1,5 @@
-<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table">
+<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+  <div class="table-container">
     <div class="top-section">
       <div class="form-group">
         <label for="purchaseDate">Purchase Date</label>
@@ -6,13 +7,11 @@
         <label for="storeName">Store Name</label>
         <input id="storeName" formControlName="storeName" />
       </div>
-      
-      
     </div>
-  
+
     <table>
       <thead>
-        <tr>
+        <tr class="bg-primary-subtle">
           <th>Category</th>
           <th>Item Description</th>
           <th>Quantity</th>
@@ -29,18 +28,20 @@
           <td><input id="unitPrice" formControlName="unitPrice" (input)="calculateTotal()" /></td>
           <td><input id="totalAmount" formControlName="totalAmount" [value]="calculateTotal()" readonly /></td>
           <td>
-            <button type="button" class="icon-button" (click)="addRow()">➕</button><br>
             <button type="button" class="icon-button" (click)="deleteRow(i)">🗑️</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="form-group">
-        <label for="receiptAttached">Receipt Attached</label>
-        <input id="receiptAttached" type="file" (change)="onFileChange($event)" />
-      </div>
-    <div class="bottom-section">
-      <button type="submit">Submit</button>
+    <div class="text-center">
+      <button type="button" class="icon-button" (click)="addRow()">➕</button><br>
     </div>
-  </form>
-  
+    <div class="form-group">
+      <label for="receiptAttached">Receipt Attachment&nbsp;&nbsp;</label>
+      <input id="receiptAttached" type="file" (change)="onFileChange($event)" class="border border-1 p-2 rounded"/>
+    </div>
+    <div class="bottom-section my-4">
+      <button type="submit" class="bg-primary text-white">SUBMIT</button>
+    </div>
+  </div>
+</form>
