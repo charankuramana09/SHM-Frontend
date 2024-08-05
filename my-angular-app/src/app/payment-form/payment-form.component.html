@@ -52,9 +52,10 @@
 </div> -->
 
 <div class="payment-container d-flex flex-column justify-content-center align-items-center min-vh-100">
-  <div class="card d-flex flex-row justify-content-between">
+  <div class="d-flex flex-row justify-content-between col-9 align-items-center">
+    <div><img src="../../assets/img/undraw_mobile_pay_re_sjb8.png" style="width: 300px; height: 200px;" class="col-md-3 img-fluid animate-up-down"/></div>
     <!-- Create Payment Link Form -->
-    <form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm" class="form create-payment-form">
+    <form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm" class="form create-payment-form col-md-3">
       <span class="login">Create Payment Link</span>
       <div class="input_container">
         <label for="userId" class="input_label">User ID</label>
@@ -78,9 +79,9 @@
         <p>Payment Link: <a [href]="paymentLink" target="_blank">{{ paymentLink }}</a></p>
       </div>
     </form>
-    <div>or</div>
+    <!-- <div>or</div> -->
     <!-- Get Payment Status Form -->
-    <form (ngSubmit)="getPaymentStatus(paymentId.value, userIdForStatus.value)" class="form get-payment-status-form">
+    <form (ngSubmit)="getPaymentStatus(paymentId.value, userIdForStatus.value)" class="form get-payment-status-form col-md-3">
       <span class="login">Get Payment Status</span>
       <div class="input_container">
         <label for="paymentId" class="input_label">Payment ID</label>
