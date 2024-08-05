@@ -1,10 +1,60 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <div *ngIf="userProfile" class="user-profile">
     <div class="card profile-card">
       <div class="card-header bg-primary text-white">
         <h2 class="mb-0">{{ userProfile.firstName }} {{ userProfile.lastName }}</h2>
       </div>
       <div class="card-body">
+        <div class="row">
+          
+          <div class="col-md-6">
+            <h5>Personal Information</h5>
+            <p><strong>Gender:</strong> {{ userProfile.gender }}</p>
+            <p><strong>Joining Date:</strong> {{ userProfile.joiningDate | date }}</p>
+            <p><strong>User Type:</strong> {{ userProfile.userType }}</p>
+            <p><strong>Email:</strong> {{ userProfile.email }}</p>
+          </div>
+          <div class="col-md-6">
+            <h5>Contact Information</h5>
+            <p><strong>Mobile Number:</strong> {{ userProfile.mobileNumber }}</p>
+            <p><strong>Alternative Mobile Number:</strong> {{ userProfile.alternateMobileNumber }}</p>
+            <p><strong>Room Number:</strong> {{ userProfile.roomNumber }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Accommodation Details</h5>
+            <p><strong>Purpose:</strong> {{ userProfile.purpose }}</p>
+            <p><strong>Room Sharing:</strong> {{ userProfile.roomSharing }}</p>
+            <p><strong>Frequency:</strong> {{ userProfile.frequency }}</p>
+            <p><strong>Hostel Name:</strong> {{ userProfile.hostelName }}</p>
+          </div>
+          <div class="col-md-6">
+            <h5>Financial Information</h5>
+            <p><strong>Status:</strong> {{ userProfile.status }}</p>
+            <p><strong>Paid Amount:</strong> {{ userProfile.paidAmount | currency:'INR':'symbol':'1.2-2'  }}</p>
+            <p><strong>Pending Amount:</strong> {{ userProfile.pendingAmount | currency:'INR':'symbol':'1.2-2'  }}</p>
+            <p><strong>Advance Payment:</strong> {{ userProfile.advancePayment | currency:'INR':'symbol':'1.2-2'  }}</p>
+            
+            <ul>
+              <li *ngFor="let payment of userProfile.paymentHistory">
+                {{ payment.date | date }}: {{ payment.amount | currency }} - {{ payment.description }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div *ngIf="userProfile" class="user-profile">
+    <div class="card profile-card">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">{{ userProfile.firstName }} {{ userProfile.lastName }}</h2>
+      </div>
+      <div class="card-body col-12">
         <div class="row">
           <!-- Profile Info -->
           <div class="col-md-6">

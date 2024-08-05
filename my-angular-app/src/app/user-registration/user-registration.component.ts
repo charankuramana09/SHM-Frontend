@@ -32,6 +32,14 @@ export class UserRegistrationComponent {
     console.log('UserRegistrationComponent initialized.');
   }
 
+  ngOnInit(): void {
+    // Retrieve email from local storage and set it to the form
+    const email = localStorage.getItem('email');
+    if (email) {
+      this.userDetails.patchValue({ email });
+    }
+  }
+
   onUserTypeChange(event: any): void {
     console.log('User type changed:', event.target.value);
     this.isCorporate = event.target.value === 'corporate';
