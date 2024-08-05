@@ -1,17 +1,22 @@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-  <div class=" card shadow border border-2 rounded">
-    <h2 class="mb-3">Hostel Room Fee Calculator</h2>
-    <div class="mb-3 w-100">
-      <label for="sharing" class="form-label">No. of Sharing Members:</label>
-      <select id="sharing" class="form-select" [(ngModel)]="selectedSharing" (change)="updateFee()">
-        <option *ngFor="let option of sharingOptions" [value]="option">
-          {{ option }} {{ option === 1 ? 'Member' : 'Members' }}
-        </option>
-      </select>
+  <div class=" row col-12 justify-content-between p-5 align-items-center">
+    <div class="col-md-4 col-12 mb-3 mb-md-0">
+      <img src="../../assets/img/undraw_calculator_re_alsc.png" class="img-fluid animate-up-down"/>
     </div>
-    <div class="fee-display text-center mt-5">
-      <h3>Fee per Member: <span>{{ fee | currency:'INR' }}</span></h3>
+    <div class="col-md-5 col-12 mx-auto">
+      <h2 class="mb-5">Hostel Room Fee Calculator</h2>
+      <div class="mb-3 w-100 w-md-25">
+        <label for="sharing" class="form-label">No. of Sharing Members:</label>
+        <select id="sharing" class="form-select" [(ngModel)]="selectedSharing" (change)="updateFee()">
+          <option *ngFor="let option of sharingOptions" [value]="option">
+            {{ option }} {{ option === 1 ? 'Member' : 'Members' }}
+          </option>
+        </select>
+      </div>
+      <div class="fee-display text-center mt-5 col-12">
+        <h3>Fee per Member: <span>{{ fee | currency:'INR' }}</span></h3>
+      </div>
     </div>
+    
   </div>
-  </div>
-  
+</div>

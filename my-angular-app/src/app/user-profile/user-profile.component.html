@@ -57,15 +57,15 @@
       <div class="card-body col-12">
         <div class="row">
           <!-- Profile Info -->
-          <div class="col-md-6">
-            <h5>Personal Information</h5>
+          <div class="col-md-6 p-2">
+            <h5><i class="fa-solid fa-id-card"></i>&nbsp;&nbsp;Personal Information</h5>
             <p><strong>Gender:</strong> {{ userProfile.gender }}</p>
             <p><strong>Joining Date:</strong> {{ userProfile.joiningDate | date }}</p>
             <p><strong>User Type:</strong> {{ userProfile.userType }}</p>
             <p><strong>Email:</strong> {{ userProfile.email }}</p>
           </div>
-          <div class="col-md-6">
-            <h5>Contact Information</h5>
+          <div class="col-md-6 p-2">
+            <h5><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;Contact Information</h5>
             <p><strong>Mobile Number:</strong> {{ userProfile.mobileNumber }}</p>
             <p><strong>Alternative Mobile Number:</strong> {{ userProfile.alternateMobileNumber }}</p>
             <p><strong>Room Number:</strong> {{ userProfile.roomNumber }}</p>
@@ -73,15 +73,15 @@
         </div>
         <div class="row">
           <!-- Additional Info -->
-          <div class="col-md-6">
-            <h5>Accommodation Details</h5>
+          <div class="col-md-6 p-2">
+            <h5><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Accommodation Details</h5>
             <p><strong>Purpose:</strong> {{ userProfile.purpose }}</p>
             <p><strong>Room Sharing:</strong> {{ userProfile.roomSharing }}</p>
             <p><strong>Frequency:</strong> {{ userProfile.frequency }}</p>
             <p><strong>Hostel Name:</strong> {{ userProfile.hostelName }}</p>
           </div>
-          <div class="col-md-6">
-            <h5>Financial Information</h5>
+          <div class="col-md-6 p-2">
+            <h5><i class="fa-solid fa-coins"></i>&nbsp;&nbsp;Financial Information</h5>
             <p><strong>Status:</strong> {{ userProfile.paymentStatus }}</p>
             <p><strong>Paid Amount:</strong> {{ userProfile.paidAmount | currency:'INR':'symbol':'1.2-2'  }}</p>
             <p><strong>Pending Amount:</strong> {{ userProfile.pendingAmount | currency:'INR':'symbol':'1.2-2'  }}</p>

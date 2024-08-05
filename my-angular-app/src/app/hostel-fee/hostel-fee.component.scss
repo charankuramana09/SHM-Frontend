@@ -30,3 +30,16 @@ select {
   background-color: #fffbf0ff;
   padding: 50px;
 }
+
+@keyframes upDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-up-down {
+  animation: upDown 3s infinite;
+}

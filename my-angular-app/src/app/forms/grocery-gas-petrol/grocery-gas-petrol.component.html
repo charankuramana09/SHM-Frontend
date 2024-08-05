@@ -1,4 +1,4 @@
-<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+<!-- <form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table w-100">
   <div class="table-container">
     <div class="top-section">
       <div class="form-group">
@@ -43,6 +43,87 @@
       </div>
       <div class="bottom-section my-4">
         <button type="submit" class="bg-primary text-white">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</form> -->
+
+<form [formGroup]="groceryForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+  <div class="table-container shadow border border-1 p-3 rounded">
+    <div class="top-section">
+      <div class="form-group">
+        <label for="purchaseDate">Purchase Date</label>
+        <input id="purchaseDate" type="date" formControlName="purchaseDate" />
+        <div *ngIf="groceryForm.get('purchaseDate')?.invalid && groceryForm.get('purchaseDate')?.touched" class="text-danger">
+          *required
+        </div>
+
+        <label for="storeName">Store Name</label>
+        <input id="storeName" formControlName="storeName" />
+        <div *ngIf="groceryForm.get('storeName')?.invalid && groceryForm.get('storeName')?.touched" class="text-danger">
+          *required
+        </div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr class="bg-primary-subtle">
+          <th>Category</th>
+          <th>Item Description</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="items">
+        <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input formControlName="category" />
+            <div *ngIf="item.get('category')?.invalid && item.get('category')?.touched" class="text-danger">
+              *required
+            </div>
+          </td>
+          <td>
+            <input formControlName="itemDescription" />
+            <div *ngIf="item.get('itemDescription')?.invalid && item.get('itemDescription')?.touched" class="text-danger">
+              *required
+            </div>
+          </td>
+          <td>
+            <input formControlName="quantity" type="number" (input)="calculateTotal(i)" />
+            <div *ngIf="item.get('quantity')?.invalid && item.get('quantity')?.touched" class="text-danger">
+              *must be a +ve number
+            </div>
+          </td>
+          <td>
+            <input formControlName="unitPrice" type="number" (input)="calculateTotal(i)" />
+            <div *ngIf="item.get('unitPrice')?.invalid && item.get('unitPrice')?.touched" class="text-danger">
+              *must be a +ve number
+            </div>
+          </td>
+          <td>
+            <input formControlName="totalAmount" [value]="item.get('totalAmount')?.value" readonly />
+          </td>
+          <td>
+            <button type="button" class="icon-button" (click)="deleteRow(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-center">
+      <button type="button" class="icon-button" (click)="addRow()">➕ Add Row</button><br>
+    </div>
+
+    <div class="d-flex row">
+      <div class="form-group my-3">
+        <label for="receiptAttached">Receipt Attachment&nbsp;&nbsp;</label>
+        <input id="receiptAttached" type="file" (change)="onFileChange($event)" class="border border-1 p-2 rounded" />
+      </div>
+      <div class="bottom-section my-4">
+        <button type="submit" class="bg-primary text-white" [disabled]="groceryForm.invalid">SUBMIT</button>
       </div>
     </div>
   </div>
