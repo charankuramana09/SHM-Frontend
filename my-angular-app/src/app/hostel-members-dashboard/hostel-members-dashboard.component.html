@@ -48,9 +48,9 @@
           <td>{{ member.joiningDate | date }}</td>
           <td>{{ member.paidAmount | currency:'INR' }}</td>
           <td>{{ member.pendingAmount | currency:'INR' }}</td>
-          <td *ngIf="editingMemberId !== member.userId">{{ member.paymentETA | date }}</td>
+          <td *ngIf="editingMemberId !== member.userId">{{ member.paymentETA | date:'yyyy-MM-dd' }}</td>
           <td *ngIf="editingMemberId === member.userId">
-            <input type="date" [(ngModel)]="member.paymentETA">
+            <input type="date" [(ngModel)]="member.paymentETA" [value]="formatToDateInput(member.paymentETA)">
           </td>
           <td>
             <button class="btn btn-info btn-sm" [routerLink]="['/payment-history']">Payment History</button>
@@ -70,5 +70,5 @@
       </tbody>
     </table>
   </div>
-</div>
+  </div>
 </div>

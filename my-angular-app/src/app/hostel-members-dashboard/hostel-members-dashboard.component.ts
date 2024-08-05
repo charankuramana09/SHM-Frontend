@@ -52,35 +52,44 @@ export class HostelMembersDashboardComponent implements OnInit {
     this.hostelService.getHostelMembers(this.hostelName, this.frequencyType).subscribe(
       (data: Map<string, any>[]) => {
         // Convert list of maps to HostelMember array
-        this.membersData = data.map(item => ({
-          userId: item['userId'],
-          firstName: item['firstName'],
-          lastName: item['lastName'],
-          gender: item['gender'],
-          joiningDate: item['joiningDate'],
-          purpose: item['purpose'],
-          roomSharing: item['roomSharing'],
-          frequency: item['frequency'],
-          userType: item['userType'],
-          mobileNumber: item['mobileNumber'],
-          alternateMobileNumber: item['alternateMobileNumber'],
-          email: item['email'],
-          idProof: item['idProof'],
-          status: item['status'],
-          paidAmount: item['paidAmount'],
-          pendingAmount: item['pendingAmount'],
-          advancePayment: item['advancePayment'],
-          hostelName: item['hostelName'],
-          paymentETA: item['paymentETA'],
-          roomNumber: item['roomNumber'],
-          roomType: item['roomType']
-        }));
+        if (data.length === 0) {
+          // No data returned, handle as needed
+          this.membersData = [];
+          this.filteredMembers = [];
+          this.totalMembersCount = 0;
+          this.todayFeeDueCount = 0;
+          this.totalFeeDueCount = 0;
+        } else {
+          this.membersData = data.map(item => ({
+            userId: item['userId'],
+            firstName: item['firstName'],
+            lastName: item['lastName'],
+            gender: item['gender'],
+            joiningDate: item['joiningDate'],
+            purpose: item['purpose'],
+            roomSharing: item['roomSharing'],
+            frequency: item['frequency'],
+            userType: item['userType'],
+            mobileNumber: item['mobileNumber'],
+            alternateMobileNumber: item['alternateMobileNumber'],
+            email: item['email'],
+            idProof: item['idProof'],
+            status: item['status'],
+            paidAmount: item['paidAmount'],
+            pendingAmount: item['pendingAmount'],
+            advancePayment: item['advancePayment'],
+            hostelName: item['hostelName'],
+            paymentETA: item['paymentETA'],
+            roomNumber: item['roomNumber'],
+            roomType: item['roomType']
+          }));
 
-        if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
-          this.saveMembersToLocalStorage();
+          if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+            this.saveMembersToLocalStorage();
+          }
+          console.log()
+          this.applyFilters();
         }
-
-        this.applyFilters();
       },
       error => console.error('Error fetching members data', error)
     );
@@ -153,6 +162,10 @@ export class HostelMembersDashboardComponent implements OnInit {
   saveChanges(): void {
     const member = this.membersData.find(m => m.userId === this.editingMemberId);
     if (member) {
+      // Format the date to ISO 8601 before sending to the server
+      member.paymentETA = this.formatToISODate(member.paymentETA);
+      
+    
       this.hostelService.updateHostelMember(member.userId, {
         paymentETA: member.paymentETA,
         status: member.status
@@ -168,5 +181,15 @@ export class HostelMembersDashboardComponent implements OnInit {
 
   cancelEdit(): void {
     this.editingMemberId = null; // Exit editing mode
+  }
+
+  formatToISODate(date: string): string {
+    const d = new Date(date);
+    return d.toISOString();
+  }
+
+  formatToDateInput(date: string): string {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
 }
