@@ -1,24 +1,80 @@
+// .user-profile {
+//   .profile-card {
+//     border-radius: 10px;
+//     border: 1px solid #ddd;
+//     overflow: hidden;
+
+//     .card-header {
+//       background-color: #0056b3; // Bootstrap primary color
+//     }
+
+//     .card-body {
+//       background-color: rgb(255, 228, 196); // Custom background color
+//       color: #333;
+
+//       h5 {
+//         margin-top: 0;
+//         color: #0056b3; // Bootstrap primary color
+//       }
+
+//       p {
+//         margin-bottom: 0.5rem;
+//       }
+
+//       ul {
+//         list-style-type: none;
+//         padding-left: 0;
+
+//         li {
+//           margin-bottom: 0.5rem;
+//         }
+//       }
+//     }
+//   }
+
+//   // Responsive design
+//   @media (max-width: 768px) {
+//     .card-body {
+//       padding: 1rem;
+//     }
+//   }
+
+//   @media (min-width: 768px) {
+//     .card-body {
+//       padding: 2rem;
+//     }
+//   }
+// }
+
 .user-profile {
   .profile-card {
     border-radius: 10px;
     border: 1px solid #ddd;
     overflow: hidden;
-    
-    .card-header {
-      background-color: #0056b3; // Bootstrap primary color
-    }
-    
+
+    // .card-header {
+    //   background-color: #0056b3; // Bootstrap primary color
+    // }
+
     .card-body {
-      background-color: rgb(255, 228, 196); // Custom background color
+      background-color: #fffbf0ff;
       color: #333;
-      
+
       h5 {
+        font-size: 1.25rem;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-style: normal;
         margin-top: 0;
-        color: #0056b3; // Bootstrap primary color
+        color: #0056b3;
       }
 
       p {
-        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-family: "Poppins", sans-serif;
+        // font-weight: 400;
+        font-style: normal;
+        margin-bottom: 1rem;
       }
 
       ul {
@@ -31,17 +87,33 @@
       }
     }
   }
-  
+
+  h2 {
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
   // Responsive design
   @media (max-width: 768px) {
     .card-body {
       padding: 1rem;
     }
   }
-  
+
   @media (min-width: 768px) {
     .card-body {
       padding: 2rem;
     }
+  }
+
+  // Centering the container
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
 }
