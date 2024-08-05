@@ -20,6 +20,7 @@ export class HostelMembersDashboardComponent implements OnInit {
   isBrowser: boolean;
   frequencyType: string = '';
   hostelName: string = '';
+  editingMemberId: number | null = null; // Track the member being edited
 
   constructor(
     private hostelService: HostelService, 
@@ -143,5 +144,29 @@ export class HostelMembersDashboardComponent implements OnInit {
       return today.getDate() === dueDate.getDate() && today.getMonth() === dueDate.getMonth() && member.status === (this.filterStatus === 'active');
     }).length;
     this.totalFeeDueCount = this.membersData.filter(member => member.pendingAmount > 0 && member.status === (this.filterStatus === 'active')).length;
+  }
+
+  editMember(member: HostelMember): void {
+    this.editingMemberId = member.userId; // Set the ID of the member being edited
+  }
+
+  saveChanges(): void {
+    const member = this.membersData.find(m => m.userId === this.editingMemberId);
+    if (member) {
+      this.hostelService.updateHostelMember(member.userId, {
+        paymentETA: member.paymentETA,
+        status: member.status
+      }).subscribe(
+        () => {
+          this.fetchMembersData(); // Refresh data
+          this.editingMemberId = null; // Exit editing mode
+        },
+        error => console.error('Error updating member details', error)
+      );
+    }
+  }
+
+  cancelEdit(): void {
+    this.editingMemberId = null; // Exit editing mode
   }
 }
