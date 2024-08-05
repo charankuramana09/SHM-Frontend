@@ -88,8 +88,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  width: 100%;
 }
 
 .table-container {
@@ -100,22 +98,21 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
+  background-color: #fffbf0ff;
+  border-radius: 10px;
   overflow: hidden;
 }
 
 th, td {
   padding: 10px;
   text-align: center;
-  border-right: 1px solid #ddd;
+  border: 1px solid #ddd;
 }
 
-th {
-  background-color: #5bc0de;
-  color: white;
+td input{
+  padding: 4px;
 }
+
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -130,7 +127,6 @@ input[type="text"], input[type="date"], input[type="number"], input[type="file"]
 }
 
 button {
-  background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -162,11 +158,25 @@ button:nth-child(5):hover {
   background-color: #31b0d5;
 }
 
-tfoot td {
-  font-weight: bold;
+th,td, span, button{
+  font-size: 1rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: black;
+  font-style: normal;
 }
 
-.submit-row {
-  text-align: center;
-  padding: 10px;
+button{
+  font-size: 0.8rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+input{
+  font-size: 1rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  color: black;
+  font-style: normal;
 }
