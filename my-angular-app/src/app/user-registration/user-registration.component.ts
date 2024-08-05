@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SharedServiceService } from '../services/shared-service.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
 
 @Component({
   selector: 'app-user-registration',
@@ -14,7 +16,7 @@ export class UserRegistrationComponent {
   userDetails: FormGroup;
   isCorporate: boolean = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private sharedService:SharedServiceService,private router:Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private sharedService:SharedServiceService,private router:Router,public dialog: MatDialog) {
     this.userDetails = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -86,7 +88,7 @@ export class UserRegistrationComponent {
       this.http.post('http://localhost:8084/user/save', formData)
         .subscribe(response => {
           this.sharedService.setuserRegistrationStatus(true);
-          this.router.navigate(['/nav-bar']);
+          this.openDialog();
           console.log('Form submitted successfully!', response);
         }, error => {
           console.error('Form submission error:', error);
@@ -94,5 +96,15 @@ export class UserRegistrationComponent {
     } else {
       console.log('Form is invalid!');
     }
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { data: ' Successfull', message: 'Registration is ' } // Pass the data object with authorityName
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/nav-bar']); // Navigate after dialog is closed
+    });
   }
 }

@@ -27,20 +27,20 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent, children: [
       { path: 'dashboard', component: HostelMembersDashboardComponent,canActivate:[AuthGuard]  },
-      { path: 'fee', component: HostelFeeComponent },
-      { path: 'expenses', component: FormSelectorComponent },
+      { path: 'fee', component: HostelFeeComponent,canActivate:[AuthGuard] },
+      { path: 'expenses', component: FormSelectorComponent,canActivate:[AuthGuard] },
       { path: 'admin-dashboard', component: AdminDashboardComponent,canActivate:[AuthGuard] },
-      { path: 'payment-page', component: PaymentFormComponent},
+      { path: 'payment-page', component: PaymentFormComponent,canActivate:[AuthGuard]},
       // { path: 'payment-history', component: PaymentHistoryComponent },
-      { path: 'payment-history', component: PaymentStatusComponent },
-      { path: 'company-invoice', component: CompanyInvoiceGenerationComponent },
-      { path: 'registration', component: UserRegistrationComponent},
-      { path: 'complaint', component: ComplaintFormComponent },
-      { path: 'queries', component: QuarysComplaintsComponent },
-      {path: 'app-main', component: MainComponent },
-      {path: 'user-profile', component: UserProfileComponent },
-      {path: 'nav-bar', component: NavbarComponent },
-      {path:'expences', component:FormSelectorComponent}
+      { path: 'payment-history', component: PaymentStatusComponent,canActivate:[AuthGuard] },
+      { path: 'company-invoice', component: CompanyInvoiceGenerationComponent,canActivate:[AuthGuard] },
+      { path: 'registration', component: UserRegistrationComponent,canActivate:[AuthGuard]},
+      { path: 'complaint', component: ComplaintFormComponent,canActivate:[AuthGuard]},
+      { path: 'queries', component: QuarysComplaintsComponent,canActivate:[AuthGuard] },
+      {path: 'app-main', component: MainComponent,canActivate:[AuthGuard]},
+      {path: 'user-profile', component: UserProfileComponent,canActivate:[AuthGuard]},
+      {path: 'nav-bar', component: NavbarComponent,canActivate:[AuthGuard]},
+      {path:'expences', component:FormSelectorComponent,canActivate:[AuthGuard]}
       // Other routes requiring the navbar
     ]
   },
