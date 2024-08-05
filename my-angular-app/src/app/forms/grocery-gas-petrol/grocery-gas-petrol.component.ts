@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataService } from '../../services/data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { RegistrationSuccessDialogComponent } from '../../registration-success-dialog/registration-success-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grocery-gas-petrol',
@@ -11,7 +14,8 @@ export class GroceryGasPetrolComponent implements OnInit {
   groceryForm: FormGroup;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder, private dataService: DataService) {
+  constructor(private fb: FormBuilder, private dataService: DataService,private router: Router,
+    public dialog: MatDialog) {
     this.groceryForm = this.fb.group({
       purchaseDate: [''],
       storeName: [''],
@@ -55,6 +59,7 @@ export class GroceryGasPetrolComponent implements OnInit {
 
     this.dataService.submitExpense(formData).subscribe(
       response => {
+        this.openDialog();
         console.log('Expense form submitted successfully', response);
       },
       error => {
@@ -62,5 +67,13 @@ export class GroceryGasPetrolComponent implements OnInit {
       }
     );
   }
-  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { data: 'updated',message: 'expences data ' } // Pass the data object with authorityName
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/expences']); // Navigate after dialog is closed
+    });
+  }
 }

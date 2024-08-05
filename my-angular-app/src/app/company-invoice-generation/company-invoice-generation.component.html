@@ -15,8 +15,11 @@
       <label for="excelFile" class="form-label fw-bold">Upload Associate List</label>
       <input type="file" class="form-control" id="excelFile" (change)="onFileChange($event)" accept=".xlsx, .xls" />
     </div>
-
-    <table class="table table-bordered mt-3" *ngIf="employeeData.length > 0">
+    <div class="mb-3">
+      <label for="email" class="form-label fw-bold">Enter Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="email" placeholder="Enter email" />
+    </div>
+    <table class="table table-bordered mt-3" *ngIf="dbEmployeeData.length > 0">
       <thead>
         <tr>
           <th>S.No</th>
@@ -30,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let employee of employeeData; let i = index">
+        <tr *ngFor="let employee of dbEmployeeData; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ employee.EmpID }}</td>
           <td>{{ employee.Name }}</td>

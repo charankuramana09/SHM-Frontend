@@ -18,7 +18,7 @@ export class QueryComplaintService {
   //   return this.http.put<any>(`${this.apiUrl}/${id}`, { status });
   // }
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   getComplaints(): Observable<any> {
     // Dummy data
@@ -53,4 +53,16 @@ export class QueryComplaintService {
     console.log(`Complaint with ID ${id} updated to status: ${status}`);
     return of({ success: true });
   }
+  getAllComplaints(): Observable<ComplaintFormResponseDTO[]> {
+    return this.http.get<ComplaintFormResponseDTO[]>("http://localhost:8084/complaint/all");
+  }
+
+
 }
+export interface ComplaintFormResponseDTO {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+}
+

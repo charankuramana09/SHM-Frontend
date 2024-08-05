@@ -12,6 +12,14 @@ export class SharedServiceService {
   UserStatus$ = this.userStatus.asObservable();
   private fetchDataSubject = new Subject<void>();
   fetchData$ = this.fetchDataSubject.asObservable();
+
+  private userRegistrationStatus =new BehaviorSubject<boolean>(false);
+  userRegistrationStatusStatus$ = this.userRegistrationStatus.asObservable();
+
+  setuserRegistrationStatus(status: boolean): void {
+    this.userRegistrationStatus.next(status);
+  }
+
   setSuperAdminStatus(status: boolean): void {
     this.superAdminStatus.next(status);
   }

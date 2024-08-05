@@ -9,21 +9,31 @@ import { SharedServiceService } from '../services/shared-service.service';
 export class NavbarComponent {
   isLoggedIn: boolean = false;
   isSuperAdmin: boolean = false;
-  isUser:boolean=false;
-  constructor(private authService: AuthService,private sharedService:SharedServiceService) { }
+  isUser: boolean = false;
+  isUserRegistration: boolean = false;
+  constructor(private authService: AuthService, private sharedService: SharedServiceService) { }
 
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
-      this.authService.isSuperAdmin$.subscribe(isSuperAdmin=>{
-        this.isSuperAdmin=isSuperAdmin;
+      this.authService.isSuperAdmin$.subscribe(isSuperAdmin => {
+        this.isSuperAdmin = isSuperAdmin;
       })
       this.isLoggedIn = isAuthenticated;
-      console.log(this.isLoggedIn);
+      
     });
 
     this.sharedService.UserStatus$.subscribe(status => {
-      this.isLoggedIn=false;
+      this.isLoggedIn = false;
       this.isUser = status;
+    });
+
+    this.sharedService.userRegistrationStatusStatus$.subscribe(status => {
+      
+      if(status){
+        this.isUserRegistration=false;
+      }else{
+      this.isUserRegistration = true;
+      }
     });
   }
 }

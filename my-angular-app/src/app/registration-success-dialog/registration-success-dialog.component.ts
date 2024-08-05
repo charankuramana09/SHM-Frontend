@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class RegistrationSuccessDialogComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { authorityName: string }, // Specify the type of data
+    @Inject(MAT_DIALOG_DATA) public data: { data: string, message : String }, // Specify the type of data
     private dialogRef: MatDialogRef<RegistrationSuccessDialogComponent> // Inject MatDialogRef
   ) { }
 

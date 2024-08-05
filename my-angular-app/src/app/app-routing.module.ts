@@ -39,7 +39,8 @@ const routes: Routes = [
       { path: 'queries', component: QuarysComplaintsComponent },
       {path: 'app-main', component: MainComponent },
       {path: 'user-profile', component: UserProfileComponent },
-      {path: 'nav-bar', component: NavbarComponent }
+      {path: 'nav-bar', component: NavbarComponent },
+      {path:'expences', component:FormSelectorComponent}
       // Other routes requiring the navbar
     ]
   },

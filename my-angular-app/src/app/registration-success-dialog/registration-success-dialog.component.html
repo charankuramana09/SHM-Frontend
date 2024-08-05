@@ -1,6 +1,6 @@
-<h3 mat-dialog-title class="text-center">Registration Successful</h3>
+<h3 mat-dialog-title class="text-center">Updated</h3>
 <div mat-dialog-content>
-  <p class="text-center">Profile creation is successful for <strong>{{ data.authorityName }}</strong>.</p>
+  <p class="text-center">{{data.message}} <strong>{{ data.data }}</strong>.</p>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-center">
   <button mat-button color="primary" (click)="onClose()" class="btn btn-primary">Close</button>

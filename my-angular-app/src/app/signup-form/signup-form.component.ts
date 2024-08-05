@@ -28,10 +28,10 @@ export class SignupFormComponent {
   signupForm: FormGroup;
   errorMessage: string | null = null;
   isSuperAdmin: boolean = false;
-  isUser:boolean=true;
-  successMessage: string = 'Sign up now to become a member.'; 
-  signUpButtonMessage="SIGNUP";
-  authorityName: string="";
+  isUser: boolean = true;
+  successMessage: string = 'Sign up now to become a member.';
+  signUpButtonMessage = "SIGNUP";
+  authorityName: string = "";
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -55,11 +55,11 @@ export class SignupFormComponent {
   ngOnInit(): void {
 
     this.sharedService.superAdminStatus$.subscribe(status => {
-      if(status){
-      this.isUser=false;
-      this.isSuperAdmin = status;
-      this.successMessage='Create a Profile'
-      this.signUpButtonMessage='Create Profile'
+      if (status) {
+        this.isUser = false;
+        this.isSuperAdmin = status;
+        this.successMessage = 'Create a Profile'
+        this.signUpButtonMessage = 'Create Profile'
       }
       // Update form controls based on superAdmin status
       const authoritiesControl = this.signupForm.get('authorities');
@@ -73,7 +73,7 @@ export class SignupFormComponent {
       authoritiesControl?.updateValueAndValidity();
     });
     this.signupForm.get('authorities')?.valueChanges.subscribe(value => {
-      this.authorityName = value; 
+      this.authorityName = value;
     });
   }
 
@@ -116,10 +116,11 @@ export class SignupFormComponent {
 
     this.authService.registerUser(user).subscribe({
       next: (response) => {
-        if(this.isSuperAdmin){
+        if (this.isSuperAdmin) {
           this.openDialog();
+        } else {
+          this.router.navigate(['']);
         }
-        this.router.navigate(['']);
       },
       error: (error) => {
         console.error('Registration error:', error);
@@ -134,7 +135,7 @@ export class SignupFormComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
       width: '40%',
-      data: { authorityName: this.authorityName } // Pass the data object with authorityName
+      data: { data: this.authorityName, message: 'Profile creation is successful for' } // Pass the data object with authorityName
     });
 
     dialogRef.afterClosed().subscribe(() => {
