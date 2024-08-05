@@ -18,20 +18,13 @@ export class HostelService {
   }
 
   updateHostelMember(userId: number, updates: any): Observable<any> {
-  
+  console.log('userId = '+userId);
+  console.log('payment Eta = '+updates.paymentETA);
+  console.log('status = '+updates.status);
     const url = `${this.apiUrl+'/patch'}/${userId}`;
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    if (updates.paymentETA) {
-      updates.paymentETA = this.convertToISODateWithTimezone(updates.paymentETA);
-    }
-
 
     return this.http.patch(url, updates, { headers });
   }
 
-  private convertToISODateWithTimezone(date: string): string {
-    const d = new Date(date);
-    return d.toISOString(); // Converts to ISO 8601 format with timezone
-  }
 }

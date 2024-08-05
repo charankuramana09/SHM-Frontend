@@ -162,12 +162,10 @@ export class HostelMembersDashboardComponent implements OnInit {
   saveChanges(): void {
     const member = this.membersData.find(m => m.userId === this.editingMemberId);
     if (member) {
-      // Format the date to ISO 8601 before sending to the server
-      member.paymentETA = this.formatToISODate(member.paymentETA);
+      const formattedPaymentETA = this.formatToISODate(member.paymentETA);
       
-    
       this.hostelService.updateHostelMember(member.userId, {
-        paymentETA: member.paymentETA,
+        paymentETA: formattedPaymentETA,
         status: member.status
       }).subscribe(
         () => {
@@ -183,9 +181,11 @@ export class HostelMembersDashboardComponent implements OnInit {
     this.editingMemberId = null; // Exit editing mode
   }
 
-  formatToISODate(date: string): string {
-    const d = new Date(date);
-    return d.toISOString();
+  formatToISODate(date: string | Date): string {
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+    return new Date(date).toISOString();
   }
 
   formatToDateInput(date: string): string {
