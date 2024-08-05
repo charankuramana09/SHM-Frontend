@@ -36,12 +36,14 @@
     <div class="text-center">
       <button type="button" class="icon-button" (click)="addRow()">➕</button><br>
     </div>
-    <div class="form-group">
-      <label for="receiptAttached">Receipt Attachment&nbsp;&nbsp;</label>
-      <input id="receiptAttached" type="file" (change)="onFileChange($event)" class="border border-1 p-2 rounded"/>
-    </div>
-    <div class="bottom-section my-4">
-      <button type="submit" class="bg-primary text-white">SUBMIT</button>
+    <div class="d-flex row">
+      <div class="form-group my-3">
+        <label for="receiptAttached">Receipt Attachment&nbsp;&nbsp;</label>
+        <input id="receiptAttached" type="file" (change)="onFileChange($event)" class="border border-1 p-2 rounded" />
+      </div>
+      <div class="bottom-section my-4">
+        <button type="submit" class="bg-primary text-white">SUBMIT</button>
+      </div>
     </div>
   </div>
 </form>
