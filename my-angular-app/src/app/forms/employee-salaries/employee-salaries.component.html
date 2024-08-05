@@ -12,19 +12,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of items; let i = index">
-        <td><input id="empName" formControlName="empName" /></td>
-        <td><input id="designation" formControlName="designation" /></td>
-        <td><input id="salary" type="number" formControlName="salary" /></td>
-        <td><input id="paymentDate" type="date" formControlName="paymentDate" /></td>
-        <td><input id="receiptAttached" type="file" (change)="onFileChange($event)" /></td>
+        <td><input id="empName{{i}}" formControlName="empName" /></td>
+        <td><input id="designation{{i}}" formControlName="designation" /></td>
+        <td><input id="salary{{i}}" type="number" formControlName="salary" /></td>
+        <td><input id="paymentDate{{i}}" type="date" formControlName="paymentDate" /></td>
+        <td><input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event)" /></td>
         <td>
           <button type="button" (click)="addRow()">➕</button>
           <button type="button" (click)="deleteRow(i)">🗑️</button>
-      </td>
-        
+        </td>
       </tr>
       <tr>
-        <button type="submit">Submit</button>
+        <td colspan="5" class="total-row">
+          <button type="submit">Submit</button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,39 +1,41 @@
 <form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()" class="form-table">
-  <table>
-      <thead>
+    <div class="table-container">
+      <table>
+        <thead>
           <tr>
-              <th>Hostel Name</th>
-              <th>Owner Name</th>
-              <th>Paid Date</th>
-              <th>Paid Amount</th>
-              <th>Receipt Attached</th>
-              <th>Actions</th>
+            <th>Hostel Name</th>
+            <th>Owner Name</th>
+            <th>Paid Date</th>
+            <th>Paid Amount</th>
+            <th>Receipt Attached</th>
+            <th>Actions</th>
           </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
           <tr *ngFor="let item of items; let i = index">
-              <td><input id="hostelName{{i}}" formControlName="hostelName" /></td>
-              <td><input id="ownerName{{i}}" formControlName="ownerName" /></td>
-              <td><input id="paidDate{{i}}" type="date" formControlName="paidDate" /></td>
-              <td><input id="paidAmount{{i}}" type="number" formControlName="paidAmount" (input)="updateTotal()" /></td>
-              <td><input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event)" /></td>
-              <td>
-                  <button type="button" (click)="addRow()">➕</button>
-                  <button type="button" (click)="deleteRow(i)">🗑️</button>
-              </td>
-          
-
+            <td><input id="hostelName{{i}}" formControlName="hostelName" /></td>
+            <td><input id="ownerName{{i}}" formControlName="ownerName" /></td>
+            <td><input id="paidDate{{i}}" type="date" formControlName="paidDate" /></td>
+            <td><input id="paidAmount{{i}}" type="number" formControlName="paidAmount" (input)="updateTotal()" /></td>
+            <td><input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event)" /></td>
+            <td>
+              <button type="button" (click)="addRow()">➕</button>
+              <button type="button" (click)="deleteRow(i)">🗑️</button>
+            </td>
           </tr>
-      </tbody>
-      <tfoot>
+        </tbody>
+        <tfoot>
           <tr>
-              
-              <td colspan="3">Total Amount:</td>
-              <td><input id="totalAmount" type="number" [value]="totalAmount" readonly /></td> 
+            <td colspan="5">Total Amount:</td>
+            <td><input id="totalAmount" type="number" [value]="totalAmount" readonly /></td>
           </tr>
           <tr>
+            <td colspan="6" class="submit-row">
               <button type="submit">Submit</button>
+            </td>
           </tr>
-      </tfoot>
-  </table>
-</form>
+        </tfoot>
+      </table>
+    </div>
+  </form>
+  
