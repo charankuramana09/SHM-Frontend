@@ -157,14 +157,14 @@ constructor(
       response => {
         console.log('Email sent successfully!', response);
         this.snackBar.open('Email sent successfully!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
         this.router.navigate(['/admin-dashboard']);
       },
       error => {
         console.error('Error sending email:', error);
         this.snackBar.open('Error sending email.', 'Close', {
-          duration: 3000
+          duration: 5000
         });
       }
     );
