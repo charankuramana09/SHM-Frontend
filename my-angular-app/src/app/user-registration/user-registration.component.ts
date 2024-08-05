@@ -29,6 +29,14 @@ export class UserRegistrationComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Retrieve email from local storage and set it to the form
+    const email = localStorage.getItem('email');
+    if (email) {
+      this.userDetails.patchValue({ email });
+    }
+  }
+
   onUserTypeChange(event: any): void {
     this.isCorporate = event.target.value === 'corporate';
     if (this.isCorporate) {
