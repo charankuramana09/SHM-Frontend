@@ -23,6 +23,7 @@ import { FormSelectorComponent } from './form-selector/form-selector.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
+  { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupFormComponent },
   {
     path: '', component: LayoutComponent, children: [
@@ -41,7 +42,7 @@ const routes: Routes = [
       {path: 'user-profile', component: UserProfileComponent,canActivate:[AuthGuard]},
       {path: 'nav-bar', component: NavbarComponent,canActivate:[AuthGuard]},
       {path:'expences', component:FormSelectorComponent,canActivate:[AuthGuard]},
-      { path: '**', redirectTo: '' }
+      { path: '**', redirectTo: '/login' }
       // Other routes requiring the navbar
     ]
   },
