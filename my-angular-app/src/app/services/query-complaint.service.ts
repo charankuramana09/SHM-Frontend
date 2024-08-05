@@ -48,10 +48,9 @@ export class QueryComplaintService {
     return of(dummyComplaints);
   }
 
-  updateComplaintStatus(id: number, status: string): Observable<any> {
-    // In a real application, this would be a PUT request to the backend
-    console.log(`Complaint with ID ${id} updated to status: ${status}`);
-    return of({ success: true });
+  updateComplaintStatus(complaintId: number, status: Status): Observable<any> {
+    console.log(`Complaint with ID ${complaintId} updated to status: ${status}`);
+    return this.http.patch<ComplaintFormResponseDTO>(`http://localhost:8084/complaint/patch/${complaintId}`, { status });
   }
   getAllComplaints(): Observable<ComplaintFormResponseDTO[]> {
     return this.http.get<ComplaintFormResponseDTO[]>("http://localhost:8084/complaint/all");
@@ -60,9 +59,15 @@ export class QueryComplaintService {
 
 }
 export interface ComplaintFormResponseDTO {
-  id: number;
-  title: string;
+  complaintId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
   description: string;
-  status: string;
+  status: Status;
 }
-
+export enum Status {
+  pending = 'pending',
+  accepted = 'accepted',
+  rejected = 'rejected'
+}
