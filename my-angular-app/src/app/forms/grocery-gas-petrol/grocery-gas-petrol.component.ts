@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class GroceryGasPetrolComponent implements OnInit {
   groceryForm: FormGroup;
   selectedFile: File | null = null;
-
+  items = [{}]; 
   constructor(private fb: FormBuilder, private dataService: DataService,private router: Router,
     public dialog: MatDialog) {
     this.groceryForm = this.fb.group({
@@ -75,5 +75,12 @@ export class GroceryGasPetrolComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       this.router.navigate(['/expences']); // Navigate after dialog is closed
     });
+  }
+  addRow() {
+    this.items.push({});
+  }
+  
+  deleteRow(index: number) {
+    this.items.splice(index, 1);
   }
 }
