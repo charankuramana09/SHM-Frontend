@@ -36,7 +36,22 @@
     overflow-x: auto;
 }
 
-.bg-success-subtle {
-    height: 100vh;
-    padding: 20px;
+// .bg-success-subtle {
+//     height: 100vh;
+//     padding: 20px;
+//   }
+
+h3{
+    font-size: 1.5rem; 
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: black;
+  }
+
+  label, select, th, td{
+    font-size: 1rem; 
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
   }

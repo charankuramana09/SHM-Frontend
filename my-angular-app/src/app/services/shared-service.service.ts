@@ -13,6 +13,9 @@ export class SharedServiceService {
   private fetchDataSubject = new Subject<void>();
   fetchData$ = this.fetchDataSubject.asObservable();
 
+  private fetchUserDetailsSubject = new Subject<void>();
+  fetchUserDetailsSubject$ = this.fetchUserDetailsSubject.asObservable();
+
   private userRegistrationStatus =new BehaviorSubject<boolean>(false);
   userRegistrationStatusStatus$ = this.userRegistrationStatus.asObservable();
 
@@ -29,5 +32,9 @@ export class SharedServiceService {
 
   triggerDataFetch(): void {
     this.fetchDataSubject.next();
+  }
+
+  triggerUserDetailsFetch(): void {
+    this.fetchUserDetailsSubject.next();
   }
 }

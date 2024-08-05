@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
+import { SharedServiceService } from '../services/shared-service.service';
 
 @Component({
   selector: 'app-payment-form',
@@ -17,7 +18,8 @@ export class PaymentFormComponent {
 
   constructor(private http: HttpClient,
     public dialog: MatDialog,
-    private router:Router) {}
+    private router:Router,
+  private sharedService: SharedServiceService) {}
 
   onSubmit(paymentForm: any) {
     const formData = paymentForm.value;
@@ -45,6 +47,7 @@ export class PaymentFormComponent {
       .subscribe(response => {
         this.paymentStatus = response.update;
         this.openDialog();
+        this.sharedService.triggerUserDetailsFetch();
       }, error => {
         console.error('Error fetching payment status:', error);
       });

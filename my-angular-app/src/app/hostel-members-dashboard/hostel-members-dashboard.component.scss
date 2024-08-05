@@ -1,5 +1,5 @@
 .dashboard {
-  padding: 50px;
+  padding: 10px;
 
   .statistics {
     display: flex;
@@ -66,4 +66,25 @@
 
 .options{
   align-items: flex-end;
+}
+
+h3{
+  font-size: 1.5rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+p, label, select, th, td{
+  font-size: 1rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h4{
+  font-size: 2rem; 
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
