@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HostelService {
-  private apiUrl = 'http://localhost:8081/admin/filter/hostelname'; // Ensure this URL is correct
+  private apiUrl = 'http://localhost:8081/admin'; // Ensure this URL is correct
 
   constructor(private http: HttpClient) {}
 
@@ -15,6 +15,13 @@ export class HostelService {
       .set('frequencyType', frequencyType)
       .set('hostelName', hostelName);
 
-    return this.http.get<Map<string, any>[]>(this.apiUrl, { params });
+    return this.http.get<Map<string, any>[]>(this.apiUrl+'/filter/hostelname', { params });
+  }
+
+  updateHostelMember(userId: number, updates: any): Observable<any> {
+    // return this.http.patch(`${this.apiUrl}/patch/${userId}`, updates);
+    const url = `${this.apiUrl+'/patch'}/${userId}`;
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.patch(url, updates, { headers });
   }
 }
