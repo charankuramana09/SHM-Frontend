@@ -1,41 +1,101 @@
-<form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()" class="form-table">
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Hostel Name</th>
-            <th>Owner Name</th>
-            <th>Paid Date</th>
-            <th>Paid Amount</th>
-            <th>Receipt Attached</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of items; let i = index">
-            <td><input id="hostelName{{i}}" formControlName="hostelName" /></td>
-            <td><input id="ownerName{{i}}" formControlName="ownerName" /></td>
-            <td><input id="paidDate{{i}}" type="date" formControlName="paidDate" /></td>
-            <td><input id="paidAmount{{i}}" type="number" formControlName="paidAmount" (input)="updateTotal()" /></td>
-            <td><input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event)" /></td>
-            <td>
-              <button type="button" (click)="addRow()">➕</button>
-              <button type="button" (click)="deleteRow(i)">🗑️</button>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5">Total Amount:</td>
-            <td><input id="totalAmount" type="number" [value]="totalAmount" readonly /></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="submit-row">
-              <button type="submit">Submit</button>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+<form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr class="bg-primary-subtle">
+          <th>Hostel Name</th>
+          <th>Owner Name</th>
+          <th>Paid Date</th>
+          <th>Paid Amount</th>
+          <th>Receipt Attached</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; let i = index">
+          <td><input id="hostelName{{i}}" formControlName="hostelName" /></td>
+          <td><input id="ownerName{{i}}" formControlName="ownerName" /></td>
+          <td><input id="paidDate{{i}}" type="date" formControlName="paidDate" /></td>
+          <td><input id="paidAmount{{i}}" type="number" formControlName="paidAmount" (input)="updateTotal()" /></td>
+          <td><input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event)" /></td>
+          <td>
+            <button type="button" (click)="deleteRow(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center my-3">
+      <button type="button" (click)="addRow()">➕</button>
     </div>
-  </form>
-  
+    <div>
+      <span>Total Amount: &nbsp;<input id="totalAmount" type="number" [value]="totalAmount"  class="w-25"/></span>
+    </div>
+    <div class="submit-row text-center mt-3">
+      <button type="submit" class="bg-primary text-white">SUBMIT</button>
+    </div>
+  </div>
+</form>
+
+
+<!-- <form [formGroup]="monthlyRentForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+  <div class="table-container shadow border border-1 p-3 rounded">
+    <table>
+      <thead>
+        <tr class="bg-primary-subtle">
+          <th>Hostel Name</th>
+          <th>Owner Name</th>
+          <th>Paid Date</th>
+          <th>Paid Amount</th>
+          <th>Receipt Attached</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="rentDetails">
+        <tr *ngFor="let item of rentDetails.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input id="hostelName{{i}}" formControlName="hostelName" class="form-control" required />
+            <div *ngIf="item.get('hostelName')?.invalid && item.get('hostelName')?.touched" class="invalid-feedback">
+              *required.
+            </div>
+          </td>
+          <td>
+            <input id="ownerName{{i}}" formControlName="ownerName" class="form-control" required />
+            <div *ngIf="item.get('ownerName')?.invalid && item.get('ownerName')?.touched" class="invalid-feedback">
+              *required.
+            </div>
+          </td>
+          <td>
+            <input id="paidDate{{i}}" type="date" formControlName="paidDate" class="form-control" required />
+            <div *ngIf="item.get('paidDate')?.invalid && item.get('paidDate')?.touched" class="invalid-feedback">
+              *required.
+            </div>
+          </td>
+          <td>
+            <input id="paidAmount{{i}}" type="number" formControlName="paidAmount" class="form-control" required (input)="updateTotal()" />
+            <div *ngIf="item.get('paidAmount')?.invalid && item.get('paidAmount')?.touched" class="invalid-feedback">
+              *must be > zero.
+            </div>
+          </td>
+          <td>
+            <input id="receiptAttached{{i}}" type="file" (change)="onFileChange($event, i)" />
+            <div *ngIf="item.get('receiptAttached')?.invalid && item.get('receiptAttached')?.touched" class="invalid-feedback">
+              *required.
+            </div>
+          </td>
+          <td>
+            <button type="button" (click)="deleteRow(i)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center my-3">
+      <button type="button" (click)="addRow()">➕</button>
+    </div>
+    <div>
+      <span>Total Amount: &nbsp;<input id="totalAmount" type="number" [value]="totalAmount" readonly class="w-25" /></span>
+    </div>
+    <div class="submit-row text-center mt-3">
+      <button type="submit" class="bg-primary text-white" [disabled]="monthlyRentForm.invalid">SUBMIT</button>
+    </div>
+  </div>
+</form> -->

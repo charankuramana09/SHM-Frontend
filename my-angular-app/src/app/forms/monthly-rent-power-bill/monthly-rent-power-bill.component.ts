@@ -29,6 +29,9 @@ export class MonthlyRentPowerBillComponent implements OnInit {
 
   ngOnInit(): void {}
 
+
+
+  
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
   }

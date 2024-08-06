@@ -1,5 +1,5 @@
 export interface HostelMember {
-  userId: string;
+  userId: number;
   firstName: string;
   lastName: string;
   gender: string;

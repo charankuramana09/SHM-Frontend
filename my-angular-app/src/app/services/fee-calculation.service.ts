@@ -4,12 +4,36 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FeeCalculationService {
-  private baseFee = 1000; // Base fee for a single person
+  private feeKey = 'hostelFees';
+  private fees: { [key: number]: number } = {
+    1: 1000,
+    2: 900,
+    3: 800,
+    4: 700,
+    5: 600
+  };
+
+  constructor() {
+    this.loadFees();
+  }
+
+  private loadFees() {
+    const storedFees = localStorage.getItem(this.feeKey);
+    if (storedFees) {
+      this.fees = JSON.parse(storedFees);
+    }
+  }
+
+  private saveFees() {
+    localStorage.setItem(this.feeKey, JSON.stringify(this.fees));
+  }
 
   getFee(sharing: number): number {
-    if (sharing < 1 || sharing > 5) {
-      throw new Error('Invalid number of sharing members');
-    }
-    return this.baseFee / sharing;
+    return this.fees[sharing] || 0;
+  }
+
+  setFee(sharing: number, fee: number) {
+    this.fees[sharing] = fee;
+    this.saveFees();
   }
 }

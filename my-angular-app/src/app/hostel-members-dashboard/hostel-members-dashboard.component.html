@@ -1,4 +1,5 @@
-<div class="dashboard">
+<div class="dashboard d-flex flex-column justify-content-center align-items-center min-vh-100">
+  <div class="w-100">
   <div class="statistics">
     <div class="stat-item" (click)="loadDefaultData()">
       <h3>{{ totalMembersCount }}</h3>
@@ -20,7 +21,7 @@
       <div class="filter options">
         <label for="status-filter">Status:&nbsp;</label>
         <select id="status-filter" [(ngModel)]="filterStatus" (change)="applyFilters()">
-          <option value="active">Active</option> 
+          <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
       </div>
@@ -47,15 +48,27 @@
           <td>{{ member.joiningDate | date }}</td>
           <td>{{ member.paidAmount | currency:'INR' }}</td>
           <td>{{ member.pendingAmount | currency:'INR' }}</td>
-          <td>{{ member.paymentETA | date }}</td>
+          <td *ngIf="editingMemberId !== member.userId">{{ member.paymentETA | date:'yyyy-MM-dd' }}</td>
+          <td *ngIf="editingMemberId === member.userId">
+            <input type="date" [(ngModel)]="member.paymentETA" [value]="formatToDateInput(member.paymentETA)">
+          </td>
           <td>
             <button class="btn btn-info btn-sm" [routerLink]="['/payment-history']">Payment History</button>
           </td>
-          <td>
-            <button class="btn btn-link">Edit</button>
+          <td *ngIf="editingMemberId !== member.userId">
+            <button class="btn btn-link" (click)="editMember(member)">Edit</button>
+          </td>
+          <td *ngIf="editingMemberId === member.userId">
+            <select [(ngModel)]="member.status">
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+            <button class="btn btn-primary btn-sm" (click)="saveChanges()">Save</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </div>

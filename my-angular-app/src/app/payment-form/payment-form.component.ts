@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
+import { SharedServiceService } from '../services/shared-service.service';
 
 @Component({
   selector: 'app-payment-form',
@@ -16,8 +17,9 @@ export class PaymentFormComponent {
   private getstatusUrl = 'http://localhost:8082/edge';
 
   constructor(private http: HttpClient,
-    public dialog: MatDialog,
-    private router:Router) {}
+              public dialog: MatDialog,
+              private router: Router,
+              private sharedService: SharedServiceService) { }
 
   onSubmit(paymentForm: any) {
     const formData = paymentForm.value;
@@ -31,8 +33,10 @@ export class PaymentFormComponent {
     this.http.post(`${this.backendUrl}/createLink`, null, { params, responseType: 'text' })
       .subscribe(response => {
         this.paymentLink = response;
+        this.openDialog('Click the link to navigate to the payment page. After a successful payment, copy your payment ID to check your payment status.', false);
       }, error => {
         console.error('Error creating payment link:', error);
+        this.openDialog('Error creating payment link', false);
       });
   }
 
@@ -44,19 +48,23 @@ export class PaymentFormComponent {
     this.http.put<any>(`${this.getstatusUrl}/updatePayment`, null, { params })
       .subscribe(response => {
         this.paymentStatus = response.update;
-        this.openDialog();
+        this.openDialog('Payment status updated', true);
+        this.sharedService.triggerUserDetailsFetch();
       }, error => {
         console.error('Error fetching payment status:', error);
+        this.openDialog('Error fetching payment status', true);
       });
   }
 
-  openDialog(): void {
+  openDialog(message: string, navigate: boolean): void {
     const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
       width: '40%',
-      data: { data: this.paymentStatus,message:'Yours payment status ', } // Pass the data object with authorityName
+      data: { data: this.paymentStatus, message: message } 
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.router.navigate(['/user-profile']); // Navigate after dialog is closed
-    });
+    if (navigate) {
+      dialogRef.afterClosed().subscribe(() => {
+        this.router.navigate(['/user-profile']); 
+      });
+    }
   }
 }

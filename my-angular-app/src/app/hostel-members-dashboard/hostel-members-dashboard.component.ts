@@ -20,6 +20,7 @@ export class HostelMembersDashboardComponent implements OnInit {
   isBrowser: boolean;
   frequencyType: string = '';
   hostelName: string = '';
+  editingMemberId: number | null = null; // Track the member being edited
 
   constructor(
     private hostelService: HostelService, 
@@ -51,35 +52,44 @@ export class HostelMembersDashboardComponent implements OnInit {
     this.hostelService.getHostelMembers(this.hostelName, this.frequencyType).subscribe(
       (data: Map<string, any>[]) => {
         // Convert list of maps to HostelMember array
-        this.membersData = data.map(item => ({
-          userId: item['userId'],
-          firstName: item['firstName'],
-          lastName: item['lastName'],
-          gender: item['gender'],
-          joiningDate: item['joiningDate'],
-          purpose: item['purpose'],
-          roomSharing: item['roomSharing'],
-          frequency: item['frequency'],
-          userType: item['userType'],
-          mobileNumber: item['mobileNumber'],
-          alternateMobileNumber: item['alternateMobileNumber'],
-          email: item['email'],
-          idProof: item['idProof'],
-          status: item['status'],
-          paidAmount: item['paidAmount'],
-          pendingAmount: item['pendingAmount'],
-          advancePayment: item['advancePayment'],
-          hostelName: item['hostelName'],
-          paymentETA: item['paymentETA'],
-          roomNumber: item['roomNumber'],
-          roomType: item['roomType']
-        }));
+        if (data.length === 0) {
+          // No data returned, handle as needed
+          this.membersData = [];
+          this.filteredMembers = [];
+          this.totalMembersCount = 0;
+          this.todayFeeDueCount = 0;
+          this.totalFeeDueCount = 0;
+        } else {
+          this.membersData = data.map(item => ({
+            userId: item['userId'],
+            firstName: item['firstName'],
+            lastName: item['lastName'],
+            gender: item['gender'],
+            joiningDate: item['joiningDate'],
+            purpose: item['purpose'],
+            roomSharing: item['roomSharing'],
+            frequency: item['frequency'],
+            userType: item['userType'],
+            mobileNumber: item['mobileNumber'],
+            alternateMobileNumber: item['alternateMobileNumber'],
+            email: item['email'],
+            idProof: item['idProof'],
+            status: item['status'],
+            paidAmount: item['paidAmount'],
+            pendingAmount: item['pendingAmount'],
+            advancePayment: item['advancePayment'],
+            hostelName: item['hostelName'],
+            paymentETA: item['paymentETA'],
+            roomNumber: item['roomNumber'],
+            roomType: item['roomType']
+          }));
 
-        if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
-          this.saveMembersToLocalStorage();
+          if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+            this.saveMembersToLocalStorage();
+          }
+          console.log()
+          this.applyFilters();
         }
-
-        this.applyFilters();
       },
       error => console.error('Error fetching members data', error)
     );
@@ -143,5 +153,43 @@ export class HostelMembersDashboardComponent implements OnInit {
       return today.getDate() === dueDate.getDate() && today.getMonth() === dueDate.getMonth() && member.status === (this.filterStatus === 'active');
     }).length;
     this.totalFeeDueCount = this.membersData.filter(member => member.pendingAmount > 0 && member.status === (this.filterStatus === 'active')).length;
+  }
+
+  editMember(member: HostelMember): void {
+    this.editingMemberId = member.userId; // Set the ID of the member being edited
+  }
+
+  saveChanges(): void {
+    const member = this.membersData.find(m => m.userId === this.editingMemberId);
+    if (member) {
+      const formattedPaymentETA = this.formatToISODate(member.paymentETA);
+      
+      this.hostelService.updateHostelMember(member.userId, {
+        paymentETA: formattedPaymentETA,
+        status: member.status
+      }).subscribe(
+        () => {
+          this.fetchMembersData(); // Refresh data
+          this.editingMemberId = null; // Exit editing mode
+        },
+        error => console.error('Error updating member details', error)
+      );
+    }
+  }
+
+  cancelEdit(): void {
+    this.editingMemberId = null; // Exit editing mode
+  }
+
+  formatToISODate(date: string | Date): string {
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+    return new Date(date).toISOString();
+  }
+
+  formatToDateInput(date: string): string {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
 }

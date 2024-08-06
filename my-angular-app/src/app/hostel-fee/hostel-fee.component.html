@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
   <div class="card shadow border border-2 rounded w-100 p-5">
-    <h2 class="mb-3 text-center">Hostel Room Fee Calculator</h2>
+    <h2 class="mb-3 text-center">Hostel Room Fee</h2>
     <div class="mb-3 w-100">
       <label for="sharing" class="form-label">No. of Sharing Members:</label>
       <select id="sharing" class="form-select" [(ngModel)]="selectedSharing" (change)="updateFee()">
@@ -17,5 +17,6 @@
         <button class="btn btn-primary mt-2" (click)="setFee()">Set Fee</button>
       </div>
     </div>
+    
   </div>
 </div>
