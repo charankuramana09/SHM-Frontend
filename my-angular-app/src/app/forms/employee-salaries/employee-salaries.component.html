@@ -1,4 +1,4 @@
-<!-- <form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+<form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()" class="form-table w-100">
   <div class="table-container">
   <table>
     <thead>
@@ -32,10 +32,10 @@
   </div>
 </div>
 </form>
- -->
 
 
- <form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()" class="form-table w-100">
+
+ <!-- <form [formGroup]="employeeSalariesForm" (ngSubmit)="onSubmit()" class="form-table w-100">
   <div class="table-container shadow border border-1 p-3 rounded">
     <table>
       <thead>
@@ -69,8 +69,8 @@
             </div>
           </td>
           <td>
-            <input id="paymentDate{{i}}" type="date" formControlName="paymentDate" [ngClass]="{'is-invalid': item.get('paymentDate')?.invalid && item.get('paymentDate')?.touched}" />
-            <div *ngIf="item.get('paymentDate')?.invalid && item.get('paymentDate')?.touched" class="invalid-feedback">
+            <input id="paymentDate{{i}}" type="date" formControlName="paidDate" [ngClass]="{'is-invalid': item.get('paidDate')?.invalid && item.get('paidDate')?.touched}" />
+            <div *ngIf="item.get('paidDate')?.invalid && item.get('paidDate')?.touched" class="invalid-feedback">
               * required.
             </div>
           </td>
@@ -90,5 +90,5 @@
       <button type="submit" class="bg-primary text-white">SUBMIT</button>
     </div>
   </div>
-</form>
+</form> -->
 
