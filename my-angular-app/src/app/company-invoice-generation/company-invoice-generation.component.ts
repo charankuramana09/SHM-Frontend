@@ -6,29 +6,34 @@ import { AdminService } from '../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegistrationSuccessDialogComponent } from '../registration-success-dialog/registration-success-dialog.component';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-company-invoice-generation',
   templateUrl: './company-invoice-generation.component.html',
-  styleUrl: './company-invoice-generation.component.scss'
+  styleUrls: ['./company-invoice-generation.component.scss']
 })
 export class CompanyInvoiceGenerationComponent {
-
   companyName = 'Microsoft';
   dbEmployeeData: any[] = [];
   employeeData: any[] = [];
   totalDue1: number = 0;
   totalDue: number = 0;
-  email: string;
+  email: string='';
   pdfOutput: Blob;
   matchedData: any[] = [];
   mobileNumbers: number[] = [];
   existingMobileNumbers: string[] = [];
   nonExistingMobileNumbers: string[] = [];
   errorMessage: string = '';
+
+  constructor(
+    private adminService: AdminService,
+    public dialog: MatDialog,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
+
   onFileChange(event: any) {
     const target: DataTransfer = <DataTransfer>(event.target);
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
@@ -48,10 +53,8 @@ export class CompanyInvoiceGenerationComponent {
         ToDate: this.convertExcelDate(row[6]),
         Due: parseFloat(row[7]) || 0
       }));
-      // Extract mobile numbers and save into the mobileNumbers array
-    this.mobileNumbers = this.employeeData.map((employee: any) => parseInt(employee.Mobile, 10)).filter(mobile => !isNaN(mobile));
-    console.log(  "mobile numbers : " ,   this.mobileNumbers );
-    this.validateNumbers();
+      this.mobileNumbers = this.employeeData.map((employee: any) => parseInt(employee.Mobile, 10)).filter(mobile => !isNaN(mobile));
+      this.validateNumbers(); // Ensure this method is defined
     };
     reader.readAsBinaryString(target.files[0]);
   }
@@ -62,23 +65,19 @@ export class CompanyInvoiceGenerationComponent {
   }
 
   calculateTotal() {
-    this.totalDue = this.employeeData.reduce((sum, emp) => sum + emp.Due, 0);
+    this.totalDue = this.dbEmployeeData.reduce((sum, emp) => sum + emp.Due, 0);
   }
 
   generateInvoice() {
-    this.totalDue1 = this.employeeData.reduce((sum, emp) => sum + emp.Due, 0);
+    this.totalDue1 = this.dbEmployeeData.reduce((sum, emp) => sum + emp.Due, 0);
     const doc = new jsPDF();
-
-    // Add Company Information
     doc.setFontSize(16);
-    doc.setFont(undefined, 'bold'); // Set font to bold
-    doc.setTextColor(22, 160, 133); // Set text color to red (RGB)
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(22, 160, 133);
     doc.text('INVOICE', 105, 20, { align: 'center' });
 
-    // Reset font style and color
     doc.setFont(undefined, 'normal');
-    doc.setTextColor(0, 0, 0); // Reset text color to black
-
+    doc.setTextColor(0, 0, 0);
 
     doc.setFontSize(12);
     doc.text('Hostel Name', 14, 30);
@@ -86,14 +85,13 @@ export class CompanyInvoiceGenerationComponent {
     doc.text('123-456-7890', 14, 40);
     doc.text('your@hostelemail.com', 14, 45);
 
-    // Add Billed To Information
+    const companyDetails = this.getCompanyDetails();
     doc.text('BILLED TO:', 140, 30);
-    doc.text('Your Client Company Name', 140, 35);
-    doc.text('34 Your Client Company Street, City, State, Country', 140, 40);
-    doc.text('234-567-5678', 140, 45);
-    doc.text('your@clientcompanyemail.com', 140, 50);
+    doc.text(companyDetails.name, 140, 35);
+    doc.text(companyDetails.address, 140, 40);
+    doc.text(companyDetails.phone, 140, 45);
+    doc.text(companyDetails.email, 140, 50);
 
-    // Add Invoice Details
     const invoiceYStart = 65;
     const invoiceDetails = [
       `Invoice No: 000001`,
@@ -105,10 +103,9 @@ export class CompanyInvoiceGenerationComponent {
       doc.text(detail, 140, invoiceYStart + (index * 5));
     });
 
-    // Add Table
     (doc as any).autoTable({
       head: [['Employee Id', 'Name', 'Designation', 'Due', 'TOTAL']],
-      body: this.employeeData.map((employee: any) => [
+      body: this.dbEmployeeData.map((employee: any) => [
         employee.EmpID,
         employee.Name,
         employee.Designation,
@@ -122,15 +119,15 @@ export class CompanyInvoiceGenerationComponent {
       styles: { cellPadding: 2, fontSize: 10 }
     });
 
-    // Calculate and Display Totals
     doc.setFontSize(12);
     let finalY = (doc as any).lastAutoTable.finalY + 10;
     const subTotal = this.totalDue1;
     const tax = subTotal * 0.1; // 10% tax
     const total = subTotal + tax;
-    doc.text(`Sub Total: $${this.totalDue1.toFixed(2)}`, 140, finalY);
-    doc.text(`Tax (10%): $${(this.totalDue1 * 0.1).toFixed(2)}`, 140, finalY + 5);
-    doc.text(`TOTAL: $${(this.totalDue1 + (this.totalDue1 * 0.1) - 23).toFixed(2)}`, 140, finalY + 20);
+
+    doc.text(`Subtotal: $${subTotal.toFixed(2)}`, 14, finalY);
+    doc.text(`Tax (10%): $${tax.toFixed(2)}`, 14, finalY + 5);
+    doc.text(`Total: $${total.toFixed(2)}`, 14, finalY + 10);
 
     // Add Footer
     doc.text('THANK YOU FOR YOUR BUSINESS', 14, finalY + 30);
@@ -139,27 +136,17 @@ export class CompanyInvoiceGenerationComponent {
     // Save PDF
     doc.save('invoice.pdf');
     this.pdfOutput = doc.output('blob');
-
-    this.sendInvoice();
+        this.sendInvoice(); 
   }
 
-//calling service function
-constructor(
-  private adminService: AdminService,
-  public dialog: MatDialog,
-  public snackBar:MatSnackBar,
-  private router:Router) { }
   sendInvoice() {
-
-    // Assuming doc is your jsPDF instance and you have generated the PDF
-  
     this.adminService.sendInvoice(this.pdfOutput, this.email, this.companyName).subscribe(
       response => {
         console.log('Email sent successfully!', response);
         this.snackBar.open('Email sent successfully!', 'Close', {
           duration: 5000,
         });
-        this.router.navigate(['/admin-dashboard']);
+        this.openDialog();
       },
       error => {
         console.error('Error sending email:', error);
@@ -168,48 +155,82 @@ constructor(
         });
       }
     );
-  
   }
-validateNumbers() {
-  this.adminService.validateMobileNumbers(this.mobileNumbers).subscribe(
-    response => {
-      this.existingMobileNumbers = response.existingMobileNumbers;
+
+  validateNumbers() {
+    this.adminService.validateMobileNumbers(this.mobileNumbers).subscribe(
+      response => {
+        this.existingMobileNumbers = response.existingMobileNumbers;
       console.log( "existingMobilenumber : " , this.existingMobileNumbers);
-      this.nonExistingMobileNumbers = response.nonExistingMobileNumbers;
+        this.nonExistingMobileNumbers = response.nonExistingMobileNumbers;
       console.log(  "Non-existingnumber : ",  this.nonExistingMobileNumbers);
 
-   // Find matched records and store them
-   this.matchedData = this.employeeData.filter(emp =>
-    this.existingMobileNumbers.includes(emp.Mobile)
+        // Find matched records and store them
+        this.matchedData = this.employeeData.filter(emp =>
+          this.existingMobileNumbers.includes(emp.Mobile)
+        );
 
-  );
+        this.processMatchedData();
+      },
+      error => {
+        this.errorMessage = 'An error occurred while validating mobile numbers.';
+      }
+    );
+  }
 
-  this.processMatchedData();
- 
-},
-error => {
-  this.errorMessage = 'An error occurred while validating mobile numbers.';
-}
-);
+  processMatchedData() {
+    // Handle matched data after it has been set
+    this.dbEmployeeData = this.matchedData;
+  }
 
-}
+  getCompanyDetails() {
+    switch (this.companyName) {
+      case 'Microsoft':
+        return {
+          name: 'Microsoft',
+          address: '1 Microsoft Way, Redmond, WA 98052, USA',
+          phone: '123-456-7890',
+          email: 'info@microsoft.com'
+        };
+      case 'Capgemini':
+        return {
+          name: 'Capgemini',
+          address: '11 rue de Tilsitt, 75017 Paris, France',
+          phone: '234-567-8901',
+          email: 'info@capgemini.com'
+        };
+      case 'TCS':
+        return {
+          name: 'TCS',
+          address: 'Tata Consultancy Services, Mumbai, India',
+          phone: '345-678-9012',
+          email: 'info@tcs.com'
+        };
+      case 'Infosys':
+        return {
+          name: 'Infosys',
+          address: 'Electronics City, Hosur Road, Bengaluru, India',
+          phone: '456-789-0123',
+          email: 'info@infosys.com'
+        };
+      default:
+        return {
+          name: 'Unknown',
+          address: 'Unknown',
+          phone: 'Unknown',
+          email: 'Unknown'
+        };
+    }
+  }
 
-//matched data..
-processMatchedData() {
-// Handle matched data after it has been set
-this.dbEmployeeData= this.matchedData;
-console.log("matched data : " , this.matchedData);
-console.log("existingMobilenumber : " , this.existingMobileNumbers);
-console.log("Matched Data:", this.matchedData);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
+      width: '40%',
+      data: { message: 'Invoice has been sent successfully' }
+    });
 
-
-} openDialog(): void {
-  const dialogRef = this.dialog.open(RegistrationSuccessDialogComponent, {
-    width: '40%',
-    data: { data: 'Successfully',message: 'Invoice has been sent ' } // Pass the data object with authorityName
-  });
-  dialogRef.afterClosed().subscribe(() => {
-    this.router.navigate(['/admin-dashboard']); // Navigate after dialog is closed
-  });
-}
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/admin-dashboard']);
+    });
+  }
 }
