@@ -1,6 +1,8 @@
 <div class="bg d-flex justify-content-center align-items-center min-vh-100">
   <div class="container border border-2 p-5">
     <h2 class="text-danger mb-4">Company Invoice Generation</h2>
+    
+    <!-- Company Name Selection -->
     <div class="mb-3">
       <label for="companyName" class="form-label fw-bold">Company Name</label>
       <select id="companyName" class="form-select" [(ngModel)]="companyName">
@@ -11,14 +13,19 @@
       </select>
     </div>
 
+    <!-- Upload Excel File -->
     <div class="mb-3">
       <label for="excelFile" class="form-label fw-bold">Upload Associate List</label>
       <input type="file" class="form-control" id="excelFile" (change)="onFileChange($event)" accept=".xlsx, .xls" />
     </div>
+
+    <!-- Email Input -->
     <div class="mb-3">
       <label for="email" class="form-label fw-bold">Enter Email</label>
       <input type="email" class="form-control" id="email" [(ngModel)]="email" placeholder="Enter email" />
     </div>
+
+    <!-- Display Matched Data Table -->
     <table class="table table-bordered mt-3" *ngIf="dbEmployeeData.length > 0">
       <thead>
         <tr>
@@ -30,6 +37,7 @@
           <th>From Date</th>
           <th>To Date</th>
           <th>Due</th>
+          <th>Action</th> <!-- New Column for Remove Button -->
         </tr>
       </thead>
       <tbody>
@@ -42,10 +50,49 @@
           <td>{{ employee.FromDate }}</td>
           <td>{{ employee.ToDate }}</td>
           <td>{{ employee.Due }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="removeEmployee(i)">Remove</button>
+          </td>
         </tr>
       </tbody>
     </table>
 
+    <!-- Display Unmatched Data Table -->
+    <div *ngIf="unmatchedData.length > 0" class="mt-4">
+      <h4 class="text-warning">Unmatched Hosteler Details</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>EmpID</th>
+            <th>Name</th>
+            <th>Mobile No</th>
+            <th>Designation</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Due</th>
+            <th>Action</th> <!-- New Column for Move Button -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of unmatchedData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ employee.EmpID }}</td>
+            <td>{{ employee.Name }}</td>
+            <td>{{ employee.Mobile }}</td>
+            <td>{{ employee.Designation }}</td>
+            <td>{{ employee.FromDate }}</td>
+            <td>{{ employee.ToDate }}</td>
+            <td>{{ employee.Due }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="moveToMatchedData(i)">Move to Matched</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Calculate Total Due and Generate Invoice -->
     <div class="d-flex justify-content-between align-items-center my-4">
       <button class="btn btn-primary" (click)="calculateTotal()">Calculate Total Due</button>
       <div *ngIf="totalDue" class="ms-3 me-auto">Total Due: {{ totalDue }}</div>

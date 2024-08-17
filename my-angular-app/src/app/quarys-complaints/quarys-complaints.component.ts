@@ -26,12 +26,7 @@ export class QuarysComplaintsComponent implements OnInit {
       console.log(this.dbcomplaints);
     });
   }
-  // acceptComplaint(id: number): void {
-  //    const Status1 = { status: 'Accepted' };
-  //   this.queryComplaintService.updateComplaintStatus(id, Status1 ).subscribe(() => {
-  //     this.fetchComplaints(); // Refresh the list after updating
-  //   });
-  // }
+
   acceptComplaint(id: number): void {
     const status: Status = Status.accepted;
     if (id) {

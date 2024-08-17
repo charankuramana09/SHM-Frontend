@@ -17,9 +17,10 @@ export class CompanyInvoiceGenerationComponent {
   companyName = 'Microsoft';
   dbEmployeeData: any[] = [];
   employeeData: any[] = [];
+  unmatchedData: any[] = [];
   totalDue1: number = 0;
   totalDue: number = 0;
-  email: string='';
+  email: string = '';
   pdfOutput: Blob;
   matchedData: any[] = [];
   mobileNumbers: number[] = [];
@@ -97,7 +98,7 @@ export class CompanyInvoiceGenerationComponent {
       `Invoice No: 000001`,
       `Account No: 00002324`,
       `Issue Date: ${new Date().toLocaleDateString()}`,
-      `Due Date: 01/08/2024`
+      `Due Date: 01/09/2024`
     ];
     invoiceDetails.forEach((detail, index) => {
       doc.text(detail, 140, invoiceYStart + (index * 5));
@@ -136,7 +137,7 @@ export class CompanyInvoiceGenerationComponent {
     // Save PDF
     doc.save('invoice.pdf');
     this.pdfOutput = doc.output('blob');
-        this.sendInvoice(); 
+    this.sendInvoice(); 
   }
 
   sendInvoice() {
@@ -161,13 +162,16 @@ export class CompanyInvoiceGenerationComponent {
     this.adminService.validateMobileNumbers(this.mobileNumbers).subscribe(
       response => {
         this.existingMobileNumbers = response.existingMobileNumbers;
-      console.log( "existingMobilenumber : " , this.existingMobileNumbers);
         this.nonExistingMobileNumbers = response.nonExistingMobileNumbers;
-      console.log(  "Non-existingnumber : ",  this.nonExistingMobileNumbers);
 
         // Find matched records and store them
         this.matchedData = this.employeeData.filter(emp =>
           this.existingMobileNumbers.includes(emp.Mobile)
+        );
+
+        // Find unmatched records and store them
+        this.unmatchedData = this.employeeData.filter(emp =>
+          !this.existingMobileNumbers.includes(emp.Mobile)
         );
 
         this.processMatchedData();
@@ -179,8 +183,20 @@ export class CompanyInvoiceGenerationComponent {
   }
 
   processMatchedData() {
-    // Handle matched data after it has been set
     this.dbEmployeeData = this.matchedData;
+    this.calculateTotal(); // Recalculate total after processing matched data
+  }
+
+  moveToMatchedData(index: number) {
+    const dataToMove = this.unmatchedData.splice(index, 1)[0];
+    this.matchedData.push(dataToMove);
+    this.dbEmployeeData = this.matchedData;
+    this.calculateTotal(); // Recalculate total after moving data
+  }
+
+  removeEmployee(index: number) {
+    this.dbEmployeeData.splice(index, 1);
+    this.calculateTotal(); // Update total due after removal
   }
 
   getCompanyDetails() {

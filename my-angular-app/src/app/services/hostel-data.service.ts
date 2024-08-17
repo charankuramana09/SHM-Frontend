@@ -17,7 +17,7 @@ export class HostelDataService {
   }
 
 
-  private apiUrl = 'http://localhost:8081/admin/filter'; // Update with your actual backend URL
+  private apiUrl = 'http://localhost:8081/admin/filter'; 
 
   constructor(private http: HttpClient) {}
 
